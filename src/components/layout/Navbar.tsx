@@ -9,6 +9,7 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 import logo from "../../assets/virat logo.png";
+import whiteLogo from "../../assets/Logo_white.png";
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -69,7 +70,7 @@ const Navbar = () => {
           className="flex items-center"
         >
           <img
-            src={logo}
+            src={darkMode ? whiteLogo : logo}
             alt="VIRAT"
             className="h-9 w-auto object-contain"
           />
