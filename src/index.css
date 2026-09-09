@@ -9,23 +9,23 @@
   color-scheme: light;
 }
 
+html {
+  min-height: 100%;
+  background: #f5f5f2;
+  scroll-behavior: smooth;
+}
+
 html.dark {
+  min-height: 100%;
   background: #050505;
   color: #ffffff;
   color-scheme: dark;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   min-width: 320px;
+  min-height: 100vh;
   background: #f5f5f2;
   color: #080808;
   transition:
@@ -38,11 +38,7 @@ html.dark body {
   color: #ffffff;
 }
 
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  cursor: pointer;
+#root {
+  min-height: 100vh;
+  background: inherit;
 }

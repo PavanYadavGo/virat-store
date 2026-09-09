@@ -72,7 +72,7 @@ const Navbar = () => {
           <img
             src={darkMode ? whiteLogo : logo}
             alt="VIRAT"
-            className="h-9 w-auto object-contain"
+            className="h-15 w-auto object-contain"
           />
         </motion.a>
 
