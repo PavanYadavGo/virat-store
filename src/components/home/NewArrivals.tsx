@@ -2,6 +2,11 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
+import velocityJersey from "../../assets/products/velocity-jersey.png";
+import performanceTee from "../../assets/products/performance-tee.png";
+import viratPolo from "../../assets/products/virat-polo.png";
+import matchDayShorts from "../../assets/products/match-day-shorts.png";
+
 const products = [
   {
     number: "01",
@@ -10,6 +15,8 @@ const products = [
     price: "₹1,499",
     description:
       "Lightweight match-day construction built for unrestricted movement.",
+    image: velocityJersey,
+    imageScale: 1.50,
     gradient:
       "from-[#E3E5ED] via-[#F5F5F2] to-[#D5D7E0] dark:from-[#000045] dark:via-[#111111] dark:to-black",
     accent: "CRICKET",
@@ -21,6 +28,8 @@ const products = [
     price: "₹999",
     description:
       "A clean performance essential designed for training and everyday movement.",
+    image: performanceTee,
+    imageScale: 1.50,
     gradient:
       "from-[#E6E6E4] via-[#F5F5F2] to-[#D7D7D5] dark:from-[#1b1b1b] dark:via-[#0d0d0d] dark:to-black",
     accent: "TRAIN",
@@ -32,6 +41,8 @@ const products = [
     price: "₹1,299",
     description:
       "Sport-inspired styling with an effortless everyday silhouette.",
+    image: viratPolo,
+    imageScale: 1.50,
     gradient:
       "from-[#F0DEDE] via-[#F5F5F2] to-[#E4CECE] dark:from-[#220000] dark:via-[#111111] dark:to-black",
     accent: "EVERYDAY",
@@ -43,6 +54,8 @@ const products = [
     price: "₹799",
     description:
       "Lightweight shorts engineered to keep up with every movement.",
+    image: matchDayShorts,
+    imageScale: 1.50,
     gradient:
       "from-[#E3E5ED] via-[#E9E9E7] to-[#D8D9E0] dark:from-[#151515] dark:via-[#000045] dark:to-black",
     accent: "MOVE",
@@ -78,6 +91,7 @@ const NewArrivals = () => {
       "
     >
       <div className="mx-auto max-w-7xl">
+
         {/* Header */}
         <div
           className="
@@ -93,7 +107,10 @@ const NewArrivals = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#FF0000]"
+              className="
+                mb-3 text-xs font-bold uppercase
+                tracking-[0.3em] text-[#FF0000]
+              "
             >
               Just dropped
             </motion.p>
@@ -107,7 +124,12 @@ const NewArrivals = () => {
                   duration: 0.8,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="text-5xl font-black uppercase tracking-[-0.06em] sm:text-6xl lg:text-8xl"
+                className="
+                  text-5xl font-black uppercase
+                  tracking-[-0.06em]
+                  sm:text-6xl
+                  lg:text-8xl
+                "
               >
                 New
                 <br />
@@ -133,6 +155,8 @@ const NewArrivals = () => {
 
         {/* Main product */}
         <div className="grid gap-8 lg:grid-cols-[1fr_0.42fr]">
+
+          {/* Product image */}
           <div
             className="
               relative min-h-[560px]
@@ -143,111 +167,31 @@ const NewArrivals = () => {
             "
           >
             <AnimatePresence mode="wait">
+
               <motion.div
                 key={product.number}
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className={`absolute inset-0 bg-gradient-to-br ${product.gradient}`}
+                className={`
+                  absolute inset-0
+                  bg-gradient-to-br
+                  ${product.gradient}
+                `}
               >
-                {/* Abstract product placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    initial={{ y: 30 }}
-                    animate={{ y: 0 }}
-                    transition={{
-                      duration: 0.7,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="relative h-[72%] w-[45%]"
-                  >
-                    {/* Head */}
-                    <div
-                      className="
-                        absolute left-1/2 top-0
-                        h-[15%] w-[18%]
-                        -translate-x-1/2 rounded-full
-                        bg-black/[0.07]
-                        dark:bg-white/[0.07]
-                      "
-                    />
 
-                    {/* Torso */}
-                    <div
-                      className="
-                        absolute left-1/2 top-[12%]
-                        h-[65%] w-[58%]
-                        -translate-x-1/2
-                        rounded-t-[35%]
-                        bg-black/[0.055]
-                        dark:bg-white/[0.055]
-                      "
-                    />
+                {/* Red lighting */}
+                <div
+                  className="
+                    absolute -left-20 top-20
+                    h-72 w-72 rounded-full
+                    bg-[#FF0000]/10
+                    blur-[110px]
+                  "
+                />
 
-                    {/* Arms */}
-                    <div
-                      className="
-                        absolute left-[5%] top-[17%]
-                        h-[48%] w-[12%]
-                        -rotate-[12deg]
-                        rounded-full
-                        bg-black/[0.04]
-                        dark:bg-white/[0.04]
-                      "
-                    />
-
-                    <div
-                      className="
-                        absolute right-[5%] top-[17%]
-                        h-[48%] w-[12%]
-                        rotate-[12deg]
-                        rounded-full
-                        bg-black/[0.04]
-                        dark:bg-white/[0.04]
-                      "
-                    />
-
-                    {/* Legs */}
-                    <div
-                      className="
-                        absolute bottom-0 left-[24%]
-                        h-[35%] w-[14%]
-                        bg-black/[0.035]
-                        dark:bg-white/[0.035]
-                      "
-                    />
-
-                    <div
-                      className="
-                        absolute bottom-0 right-[24%]
-                        h-[35%] w-[14%]
-                        bg-black/[0.035]
-                        dark:bg-white/[0.035]
-                      "
-                    />
-
-                    {/* Jersey detail */}
-                    <div className="absolute left-1/2 top-[38%] h-[3px] w-[75%] -translate-x-1/2 bg-[#FF0000]/60" />
-
-                    <div
-                      className="
-                        absolute left-1/2 top-[44%]
-                        -translate-x-1/2
-                        text-[clamp(2rem,5vw,5rem)]
-                        font-black tracking-[-0.08em]
-                        text-black/[0.045]
-                        dark:text-white/[0.04]
-                      "
-                    >
-                      V
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Lighting */}
-                <div className="absolute -left-20 top-20 h-72 w-72 rounded-full bg-[#FF0000]/10 blur-[110px]" />
-
+                {/* Navy lighting */}
                 <div
                   className="
                     absolute -bottom-20 right-0
@@ -258,10 +202,46 @@ const NewArrivals = () => {
                   "
                 />
 
-                {/* Grid — light */}
+                {/* Product image */}
+                <div className="absolute inset-0 flex items-center justify-center">
+
+                  <motion.img
+                    key={product.number}
+                    src={product.image}
+                    alt={product.name}
+                    draggable={false}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.92,
+                      y: 30,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: product.imageScale,
+                      y: 0,
+                    }}
+                    transition={{
+                      duration: 0.7,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="
+                      relative z-10
+                      h-[88%] w-[88%]
+                      object-contain
+                      select-none
+                      transition-transform
+                      duration-700
+                      ease-[cubic-bezier(0.16,1,0.3,1)]
+                      hover:scale-[1.04]
+                    "
+                  />
+
+                </div>
+
+                {/* Light mode grid */}
                 <div
                   className="
-                    absolute inset-0
+                    pointer-events-none absolute inset-0
                     opacity-[0.035]
                     dark:hidden
                   "
@@ -272,10 +252,10 @@ const NewArrivals = () => {
                   }}
                 />
 
-                {/* Grid — dark */}
+                {/* Dark mode grid */}
                 <div
                   className="
-                    absolute inset-0
+                    pointer-events-none absolute inset-0
                     hidden opacity-[0.025]
                     dark:block
                   "
@@ -287,39 +267,17 @@ const NewArrivals = () => {
                 />
 
                 {/* Product number */}
-                <div className="absolute left-6 top-6">
+                <div className="absolute left-6 top-6 z-20">
                   <span
                     className="
-                      text-[10px] uppercase tracking-[0.3em]
+                      text-[10px] uppercase
+                      tracking-[0.3em]
                       text-black/35
                       dark:text-white/35
                     "
                   >
                     {product.number} / {products.length}
                   </span>
-                </div>
-
-                {/* Product image label */}
-                <div className="absolute bottom-6 left-6">
-                  <span
-                    className="
-                      text-[8px] uppercase tracking-[0.3em]
-                      text-black/25
-                      dark:text-white/25
-                    "
-                  >
-                    Product photography
-                  </span>
-
-                  <p
-                    className="
-                      mt-1 text-xs uppercase tracking-[0.2em]
-                      text-black/50
-                      dark:text-white/50
-                    "
-                  >
-                    Coming soon
-                  </p>
                 </div>
 
                 {/* Accent word */}
@@ -336,11 +294,18 @@ const NewArrivals = () => {
                 >
                   {product.accent}
                 </div>
+
               </motion.div>
+
             </AnimatePresence>
 
             {/* Controls */}
-            <div className="absolute bottom-6 right-6 flex gap-2">
+            <div
+              className="
+                absolute bottom-6 right-6
+                z-30 flex gap-2
+              "
+            >
               <button
                 onClick={previous}
                 aria-label="Previous product"
@@ -387,20 +352,47 @@ const NewArrivals = () => {
 
           {/* Product details */}
           <div className="flex flex-col justify-between">
+
             <div>
               <AnimatePresence mode="wait">
+
                 <motion.div
                   key={product.number}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.35 }}
+                  initial={{
+                    opacity: 0,
+                    x: 20,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    x: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    x: -20,
+                  }}
+                  transition={{
+                    duration: 0.35,
+                  }}
                 >
-                  <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#FF0000]">
+
+                  <p
+                    className="
+                      mb-3 text-[9px] font-bold
+                      uppercase tracking-[0.25em]
+                      text-[#FF0000]
+                    "
+                  >
                     {product.category}
                   </p>
 
-                  <h3 className="text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] sm:text-5xl">
+                  <h3
+                    className="
+                      text-4xl font-black uppercase
+                      leading-[0.9]
+                      tracking-[-0.05em]
+                      sm:text-5xl
+                    "
+                  >
                     {product.name}
                     <span className="text-[#FF0000]">.</span>
                   </h3>
@@ -422,13 +414,16 @@ const NewArrivals = () => {
                   <a
                     href="#"
                     className="
-                      group mt-8 flex w-fit items-center gap-4
+                      group mt-8 flex w-fit
+                      items-center gap-4
                       bg-black px-6 py-4
                       text-xs font-bold uppercase
-                      tracking-[0.18em] text-white
+                      tracking-[0.18em]
+                      text-white
                       transition-all
                       hover:bg-[#FF0000]
-                      dark:bg-white dark:text-black
+                      dark:bg-white
+                      dark:text-black
                       dark:hover:bg-[#FF0000]
                       dark:hover:text-white
                     "
@@ -438,18 +433,22 @@ const NewArrivals = () => {
                     <ArrowUpRight
                       size={16}
                       className="
-                        transition-transform duration-300
+                        transition-transform
+                        duration-300
                         group-hover:-translate-y-1
                         group-hover:translate-x-1
                       "
                     />
                   </a>
+
                 </motion.div>
+
               </AnimatePresence>
             </div>
 
             {/* Product selector */}
             <div className="mt-12 lg:mt-0">
+
               <p
                 className="
                   mb-4 text-[9px] font-bold uppercase
@@ -462,36 +461,56 @@ const NewArrivals = () => {
               </p>
 
               <div className="space-y-1">
+
                 {products.map((item, index) => (
+
                   <button
                     key={item.number}
                     onClick={() => setActiveIndex(index)}
-                    className={`group flex w-full items-center justify-between border-b py-4 text-left transition-all ${
-                      activeIndex === index
-                        ? "border-[#FF0000]"
-                        : "border-black/10 dark:border-white/10"
-                    }`}
+                    className={`
+                      group flex w-full
+                      items-center justify-between
+                      border-b py-4
+                      text-left
+                      transition-all
+                      ${
+                        activeIndex === index
+                          ? "border-[#FF0000]"
+                          : "border-black/10 dark:border-white/10"
+                      }
+                    `}
                   >
+
                     <div className="flex items-center gap-4">
+
                       <span
-                        className={`text-[9px] ${
-                          activeIndex === index
-                            ? "text-[#FF0000]"
-                            : "text-black/25 dark:text-white/25"
-                        }`}
+                        className={`
+                          text-[9px]
+                          ${
+                            activeIndex === index
+                              ? "text-[#FF0000]"
+                              : "text-black/25 dark:text-white/25"
+                          }
+                        `}
                       >
                         {item.number}
                       </span>
 
                       <span
-                        className={`text-xs font-bold uppercase tracking-wide transition-colors ${
-                          activeIndex === index
-                            ? "text-black dark:text-white"
-                            : "text-black/40 group-hover:text-black dark:text-white/40 dark:group-hover:text-white"
-                        }`}
+                        className={`
+                          text-xs font-bold
+                          uppercase tracking-wide
+                          transition-colors
+                          ${
+                            activeIndex === index
+                              ? "text-black dark:text-white"
+                              : "text-black/40 group-hover:text-black dark:text-white/40 dark:group-hover:text-white"
+                          }
+                        `}
                       >
                         {item.name}
                       </span>
+
                     </div>
 
                     <span
@@ -503,17 +522,22 @@ const NewArrivals = () => {
                     >
                       {item.price}
                     </span>
+
                   </button>
+
                 ))}
+
               </div>
             </div>
+
           </div>
         </div>
 
         {/* Bottom line */}
         <div
           className="
-            mt-12 flex items-center justify-between
+            mt-12 flex items-center
+            justify-between
             border-t border-black/10
             pt-5
             dark:border-white/10
@@ -521,7 +545,8 @@ const NewArrivals = () => {
         >
           <span
             className="
-              text-[9px] uppercase tracking-[0.25em]
+              text-[9px] uppercase
+              tracking-[0.25em]
               text-black/25
               dark:text-white/25
             "
@@ -531,7 +556,8 @@ const NewArrivals = () => {
 
           <span
             className="
-              text-[9px] uppercase tracking-[0.25em]
+              text-[9px] uppercase
+              tracking-[0.25em]
               text-black/25
               dark:text-white/25
             "
@@ -539,6 +565,7 @@ const NewArrivals = () => {
             Virat / New arrivals
           </span>
         </div>
+
       </div>
     </section>
   );
