@@ -1,30 +1,46 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
+import cricketImage from "../../assets/categories/cricket.jpg";
+import casualImage from "../../assets/categories/casual.jpg";
+import sportsImage from "../../assets/categories/sports.jpg";
+
 const categories = [
   {
     number: "01",
     title: "Cricket",
     description: "Built for the game.",
+    image: cricketImage,
     className: "md:col-span-2 md:row-span-2",
-    lightGradient: "from-[#E8E8F0] via-[#F5F5F2] to-[#DCDCE5]",
-    darkGradient: "from-[#000045] via-[#111111] to-black",
+
+    // IMAGE CONTROLS
+    width: "105%",
+    x: 0,
+    y: 50,
   },
   {
     number: "02",
     title: "Casual",
     description: "Made for every day.",
+    image: casualImage,
     className: "",
-    lightGradient: "from-[#E8E8E8] via-[#F5F5F2] to-[#D9D9D9]",
-    darkGradient: "from-[#222222] via-[#111111] to-black",
+
+    // IMAGE CONTROLS
+    width: "105%",
+    x: 0,
+    y: 80,
   },
   {
     number: "03",
     title: "Sports",
     description: "Move without limits.",
+    image: sportsImage,
     className: "",
-    lightGradient: "from-[#F0DADA] via-[#F5F5F2] to-[#E5CFCF]",
-    darkGradient: "from-[#300000] via-[#111111] to-black",
+
+    // IMAGE CONTROLS
+    width: "105%",
+    x: 0,
+    y: 0,
   },
 ];
 
@@ -113,13 +129,61 @@ const CategorySection = () => {
               }}
               className={`
                 group relative overflow-hidden
-                bg-gradient-to-br
-                ${category.lightGradient}
-                ${category.darkGradient ? `dark:${category.darkGradient}` : ""}
                 ${category.className}
               `}
             >
-              {/* Decorative red glow */}
+              {/* Image frame */}
+<div className="absolute inset-0 overflow-hidden bg-black">
+  <motion.img
+    src={category.image}
+    alt={category.title}
+    className="
+      absolute
+      left-1/2
+      top-1/2
+      max-w-none
+      h-auto
+    "
+    style={{
+      width: category.width,
+    }}
+    animate={{
+      x: `calc(-50% + ${category.x}px)`,
+      y: `calc(-50% + ${category.y}px)`,
+    }}
+    whileHover={{
+      scale: 1.05,
+    }}
+    transition={{
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1],
+    }}
+  />
+</div>
+              {/* Image darkening — only activates on hover */}
+<div
+  className="
+    absolute inset-0
+    bg-black/0
+    transition-colors duration-500
+    group-hover:bg-black/30
+    dark:bg-black/0
+    dark:group-hover:bg-black/45
+  "
+/>
+
+              {/* Bottom cinematic gradient */}
+              <div
+                className="
+                  absolute inset-0
+                  bg-gradient-to-t
+                  from-black/80
+                  via-black/20
+                  to-transparent
+                "
+              />
+
+              {/* Red glow */}
               <div
                 className="
                   absolute -right-20 -top-20
@@ -131,59 +195,34 @@ const CategorySection = () => {
                 "
               />
 
-              {/* Abstract visual */}
-              <div className="absolute inset-0">
-
-                {/* Angular shape */}
-                <div
-                  className="
-                    absolute right-[12%] top-[12%]
-                    h-[65%] w-[42%] rotate-12
-                    border border-black/10
-                    transition-transform duration-700
-                    group-hover:rotate-6
-                    group-hover:scale-105
-                    dark:border-white/10
-                  "
-                />
-
-                {/* Soft circle */}
-                <div
-                  className="
-                    absolute bottom-[-20%] right-[-5%]
-                    h-[70%] w-[45%]
-                    rounded-full
-                    bg-black/[0.035]
-                    blur-2xl
-                    transition-transform duration-700
-                    group-hover:scale-125
-                    dark:bg-white/[0.025]
-                  "
-                />
-
-                {/* Giant initial */}
-                <div
-                  className="
-                    absolute bottom-8 right-8
-                    text-[8rem] font-black uppercase
-                    leading-none tracking-[-0.08em]
-                    text-black/[0.045]
-                    transition-transform duration-700
-                    group-hover:-translate-x-4
-                    dark:text-white/[0.035]
-                  "
-                >
-                  {category.title.charAt(0)}
-                </div>
-              </div>
+              {/* Subtle image sweep */}
+              <motion.div
+                className="
+                  absolute inset-y-0 -left-1/2
+                  w-1/3
+                  rotate-[12deg]
+                  bg-white/10
+                  blur-2xl
+                "
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "450%" }}
+                transition={{
+                  duration: 0.9,
+                  ease: "easeInOut",
+                }}
+              />
 
               {/* Top */}
-              <div className="absolute left-6 right-6 top-6 flex items-center justify-between">
+              <div
+                className="
+                  absolute left-6 right-6 top-6
+                  flex items-center justify-between
+                "
+              >
                 <span
                   className="
                     text-xs font-medium tracking-widest
-                    text-black/40
-                    dark:text-white/40
+                    text-white/70
                   "
                 >
                   {category.number}
@@ -193,24 +232,26 @@ const CategorySection = () => {
                   size={20}
                   strokeWidth={1.5}
                   className="
-                    text-black/50
+                    text-white/80
                     transition-all duration-300
                     group-hover:-translate-y-1
                     group-hover:translate-x-1
                     group-hover:text-[#FF0000]
-                    dark:text-white/50
                   "
                 />
               </div>
 
               {/* Bottom content */}
-              <div className="absolute bottom-6 left-6 right-6">
+              <div
+                className="
+                  absolute bottom-6 left-6 right-6
+                "
+              >
                 <p
                   className="
                     mb-1 text-xs uppercase
                     tracking-[0.2em]
-                    text-black/40
-                    dark:text-white/40
+                    text-white/60
                   "
                 >
                   {category.description}
@@ -221,9 +262,8 @@ const CategorySection = () => {
                     className="
                       text-4xl font-black uppercase
                       tracking-[-0.04em]
-                      text-[#080808]
+                      text-white
                       sm:text-5xl
-                      dark:text-white
                     "
                   >
                     {category.title}
@@ -249,7 +289,7 @@ const CategorySection = () => {
                   absolute inset-0
                   border border-transparent
                   transition-colors duration-500
-                  group-hover:border-[#FF0000]/40
+                  group-hover:border-[#FF0000]/60
                 "
               />
             </motion.a>
