@@ -34,7 +34,7 @@ const products: Product[] = [
     tag: "Bestseller",
     image: velocityJersey,
 
-    imageScale: 1.60,
+    imageScale: 1.6,
     imageX: 0,
     imageY: 0,
 
@@ -50,7 +50,7 @@ const products: Product[] = [
     tag: "New",
     image: performanceTee,
 
-    imageScale: 1.30,
+    imageScale: 1.3,
     imageX: 0,
     imageY: 0,
 
@@ -66,7 +66,7 @@ const products: Product[] = [
     tag: "",
     image: matchDayShorts,
 
-    imageScale: 1.30,
+    imageScale: 1.3,
     imageX: 0,
     imageY: 0,
 
@@ -82,7 +82,7 @@ const products: Product[] = [
     tag: "Popular",
     image: viratPolo,
 
-    imageScale: 1.30,
+    imageScale: 1.3,
     imageX: 0,
     imageY: 0,
 
@@ -121,17 +121,20 @@ const ProductVisual = ({
           absolute
           left-1/2
           top-1/2
-          h-[45%]
-          w-[45%]
+          h-[38%]
+          w-[38%]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-white/50
-          blur-[80px]
+          blur-[60px]
           transition-all
           duration-700
           group-hover:scale-125
           group-hover:bg-[#FF0000]/10
+          sm:h-[45%]
+          sm:w-[45%]
+          sm:blur-[80px]
           dark:bg-white/10
           dark:group-hover:bg-[#FF0000]/10
         "
@@ -161,8 +164,8 @@ const ProductVisual = ({
             ease-[cubic-bezier(0.16,1,0.3,1)]
             ${
               large
-                ? "h-[92%] w-[92%] p-6 sm:p-8 lg:p-10"
-                : "h-[88%] w-[88%] p-5 sm:p-6"
+                ? "h-[88%] w-[88%] p-4 sm:h-[92%] sm:w-[92%] sm:p-8 lg:p-10"
+                : "h-[84%] w-[84%] p-4 sm:h-[88%] sm:w-[88%] sm:p-6"
             }
           `}
           style={{
@@ -174,8 +177,6 @@ const ProductVisual = ({
       ) : (
         /* ====================================================
            FALLBACK PRODUCT PLACEHOLDER
-
-           This only appears if no image is supplied.
         ==================================================== */
 
         <div
@@ -183,8 +184,8 @@ const ProductVisual = ({
             relative
             ${
               large
-                ? "h-[82%] w-[42%]"
-                : "h-[76%] w-[55%]"
+                ? "h-[78%] w-[58%] sm:h-[82%] sm:w-[42%]"
+                : "h-[72%] w-[68%] sm:h-[76%] sm:w-[55%]"
             }
           `}
         >
@@ -362,10 +363,11 @@ const ProductVisual = ({
           absolute
           inset-x-0
           bottom-0
-          h-[35%]
+          h-[30%]
           bg-gradient-to-t
           from-black/[0.07]
           to-transparent
+          sm:h-[35%]
           dark:from-black/20
         "
       />
@@ -387,24 +389,62 @@ const FeaturedProducts = () => {
         relative
         overflow-hidden
         bg-[#F5F5F2]
-        px-6
-        py-24
+        px-5
+        py-20
         text-[#080808]
         transition-colors
         duration-300
-        dark:bg-[#050505]
-        dark:text-white
+        sm:px-8
+        sm:py-24
         lg:px-10
         lg:py-32
+        dark:bg-[#050505]
+        dark:text-white
       "
     >
-      <div className="mx-auto max-w-7xl">
+      {/* ======================================================
+          SECTION NUMBER
+      ====================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          right-[-10px]
+          top-1/2
+          z-0
+          -translate-y-1/2
+          select-none
+          text-[clamp(10rem,22vw,22rem)]
+          font-black
+          leading-none
+          tracking-[-0.1em]
+          text-black/[0.045]
+          dark:text-white/[0.045]
+        "
+      >
+        02
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl">
 
         {/* ======================================================
             HEADER
         ====================================================== */}
 
-        <div className="mb-14 flex items-end justify-between">
+        <div
+          className="
+            mb-10
+            flex
+            flex-col
+            gap-8
+            sm:mb-14
+            sm:flex-row
+            sm:items-end
+            sm:justify-between
+          "
+        >
           <div>
             <motion.p
               initial={{
@@ -430,7 +470,7 @@ const FeaturedProducts = () => {
                 text-[#FF0000]
               "
             >
-              01 — The essentials
+              02 — The essentials
             </motion.p>
 
             <div className="overflow-hidden">
@@ -449,22 +489,23 @@ const FeaturedProducts = () => {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 className="
-                  text-[clamp(3.5rem,8vw,8rem)]
+                  text-[clamp(3.8rem,14vw,8rem)]
                   font-black
                   uppercase
                   leading-[0.78]
                   tracking-[-0.075em]
+                  text-[#080808]
+                  dark:text-white
                 "
               >
                 Featured
-                <span className="text-[#FF0000]">
-                  .
-                </span>
+                <span className="text-[#FF0000]">.</span>
               </motion.h2>
             </div>
           </div>
 
-          {/* Desktop view all */}
+          {/* Desktop / tablet view all */}
+
           <motion.a
             href="#"
             initial={{
@@ -537,26 +578,31 @@ const FeaturedProducts = () => {
           <div
             className={`
               relative
-              min-h-[540px]
+              min-h-[500px]
               overflow-hidden
               bg-gradient-to-br
               ${featured.gradient}
+              sm:min-h-[580px]
+              md:min-h-[620px]
               lg:min-h-[650px]
             `}
           >
             {/* ==================================================
-                NUMBER
+                PRODUCT NUMBER
             ================================================== */}
 
             <div
               className="
                 absolute
-                left-6
-                top-6
+                left-4
+                top-4
                 z-30
                 flex
                 items-center
-                gap-3
+                gap-2
+                sm:left-6
+                sm:top-6
+                sm:gap-3
               "
             >
               <span
@@ -572,20 +618,23 @@ const FeaturedProducts = () => {
               <span
                 className="
                   h-px
-                  w-8
+                  w-5
                   bg-black/20
+                  sm:w-8
                   dark:bg-white/20
                 "
               />
 
               <span
                 className="
+                  hidden
                   text-[9px]
                   font-medium
                   uppercase
                   tracking-[0.25em]
                   text-black/40
                   dark:text-white/40
+                  xs:inline
                 "
               >
                 Featured product
@@ -600,14 +649,16 @@ const FeaturedProducts = () => {
               <div
                 className="
                   absolute
-                  right-6
-                  top-6
+                  right-4
+                  top-4
                   z-30
                   text-[9px]
                   font-bold
                   uppercase
                   tracking-[0.2em]
                   text-black/50
+                  sm:right-6
+                  sm:top-6
                   dark:text-white/50
                 "
               >
@@ -632,17 +683,19 @@ const FeaturedProducts = () => {
               className="
                 pointer-events-none
                 absolute
-                bottom-[-4%]
+                bottom-[-2%]
                 left-1/2
                 z-10
                 -translate-x-1/2
                 whitespace-nowrap
-                text-[18vw]
+                text-[27vw]
                 font-black
                 uppercase
                 leading-none
                 tracking-[-0.09em]
                 text-black/[0.035]
+                sm:text-[22vw]
+                lg:text-[18vw]
                 dark:text-white/[0.035]
               "
             >
@@ -662,11 +715,13 @@ const FeaturedProducts = () => {
                 z-40
                 flex
                 flex-col
-                justify-between
-                gap-8
-                p-6
+                gap-5
+                p-5
+                sm:gap-8
+                sm:p-6
                 lg:flex-row
                 lg:items-end
+                lg:justify-between
                 lg:p-10
               "
             >
@@ -687,13 +742,14 @@ const FeaturedProducts = () => {
 
                 <h3
                   className="
-                    text-3xl
+                    max-w-[80vw]
+                    text-2xl
                     font-black
                     uppercase
                     leading-none
                     tracking-[-0.04em]
                     sm:text-4xl
-                    lg:text-5xl
+                    md:text-5xl
                   "
                 >
                   {featured.name}
@@ -703,14 +759,20 @@ const FeaturedProducts = () => {
               <div
                 className="
                   flex
+                  w-full
                   items-center
-                  gap-6
+                  justify-between
+                  gap-5
+                  sm:w-auto
+                  sm:justify-start
+                  sm:gap-6
                 "
               >
                 <span
                   className="
                     text-sm
                     font-bold
+                    sm:text-base
                   "
                 >
                   {featured.price}
@@ -721,17 +783,19 @@ const FeaturedProducts = () => {
                     group/shop
                     flex
                     items-center
-                    gap-3
+                    gap-2
                     border-b
                     border-black/40
                     pb-2
-                    text-[10px]
+                    text-[9px]
                     font-bold
                     uppercase
                     tracking-[0.2em]
                     transition-colors
                     hover:border-[#FF0000]
                     hover:text-[#FF0000]
+                    sm:gap-3
+                    sm:text-[10px]
                     dark:border-white/40
                   "
                 >
@@ -761,10 +825,11 @@ const FeaturedProducts = () => {
                 inset-x-0
                 bottom-0
                 z-20
-                h-[38%]
+                h-[42%]
                 bg-gradient-to-t
-                from-black/[0.12]
+                from-black/[0.14]
                 to-transparent
+                sm:h-[38%]
                 dark:from-black/30
               "
             />
@@ -796,7 +861,7 @@ const FeaturedProducts = () => {
             SECONDARY PRODUCTS
         ====================================================== */}
 
-        <div className="mt-14">
+        <div className="mt-12 sm:mt-14">
 
           {/* Section label */}
 
@@ -806,6 +871,7 @@ const FeaturedProducts = () => {
               flex
               items-center
               justify-between
+              gap-4
               border-b
               border-black/10
               pb-4
@@ -845,7 +911,8 @@ const FeaturedProducts = () => {
               grid
               grid-cols-1
               gap-8
-              sm:grid-cols-3
+              sm:grid-cols-2
+              lg:grid-cols-3
             "
           >
             {secondary.map((product, index) => (
@@ -888,13 +955,15 @@ const FeaturedProducts = () => {
                   <span
                     className="
                       absolute
-                      left-5
-                      top-5
+                      left-4
+                      top-4
                       z-30
                       text-[9px]
                       font-bold
                       tracking-[0.2em]
                       text-black/35
+                      sm:left-5
+                      sm:top-5
                       dark:text-white/35
                     "
                   >
@@ -912,8 +981,8 @@ const FeaturedProducts = () => {
                   <div
                     className="
                       absolute
-                      bottom-5
-                      right-5
+                      bottom-4
+                      right-4
                       z-40
                       flex
                       items-center
@@ -928,6 +997,8 @@ const FeaturedProducts = () => {
                       duration-300
                       group-hover:translate-y-0
                       group-hover:opacity-100
+                      sm:bottom-5
+                      sm:right-5
                     "
                   >
                     Shop
@@ -970,7 +1041,7 @@ const FeaturedProducts = () => {
                       gap-4
                     "
                   >
-                    <div>
+                    <div className="min-w-0">
                       <p
                         className="
                           mb-1.5
@@ -998,6 +1069,7 @@ const FeaturedProducts = () => {
 
                     <span
                       className="
+                        shrink-0
                         text-sm
                         font-semibold
                       "
@@ -1029,13 +1101,18 @@ const FeaturedProducts = () => {
             duration: 0.7,
           }}
           className="
-            mt-20
+            mt-16
             flex
-            items-center
-            justify-between
+            flex-col
+            items-start
+            gap-3
             border-t
             border-black/10
             pt-6
+            sm:mt-20
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
             dark:border-white/10
           "
         >

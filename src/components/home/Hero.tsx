@@ -1,548 +1,584 @@
-import { ArrowUpRight, MoveDown } from "lucide-react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-} from "motion/react";
-import { useRef } from "react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 import heroImage from "../../assets/Hero.png";
 
+import header01 from "../../assets/hero/header-1.png";
+import header02 from "../../assets/hero/header-2.png";
+import header03 from "../../assets/hero/header-3.png";
+import header04 from "../../assets/hero/header-4.png";
+
+const slides = [
+  {
+    image: header01,
+    eyebrow: "VIRAT / 01",
+    title: "Play",
+    accent: "Harder.",
+  },
+  {
+    image: header02,
+    eyebrow: "VIRAT / 02",
+    title: "Own",
+    accent: "The Game.",
+  },
+  {
+    image: header03,
+    eyebrow: "VIRAT / 03",
+    title: "Built",
+    accent: "To Move.",
+  },
+  {
+    image: header04,
+    eyebrow: "VIRAT / 04",
+    title: "Never",
+    accent: "Settle.",
+  },
+];
+
 const Hero = () => {
-  const heroRef = useRef<HTMLElement>(null);
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(1);
 
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
 
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["-2%", "8%"]
-  );
+  const previousSlide = () => {
+    setDirection(-1);
+    setCurrent(
+      (prev) => (prev - 1 + slides.length) % slides.length
+    );
+  };
 
-  const imageScale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [1.02, 1.08]
-  );
+  /*
+   * Automatic slideshow
+   */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 6500);
 
-  const imageOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.8, 1],
-    [1, 1, 0.75]
-  );
+    return () => clearInterval(timer);
+  }, []);
+
+  const slide = slides[current];
 
   return (
     <section
-      ref={heroRef}
       className="
-  relative min-h-[100svh]
-  overflow-hidden
-  bg-[#F5F5F2]
-  text-[#080808]
-  transition-colors duration-500
-  dark:bg-[#050505]
-  dark:text-white
-"
+        relative
+        min-h-[100svh]
+        overflow-hidden
+        bg-black
+        text-white
+      "
     >
-      {/* BACKGROUND */}
-      <div className="pointer-events-none absolute inset-0">
+      {/* =====================================================
+          BACKGROUND SLIDESHOW
+      ====================================================== */}
 
-        {/* NAVY GLOW */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 1.8,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="
-            absolute right-[-15%] top-[5%]
-            h-[550px] w-[550px]
-            rounded-full
-            bg-[#000045]/[0.07]
-            blur-[150px]
-            dark:bg-[#000045]/40
-          "
-        />
-
-        {/* RED GLOW */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 2,
-            delay: 0.5,
-          }}
-          className="
-            absolute bottom-[-20%] left-[10%]
-            h-[400px] w-[400px]
-            rounded-full
-            bg-[#FF0000]/[0.025]
-            blur-[160px]
-            dark:bg-[#FF0000]/[0.08]
-          "
-        />
-
-        {/* MOVING BACKGROUND TEXT — ROW 1 */}
-        <div className="absolute left-0 top-[42%] w-full -translate-y-1/2 overflow-hidden">
+      <div className="absolute inset-0">
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
-            initial={{ x: "0%" }}
-            animate={{ x: "-33.333%" }}
-            transition={{
-              duration: 38,
-              repeat: Infinity,
-              ease: "linear",
+            key={current}
+            custom={direction}
+            initial={{
+              opacity: 0,
+              scale: 1.08,
             }}
-            className="flex w-max whitespace-nowrap"
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 1.03,
+            }}
+            transition={{
+              opacity: {
+                duration: 1.2,
+                ease: "easeInOut",
+              },
+              scale: {
+                duration: 7,
+                ease: [0.16, 1, 0.3, 1],
+              },
+            }}
+            className="absolute inset-0"
           >
-            <BackgroundText />
-            <BackgroundText />
-            <BackgroundText />
-          </motion.div>
-        </div>
+            <img
+              src={slide.image}
+              alt=""
+              draggable={false}
+              className="
+                h-full
+                w-full
+                object-cover
+                select-none
+              "
+            />
 
-        {/* MOVING BACKGROUND TEXT — ROW 2 */}
-        <div className="absolute left-0 top-[63%] w-full -translate-y-1/2 overflow-hidden">
-          <motion.div
-            initial={{ x: "-33.333%" }}
-            animate={{ x: "0%" }}
-            transition={{
-              duration: 45,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="flex w-max whitespace-nowrap"
-          >
-            <BackgroundText />
-            <BackgroundText />
-            <BackgroundText />
+            {/* Image darkening */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                bg-black/35
+              "
+            />
+
+            {/* Bottom gradient */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                bg-gradient-to-t
+                from-black
+                via-black/20
+                to-black/10
+              "
+            />
+
+            {/* Left gradient */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                bg-gradient-to-r
+                from-black/65
+                via-black/20
+                to-transparent
+              "
+            />
           </motion.div>
-        </div>
+        </AnimatePresence>
       </div>
 
-      {/* TOP RED LINE */}
+      {/* =====================================================
+          SUBTLE RED LIGHT
+      ====================================================== */}
+
+      <motion.div
+        animate={{
+          opacity: [0.15, 0.3, 0.15],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          -right-32
+          top-1/4
+          h-[400px]
+          w-[400px]
+          rounded-full
+          bg-[#FF0000]/20
+          blur-[150px]
+        "
+      />
+
+      {/* =====================================================
+          TOP NAV LINE
+      ====================================================== */}
+
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{
           duration: 1.2,
-          delay: 0.45,
           ease: [0.76, 0, 0.24, 1],
         }}
         className="
-          absolute left-0 top-20 z-20
-          h-px w-full origin-left
+          absolute
+          left-0
+          top-20
+          z-30
+          h-px
+          w-full
+          origin-left
           bg-gradient-to-r
           from-[#FF0000]
-          via-[#FF0000]/40
+          via-white/40
           to-transparent
         "
       />
 
-      {/* CONTENT */}
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl items-center px-6 pt-20 lg:px-10">
-        <div className="grid w-full items-center gap-10 lg:grid-cols-[1fr_0.95fr]">
+      {/* =====================================================
+          MAIN CONTENT
+      ====================================================== */}
 
-          {/* LEFT CONTENT */}
-          <div className="relative z-20">
+      <div
+        className="
+          relative
+          z-20
+          mx-auto
+          flex
+          min-h-[100svh]
+          max-w-7xl
+          items-end
+          px-5
+          pb-28
+          pt-32
+          sm:px-8
+          sm:pb-32
+          lg:px-10
+          lg:pb-28
+        "
+      >
+        <div className="w-full">
 
-            {/* EYEBROW */}
-            <motion.p
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
+          {/* =================================================
+              EYEBROW
+          ================================================= */}
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`eyebrow-${current}`}
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                y: -10,
+              }}
               transition={{
-                duration: 0.7,
-                delay: 0.55,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 0.5,
               }}
               className="
-                mb-6 text-xs font-semibold
-                uppercase tracking-[0.35em]
-                text-[#FF0000]
+                mb-5
+                flex
+                items-center
+                gap-3
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.3em]
+                text-white/65
+                sm:text-xs
               "
             >
-              Sportswear / Cricket / Lifestyle
-            </motion.p>
+              <span className="h-1.5 w-1.5 rounded-full bg-[#FF0000]" />
 
-            {/* PLAY */}
-            <div className="overflow-hidden">
-              <motion.h1
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.45,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="
-                  text-[clamp(5rem,11vw,10rem)]
-                  font-black uppercase
-                  leading-[0.78]
-                  tracking-[-0.075em]
-                "
-              >
-                Play
-              </motion.h1>
-            </div>
+              {slide.eyebrow}
+            </motion.div>
+          </AnimatePresence>
 
-            {/* HARDER */}
-            <div className="overflow-hidden">
-              <motion.h1
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.58,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="
-                  text-[clamp(5rem,11vw,10rem)]
-                  font-black uppercase
-                  leading-[0.78]
-                  tracking-[-0.075em]
-                "
-              >
-                <motion.span
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: 0.9,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="text-[#FF0000]"
-                >
-                  Harder
-                </motion.span>
-                .
-              </motion.h1>
-            </div>
+          {/* =================================================
+              TITLE
+          ================================================= */}
 
-            {/* DESCRIPTION */}
-            <motion.p
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`title-${current}`}
+              initial={{
+                opacity: 0,
+                y: 50,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                y: -30,
+              }}
               transition={{
-                duration: 0.75,
-                delay: 1.05,
+                duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
+            >
+              <h1
+                className="
+                  max-w-4xl
+                  text-[clamp(4.5rem,13vw,10rem)]
+                  font-black
+                  uppercase
+                  leading-[0.78]
+                  tracking-[-0.075em]
+                "
+              >
+                {slide.title}
+                <br />
+
+                <span className="text-[#FF0000]">
+                  {slide.accent}
+                </span>
+              </h1>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* =================================================
+              BOTTOM CONTENT
+          ================================================= */}
+
+          <div
+            className="
+              mt-8
+              flex
+              flex-col
+              gap-7
+              sm:mt-10
+              lg:flex-row
+              lg:items-end
+              lg:justify-between
+            "
+          >
+            {/* Description */}
+
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: 0.4,
+                duration: 0.6,
+              }}
               className="
-                mt-10 max-w-md
-                text-sm leading-7
-                text-black/60
-                dark:text-white/65
+                max-w-sm
+                text-sm
+                leading-6
+                text-white/65
                 sm:text-base
               "
             >
-              Performance wear built for the game and designed for every day.
-              Discover cricket and sportswear made to move with you.
+              Performance wear built for cricket,
+              sports and everything beyond the game.
             </motion.p>
 
             {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.7,
-                delay: 1.2,
-                ease: [0.16, 1, 1, 1],
+
+            <motion.button
+              whileHover="hover"
+              whileTap={{
+                scale: 0.96,
               }}
-              className="mt-8"
+              className="
+                group
+                flex
+                w-fit
+                items-center
+                gap-4
+                border
+                border-white/30
+                bg-white/[0.06]
+                px-6
+                py-3.5
+                text-xs
+                font-bold
+                uppercase
+                tracking-wider
+                backdrop-blur-md
+                transition-colors
+                hover:border-white
+                hover:bg-white
+                hover:text-black
+                sm:px-7
+                sm:py-4
+              "
             >
-              <motion.button
-                whileHover="hover"
-                whileTap={{ scale: 0.97 }}
-                className="
-                  group relative flex items-center
-                  gap-4 overflow-hidden
-                  bg-[#FF0000]
-                  px-7 py-4
-                  text-sm font-bold
-                  uppercase tracking-wider
-                  text-white
-                "
+              Shop collection
+
+              <motion.span
+                variants={{
+                  hover: {
+                    x: 5,
+                    y: -5,
+                  },
+                }}
               >
-                {/* HOVER FILL */}
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  variants={{
-                    hover: { scaleX: 1 },
-                  }}
-                  transition={{
-                    duration: 0.35,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="
-                    absolute inset-0 origin-left
-                    bg-white
-                  "
-                />
-
-                <span
-                  className="
-                    relative z-10
-                    transition-colors duration-300
-                    group-hover:text-black
-                  "
-                >
-                  Shop now
-                </span>
-
-                <motion.span
-                  variants={{
-                    hover: { x: 4, y: -4 },
-                  }}
-                  transition={{ duration: 0.25 }}
-                  className="
-                    relative z-10
-                    transition-colors duration-300
-                    group-hover:text-black
-                  "
-                >
-                  <ArrowUpRight size={18} />
-                </motion.span>
-              </motion.button>
-            </motion.div>
+                <ArrowUpRight size={17} />
+              </motion.span>
+            </motion.button>
           </div>
-
-          {/* HERO IMAGE */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: 50,
-              scale: 1.04,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              scale: 1,
-            }}
-            transition={{
-              duration: 1.2,
-              delay: 0.3,
-              ease: [0.16, 1, 1, 1],
-            }}
-            className="relative mx-auto w-full max-w-[580px]"
-          >
-
-            {/* RED CORNER */}
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.8,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-              }}
-              transition={{
-                duration: 0.8,
-                delay: 1,
-              }}
-              className="
-                absolute -right-3 -top-3 z-30
-                h-24 w-24
-                border-r border-t
-                border-[#FF0000]
-              "
-            />
-
-            {/* IMAGE FRAME */}
-            <div className="relative aspect-[4/5] overflow-hidden bg-white">
-
-              {/* PARALLAX IMAGE */}
-              <motion.img
-                src={heroImage}
-                alt="VIRAT cricket player"
-                style={{
-                  y: imageY,
-                  scale: imageScale,
-                  opacity: imageOpacity,
-                }}
-                className="
-                  absolute inset-0
-                  h-full w-full
-                  object-contain object-center
-                "
-              />
-
-              {/* SUBTLE IMAGE SHADOW */}
-              <div
-                className="
-                  pointer-events-none absolute inset-0
-                  bg-gradient-to-t
-                  from-black/10
-                  via-transparent
-                  to-transparent
-                "
-              />
-
-              {/* IMAGE LABEL */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 15,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: 1.35,
-                }}
-                className="absolute bottom-6 left-6 z-20"
-              >
-                <span
-                  className="
-                    text-[10px] font-medium
-                    uppercase tracking-[0.3em]
-                    text-black/45
-                  "
-                >
-                  VIRAT
-                </span>
-
-                <p
-                  className="
-                    mt-1 text-xs uppercase
-                    tracking-widest text-black/70
-                  "
-                >
-                  Built for the game
-                </p>
-              </motion.div>
-            </div>
-
-            {/* SIDE LABEL */}
-            <motion.div
-              initial={{
-                opacity: 0,
-                x: 10,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 1.4,
-              }}
-              className="
-                absolute -right-8 bottom-16
-                hidden rotate-90
-                text-[9px] uppercase
-                tracking-[0.4em]
-                text-black/30
-                dark:text-white/30
-                lg:block
-              "
-            >
-              Cricket / Performance
-            </motion.div>
-          </motion.div>
         </div>
       </div>
 
-      {/* SCROLL INDICATOR */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          delay: 1.8,
-          duration: 0.6,
-        }}
+      {/* =====================================================
+          SLIDE CONTROLS
+      ====================================================== */}
+
+      <div
         className="
-          absolute bottom-7 left-6 z-20
-          flex items-center gap-3
-          lg:left-10
+          absolute
+          bottom-7
+          right-5
+          z-30
+          flex
+          items-center
+          gap-5
+          sm:right-8
+          lg:right-10
         "
       >
-        <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{
-            duration: 1.6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <MoveDown
-            size={14}
-            strokeWidth={1}
-            className="text-black/35 dark:text-white/35"
-          />
-        </motion.div>
+        {/* Counter */}
 
-        <span
+        <div
           className="
-            text-[10px] uppercase
-            tracking-[0.3em]
-            text-black/35
-            dark:text-white/35
+            flex
+            items-baseline
+            gap-1.5
+            font-mono
+            text-xs
           "
         >
-          Scroll to explore
-        </span>
-      </motion.div>
+          <span className="font-bold text-white">
+            {String(current + 1).padStart(2, "0")}
+          </span>
+
+          <span className="text-white/30">
+            /
+          </span>
+
+          <span className="text-white/40">
+            {String(slides.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        {/* Progress bars */}
+
+        <div className="hidden gap-1.5 sm:flex">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setDirection(
+                  index > current ? 1 : -1
+                );
+                setCurrent(index);
+              }}
+              aria-label={`Go to slide ${index + 1}`}
+              className="
+                relative
+                h-8
+                w-10
+                overflow-hidden
+              "
+            >
+              <span
+                className="
+                  absolute
+                  left-0
+                  top-1/2
+                  h-px
+                  w-full
+                  -translate-y-1/2
+                  bg-white/25
+                "
+              />
+
+              <motion.span
+                animate={{
+                  scaleX:
+                    index === current ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.4,
+                }}
+                className="
+                  absolute
+                  left-0
+                  top-1/2
+                  h-px
+                  w-full
+                  origin-left
+                  -translate-y-1/2
+                  bg-[#FF0000]
+                "
+              />
+            </button>
+          ))}
+        </div>
+
+        {/* Arrows */}
+
+        <div className="flex gap-1">
+          <button
+            onClick={previousSlide}
+            aria-label="Previous slide"
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              border
+              border-white/20
+              text-white/70
+              transition-all
+              hover:border-white
+              hover:bg-white
+              hover:text-black
+            "
+          >
+            <ChevronLeft size={17} />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            aria-label="Next slide"
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              border
+              border-white/20
+              text-white/70
+              transition-all
+              hover:border-white
+              hover:bg-white
+              hover:text-black
+            "
+          >
+            <ChevronRight size={17} />
+          </button>
+        </div>
+      </div>
+
+      {/* =====================================================
+          SIDE BRAND
+      ====================================================== */}
+
+      <div
+        className="
+          absolute
+          bottom-8
+          left-5
+          z-30
+          hidden
+          -rotate-90
+          origin-left
+          text-[9px]
+          uppercase
+          tracking-[0.4em]
+          text-white/35
+          sm:left-8
+          lg:block
+        "
+      >
+        VIRAT / SPORTSWEAR
+      </div>
     </section>
-  );
-};
-
-const BackgroundText = () => {
-  return (
-    <div className="flex items-center">
-      <span
-        className="
-          mx-10 text-[clamp(5rem,10vw,10rem)]
-          font-black uppercase leading-none
-          tracking-[-0.08em]
-          text-[#9A9A96]/40
-          dark:text-[#5A5A5A]/45
-        "
-      >
-        VIRAT
-      </span>
-
-      <span
-        className="
-          mx-10 text-[clamp(5rem,10vw,10rem)]
-          font-black uppercase leading-none
-          tracking-[-0.08em]
-          text-[#9A9A96]/40
-          dark:text-[#5A5A5A]/45
-        "
-      >
-        PLAY HARDER
-      </span>
-
-      <span
-        className="
-          mx-10 text-[clamp(5rem,10vw,10rem)]
-          font-black uppercase leading-none
-          tracking-[-0.08em]
-          text-[#9A9A96]/40
-          dark:text-[#5A5A5A]/45
-        "
-      >
-        CRICKET
-      </span>
-
-      <span
-        className="
-          mx-10 text-[clamp(5rem,10vw,10rem)]
-          font-black uppercase leading-none
-          tracking-[-0.08em]
-          text-[#9A9A96]/40
-          dark:text-[#5A5A5A]/45
-        "
-      >
-        VIRAT
-      </span>
-    </div>
   );
 };
 

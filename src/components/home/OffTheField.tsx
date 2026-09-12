@@ -46,52 +46,85 @@ const ProductVisual = ({
       href="#"
       initial={{ opacity: 0, y: 35 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
         duration: 0.7,
         delay: index * 0.12,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className={`group relative block ${
-        large ? "h-full" : "h-[300px] sm:h-[360px]"
-      }`}
+      className="group relative block"
     >
+      {/* =====================================================
+          PRODUCT VISUAL
+      ====================================================== */}
+
       <div
         className={`
-          relative h-full overflow-hidden
+          relative
+          w-full
+          overflow-hidden
           bg-gradient-to-br
           ${product.gradient}
+
+          ${
+            large
+              ? "h-[430px] sm:h-[520px] md:h-[580px] lg:h-[700px]"
+              : "h-[320px] sm:h-[360px] md:h-[390px] lg:h-[330px]"
+          }
         `}
       >
-        {/* Subtle background glow */}
+        {/* =================================================
+            SUBTLE RED GLOW
+        ================================================== */}
+
         <div
           className="
-            absolute -bottom-24 -right-24
-            h-72 w-72 rounded-full
+            absolute
+            -bottom-24
+            -right-24
+            h-72
+            w-72
+            rounded-full
             bg-[#FF0000]/10
             blur-[100px]
-            transition-all duration-700
+            transition-all
+            duration-700
             group-hover:scale-150
             group-hover:bg-[#FF0000]/15
           "
         />
 
-        {/* Product number */}
+        {/* =================================================
+            PRODUCT NUMBER
+        ================================================== */}
+
         <span
           className={`
-            absolute right-5 top-4
-            z-10 select-none
-            font-black leading-none
+            absolute
+            right-3
+            top-2
+            z-10
+            select-none
+            font-black
+            leading-none
             tracking-[-0.08em]
             text-black/[0.045]
             dark:text-white/[0.045]
-            ${large ? "text-[12rem]" : "text-[8rem]"}
+
+            ${
+              large
+                ? "text-[8rem] sm:text-[11rem] md:text-[14rem]"
+                : "text-[6rem] sm:text-[7rem] md:text-[8rem]"
+            }
           `}
         >
           0{index + 1}
         </span>
 
-        {/* PRODUCT IMAGE */}
+        {/* =================================================
+            PRODUCT IMAGE
+        ================================================== */}
+
         <motion.div
           initial={{ scale: 0.94 }}
           whileInView={{ scale: 1 }}
@@ -101,31 +134,58 @@ const ProductVisual = ({
             delay: index * 0.12,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="absolute inset-0 flex items-center justify-center"
+          className="
+            absolute
+            inset-0
+            flex
+            items-center
+            justify-center
+          "
         >
           <motion.img
             src={product.image}
             alt={product.name}
             draggable={false}
             className={`
-              relative z-[2]
-              h-full w-full
-              object-contain
+              relative
+              z-[2]
+              h-full
+              w-full
               select-none
+              object-contain
+
               transition-transform
               duration-700
-              scale-[1.30]
               ease-[cubic-bezier(0.16,1,0.3,1)]
-              group-hover:scale-[1.35]
-              ${large ? "p-6 sm:p-8 lg:p-10" : "p-5 sm:p-6"}
+
+              scale-[1.12]
+              group-hover:scale-[1.18]
+
+              sm:scale-[1.18]
+              sm:group-hover:scale-[1.24]
+
+              md:scale-[1.22]
+              md:group-hover:scale-[1.28]
+
+              ${
+                large
+                  ? "p-8 sm:p-10 md:p-12 lg:p-14"
+                  : "p-6 sm:p-7 md:p-8"
+              }
             `}
           />
         </motion.div>
 
-        {/* Soft image overlay */}
+        {/* =================================================
+            SOFT IMAGE OVERLAY
+        ================================================== */}
+
         <div
           className="
-            pointer-events-none absolute inset-0 z-[3]
+            pointer-events-none
+            absolute
+            inset-0
+            z-[3]
             bg-gradient-to-t
             from-black/10
             via-transparent
@@ -134,10 +194,16 @@ const ProductVisual = ({
           "
         />
 
-        {/* Grid texture */}
+        {/* =================================================
+            LIGHT MODE GRID
+        ================================================== */}
+
         <div
           className="
-            pointer-events-none absolute inset-0 z-[4]
+            pointer-events-none
+            absolute
+            inset-0
+            z-[4]
             opacity-[0.02]
             dark:hidden
           "
@@ -148,10 +214,19 @@ const ProductVisual = ({
           }}
         />
 
+        {/* =================================================
+            DARK MODE GRID
+        ================================================== */}
+
         <div
           className="
-            pointer-events-none absolute inset-0
-            z-[4] hidden opacity-[0.02] dark:block
+            pointer-events-none
+            absolute
+            inset-0
+            z-[4]
+            hidden
+            opacity-[0.02]
+            dark:block
           "
           style={{
             backgroundImage:
@@ -160,11 +235,31 @@ const ProductVisual = ({
           }}
         />
 
-        {/* Top information */}
-        <div className="absolute left-5 right-5 top-5 z-10 flex items-center justify-between">
+        {/* =================================================
+            TOP INFORMATION
+        ================================================== */}
+
+        <div
+          className="
+            absolute
+            left-4
+            right-4
+            top-4
+            z-10
+            flex
+            items-center
+            justify-between
+
+            sm:left-5
+            sm:right-5
+            sm:top-5
+          "
+        >
           <span
             className="
-              text-[9px] font-medium uppercase
+              text-[9px]
+              font-medium
+              uppercase
               tracking-[0.25em]
               text-black/45
               dark:text-white/45
@@ -175,21 +270,33 @@ const ProductVisual = ({
 
           <div
             className="
-              flex h-9 w-9 items-center justify-center
-              border border-black/10
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              border
+              border-black/10
               bg-white/20
               backdrop-blur-sm
-              transition-all duration-300
+              transition-all
+              duration-300
+
               group-hover:border-[#FF0000]
               group-hover:bg-[#FF0000]
+
               dark:border-white/10
               dark:bg-black/10
+
+              sm:h-9
+              sm:w-9
             "
           >
             <ArrowUpRight
-              size={16}
+              size={15}
               className="
-                transition-transform duration-300
+                transition-transform
+                duration-300
                 group-hover:-translate-y-0.5
                 group-hover:translate-x-0.5
               "
@@ -197,37 +304,81 @@ const ProductVisual = ({
           </div>
         </div>
 
-        {/* Bottom product label */}
-        <div className="absolute bottom-5 left-5 z-10">
+        {/* =================================================
+            BOTTOM PRODUCT LABEL
+        ================================================== */}
+
+        <div
+          className="
+            absolute
+            bottom-4
+            left-4
+            z-10
+
+            sm:bottom-5
+            sm:left-5
+          "
+        >
           <span
             className="
-              text-[8px] uppercase
+              text-[8px]
+              uppercase
               tracking-[0.3em]
               text-black/30
               dark:text-white/35
             "
           >
-            Virat / Everyday
+            Virat / {product.category}
           </span>
         </div>
 
-        {/* Hover border */}
+        {/* =================================================
+            HOVER BORDER
+        ================================================== */}
+
         <div
           className="
-            pointer-events-none absolute inset-0 z-20
-            border border-transparent
-            transition-colors duration-500
+            pointer-events-none
+            absolute
+            inset-0
+            z-20
+            border
+            border-transparent
+            transition-colors
+            duration-500
             group-hover:border-[#FF0000]/40
           "
         />
       </div>
 
-      {/* Product information */}
-      <div className="mt-4 flex items-end justify-between">
+      {/* =====================================================
+          PRODUCT INFORMATION
+      ====================================================== */}
+
+      <div
+        className="
+          mt-3
+          flex
+          items-end
+          justify-between
+          gap-4
+
+          sm:mt-4
+        "
+      >
         <h3
-          className={`font-black uppercase tracking-[-0.03em] ${
-            large ? "text-xl sm:text-2xl" : "text-base sm:text-lg"
-          }`}
+          className={`
+            font-black
+            uppercase
+            leading-none
+            tracking-[-0.03em]
+
+            ${
+              large
+                ? "text-lg sm:text-xl md:text-2xl"
+                : "text-base sm:text-lg"
+            }
+          `}
         >
           {product.name}
           <span className="text-[#FF0000]">.</span>
@@ -235,9 +386,13 @@ const ProductVisual = ({
 
         <span
           className="
-            text-sm font-semibold
+            shrink-0
+            text-xs
+            font-semibold
             text-black/65
             dark:text-white/65
+
+            sm:text-sm
           "
         >
           {product.price}
@@ -251,40 +406,110 @@ const OffTheField = () => {
   return (
     <section
       className="
-        relative overflow-hidden
+        relative
+        overflow-hidden
         bg-[#F5F5F2]
-        px-6 py-24
+        px-5
+        py-20
         text-[#080808]
-        transition-colors duration-300
+        transition-colors
+        duration-300
         dark:bg-[#0B0B0B]
         dark:text-white
-        lg:px-10 lg:py-36
+
+        sm:px-8
+        sm:py-24
+
+        lg:px-10
+        lg:py-36
       "
     >
-      <div className="mx-auto max-w-7xl">
+      {/* =====================================================
+          LARGE SECTION NUMBER
+      ====================================================== */}
 
-        {/* HEADER */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          right-[-15px]
+          top-1/2
+          z-0
+          -translate-y-1/2
+          select-none
+          text-[clamp(10rem,22vw,22rem)]
+          font-black
+          leading-none
+          tracking-[-0.1em]
+          text-black/[0.045]
+          dark:text-white/[0.045]
+        "
+      >
+        04
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+
+        {/* =====================================================
+            HEADER
+        ====================================================== */}
+
         <div className="mb-14 lg:mb-20">
+
+          {/* TOP META */}
           <div
             className="
-              flex items-center justify-between
-              border-b border-black/10
+              flex
+              flex-col
+              gap-4
+              border-b
+              border-black/10
               pb-5
+
+              sm:flex-row
+              sm:items-center
+              sm:justify-between
+
               dark:border-white/10
             "
           >
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-3"
+              initial={{
+                opacity: 0,
+                x: -20,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              className="
+                flex
+                items-center
+                gap-3
+              "
             >
-              <span className="h-2 w-2 rounded-full bg-[#FF0000]" />
+              <span
+                className="
+                  h-2
+                  w-2
+                  shrink-0
+                  rounded-full
+                  bg-[#FF0000]
+                "
+              />
 
               <span
                 className="
-                  text-[10px] font-bold uppercase
+                  text-[10px]
+                  font-bold
+                  uppercase
                   tracking-[0.3em]
                   text-[#FF0000]
                 "
@@ -295,7 +520,9 @@ const OffTheField = () => {
 
             <span
               className="
-                text-[9px] font-medium uppercase
+                text-[9px]
+                font-medium
+                uppercase
                 tracking-[0.25em]
                 text-black/30
                 dark:text-white/30
@@ -305,21 +532,33 @@ const OffTheField = () => {
             </span>
           </div>
 
-          {/* MAIN HEADING */}
-          <div className="mt-8 overflow-hidden">
+          {/* =================================================
+              MAIN HEADING
+          ================================================== */}
+
+          <div className="mt-7 overflow-hidden sm:mt-8">
             <motion.h2
-              initial={{ y: "100%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
+              initial={{
+                y: "100%",
+              }}
+              whileInView={{
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
               transition={{
                 duration: 0.9,
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="
-                text-[clamp(4rem,9vw,9rem)]
-                font-black uppercase
+                text-[clamp(3.8rem,14vw,9rem)]
+                font-black
+                uppercase
                 leading-[0.78]
                 tracking-[-0.085em]
+                text-[#080808]
+                dark:text-white
               "
             >
               Off The
@@ -328,24 +567,48 @@ const OffTheField = () => {
             </motion.h2>
           </div>
 
+          {/* =================================================
+              DESCRIPTION
+          ================================================== */}
+
           <div
             className="
-              mt-8 flex flex-col gap-5
-              sm:flex-row sm:items-end
+              mt-7
+              flex
+              flex-col
+              gap-5
+
+              sm:mt-8
+              sm:flex-row
+              sm:items-end
               sm:justify-between
             "
           >
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.6,
+                delay: 0.15,
+              }}
               className="
                 max-w-xl
-                text-sm leading-6
+                text-sm
+                leading-6
                 text-black/55
                 dark:text-white/55
+
                 sm:text-base
+                sm:leading-7
               "
             >
               The game doesn't stop when you leave the pitch. Everyday
@@ -355,7 +618,10 @@ const OffTheField = () => {
 
             <span
               className="
-                text-[9px] font-bold uppercase
+                shrink-0
+                text-[9px]
+                font-bold
+                uppercase
                 tracking-[0.25em]
                 text-black/30
                 dark:text-white/30
@@ -366,22 +632,42 @@ const OffTheField = () => {
           </div>
         </div>
 
-        {/* PRODUCT GRID */}
+        {/* =====================================================
+            PRODUCT GRID
+        ====================================================== */}
+
         <div
           className="
-            grid gap-5
+            grid
+            gap-5
+
             lg:grid-cols-[1.25fr_0.75fr]
           "
         >
-          {/* LARGE PRODUCT */}
+          {/* =================================================
+              LARGE PRODUCT
+          ================================================== */}
+
           <ProductVisual
             product={products[0]}
             index={0}
             large
           />
 
-          {/* SMALL PRODUCTS */}
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+          {/* =================================================
+              SMALL PRODUCTS
+          ================================================== */}
+
+          <div
+            className="
+              grid
+              gap-5
+
+              sm:grid-cols-2
+
+              lg:grid-cols-1
+            "
+          >
             <ProductVisual
               product={products[1]}
               index={1}
@@ -394,27 +680,50 @@ const OffTheField = () => {
           </div>
         </div>
 
-        {/* BOTTOM CTA */}
+        {/* =====================================================
+            BOTTOM CTA
+        ====================================================== */}
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.7,
+          }}
           className="
-            mt-16 flex flex-col gap-6
-            border-t border-black/10
+            mt-14
+            flex
+            flex-col
+            gap-6
+            border-t
+            border-black/10
             pt-7
+
+            sm:mt-16
             sm:flex-row
             sm:items-center
             sm:justify-between
+
             lg:mt-20
+
             dark:border-white/10
           "
         >
           <div>
             <p
               className="
-                text-xs font-bold uppercase
+                text-xs
+                font-bold
+                uppercase
                 tracking-[0.2em]
                 text-black/60
                 dark:text-white/60
@@ -425,7 +734,9 @@ const OffTheField = () => {
 
             <p
               className="
-                mt-2 text-[9px] uppercase
+                mt-2
+                text-[9px]
+                uppercase
                 tracking-[0.25em]
                 text-black/25
                 dark:text-white/25
@@ -438,9 +749,14 @@ const OffTheField = () => {
           <a
             href="#"
             className="
-              group flex w-fit
-              items-center gap-4
-              text-xs font-bold uppercase
+              group
+              flex
+              w-fit
+              items-center
+              gap-4
+              text-xs
+              font-bold
+              uppercase
               tracking-[0.2em]
             "
           >
@@ -449,7 +765,8 @@ const OffTheField = () => {
             <MoveRight
               size={17}
               className="
-                transition-transform duration-300
+                transition-transform
+                duration-300
                 group-hover:translate-x-2
                 group-hover:text-[#FF0000]
               "

@@ -42,3 +42,27 @@ html.dark body {
   min-height: 100vh;
   background: inherit;
 }
+.hero-bg-text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+
+  font-size: clamp(4rem, 10vw, 10rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+
+  color: rgb(154 154 150 / 0.4);
+}
+
+.dark .hero-bg-text {
+  color: rgb(90 90 90 / 0.45);
+}
+
+@media (max-width: 640px) {
+  .hero-bg-text {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 4rem;
+  }
+}
