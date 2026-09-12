@@ -2,8 +2,6 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-import heroImage from "../../assets/Hero.png";
-
 import header01 from "../../assets/hero/header-1.png";
 import header02 from "../../assets/hero/header-2.png";
 import header03 from "../../assets/hero/header-3.png";
