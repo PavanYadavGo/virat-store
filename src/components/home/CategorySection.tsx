@@ -140,47 +140,38 @@ const CategorySection = () => {
             </motion.p>
 
             {/* =================================================
-                BIG TITLE
-            ================================================== */}
+    BIG TITLE
+================================================== */}
 
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{
-                  y: "105%",
-                }}
-                whileInView={{
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                  amount: 0.4,
-                }}
-                transition={{
-                  duration: 1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="
-                  text-[4.8rem]
-                  font-black
-                  uppercase
-                  leading-[0.78]
-                  tracking-[-0.075em]
-                  text-[#080808]
-                  dark:text-white
-                  sm:text-[6.5rem]
-                  md:text-[7.5rem]
-                  lg:text-[8.5rem]
-                  xl:text-[9.5rem]
-                "
-              >
-                Find your
-                <br />
-                <span>
-                  game
-                  <span className="text-[#FF0000]">.</span>
-                </span>
-              </motion.h2>
-            </div>
+<div className="overflow-hidden">
+  <motion.h2
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{
+      once: true,
+      amount: 0.2,
+    }}
+    transition={{
+      duration: 0.9,
+      ease: [0.16, 1, 0.3, 1],
+    }}
+    className="
+      text-[clamp(4rem,14vw,9.5rem)]
+      font-black
+      uppercase
+      leading-[0.78]
+      tracking-[-0.075em]
+      text-[#080808]
+      dark:text-white
+    "
+  >
+    Find your
+    <br />
+    <span>
+      game<span className="text-[#FF0000]">.</span>
+    </span>
+  </motion.h2>
+</div>
           </div>
 
           {/* =================================================

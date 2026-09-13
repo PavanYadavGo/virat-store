@@ -2,7 +2,7 @@ import { ArrowUpRight, MoveRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
-import cricketCollectionImage from "../../assets/cricket-collection.jpg";
+import performanceVideo from "../../assets/cricket-collection.mp4";
 
 const CricketCollection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -12,8 +12,17 @@ const CricketCollection = () => {
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["20px", "-20px"]);
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["-5%", "5%"]
+  );
+
+  const textY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["20px", "-20px"]
+  );
 
   return (
     <section
@@ -25,28 +34,24 @@ const CricketCollection = () => {
         px-5
         py-20
         text-[#080808]
-        transition-colors
-        duration-300
-        dark:bg-[#050505]
-        dark:text-white
-
         sm:px-8
         sm:py-24
-
         lg:px-10
-        lg:py-32
+        lg:py-36
+        dark:bg-[#050505]
+        dark:text-white
       "
     >
-      {/* =====================================================
-          LARGE SECTION NUMBER
-      ====================================================== */}
+      {/* =========================================================
+          SECTION NUMBER
+      ========================================================= */}
 
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute
-          right-[-15px]
+          right-[-10px]
           top-1/2
           z-0
           -translate-y-1/2
@@ -62,555 +67,260 @@ const CricketCollection = () => {
         03
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl">
+      {/* =========================================================
+          TOP META
+      ========================================================= */}
 
-        {/* =====================================================
-            HEADER
-        ====================================================== */}
+      <div className="relative z-10 mb-12 flex flex-col gap-4 border-b border-black/10 pb-6 sm:mb-16 sm:flex-row sm:items-end sm:justify-between dark:border-white/10">
+        <div className="flex items-center gap-3">
+          <span className="h-2 w-2 rounded-full bg-[#FF0000]" />
 
-        <div className="mb-14 lg:mb-20">
-
-          {/* TOP META */}
-
-          <div
-            className="
-              flex
-              flex-col
-              gap-4
-              border-b
-              border-black/10
-              pb-5
-
-              sm:flex-row
-              sm:items-center
-              sm:justify-between
-
-              dark:border-white/10
-            "
-          >
-            <div className="flex items-center gap-3">
-              <span
-                className="
-                  h-2
-                  w-2
-                  shrink-0
-                  rounded-full
-                  bg-[#FF0000]
-                "
-              />
-
-              <span
-                className="
-                  text-[10px]
-                  font-bold
-                  uppercase
-                  tracking-[0.3em]
-                  text-[#FF0000]
-                "
-              >
-                Cricket Collection
-              </span>
-            </div>
-
-            <span
-              className="
-                text-[9px]
-                font-medium
-                uppercase
-                tracking-[0.25em]
-                text-black/30
-                dark:text-white/30
-              "
-            >
-              Collection 02 / 2026
-            </span>
-          </div>
-
-          {/* =================================================
-              MAIN HEADING
-          ================================================== */}
-
-          <div className="mt-7 overflow-hidden sm:mt-8">
-            <motion.h2
-              initial={{
-                y: "100%",
-              }}
-              whileInView={{
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.9,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="
-                text-[clamp(3.7rem,13vw,8rem)]
-                font-black
-                uppercase
-                leading-[0.8]
-                tracking-[-0.075em]
-                text-[#080808]
-                dark:text-white
-              "
-            >
-              Cricket.
-              <br />
-              <span className="text-[#FF0000]">
-                Redefined.
-              </span>
-            </motion.h2>
-          </div>
-
-          {/* =================================================
-              DESCRIPTION
-          ================================================== */}
-
-          <div
-            className="
-              mt-7
-              flex
-              flex-col
-              gap-5
-
-              sm:mt-8
-              sm:flex-row
-              sm:items-end
-              sm:justify-between
-            "
-          >
-            <motion.p
-              initial={{
-                opacity: 0,
-                y: 12,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 0.15,
-              }}
-              className="
-                max-w-lg
-                text-sm
-                leading-6
-                text-black/50
-                dark:text-white/50
-
-                sm:text-base
-                sm:leading-7
-              "
-            >
-              Performance-driven cricket wear built for movement,
-              confidence and the demands of the game.
-            </motion.p>
-
-            <span
-              className="
-                shrink-0
-                text-[9px]
-                font-bold
-                uppercase
-                tracking-[0.25em]
-                text-black/30
-                dark:text-white/30
-              "
-            >
-              06 Pieces / Performance
-            </span>
-          </div>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/60">
+            Performance Collection
+          </span>
         </div>
 
-        {/* =====================================================
-            MAIN CONTENT
-        ====================================================== */}
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40">
+          Collection 03 / 2026
+        </span>
+      </div>
 
+      {/* =========================================================
+          HEADER
+      ========================================================= */}
+<div className="relative z-20 grid gap-10 lg:grid-cols-[1fr_0.55fr] lg:items-end lg:gap-16">
+  <div>
+    <motion.p
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+      }}
+      className="
+        mb-6
+        text-xs
+        font-bold
+        uppercase
+        tracking-[0.25em]
+        text-[#FF0000]
+      "
+    >
+      Made for motion.
+    </motion.p>
+
+    <motion.h2
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{
+        duration: 0.8,
+        delay: 0.05,
+        ease: "easeOut",
+      }}
+      className="
+        text-[clamp(4rem,13vw,9.5rem)]
+        font-black
+        uppercase
+        leading-[0.78]
+        tracking-[-0.085em]
+        text-[#080808]
+        dark:text-white
+      "
+    >
+      Built to
+      <br />
+      Move<span className="text-[#FF0000]">.</span>
+    </motion.h2>
+  </div>
+
+  <motion.div
+    style={{ y: textY }}
+    className="relative z-20 max-w-md lg:pb-3"
+  >
+    <p className="text-base leading-relaxed text-black/60 sm:text-lg dark:text-white/60">
+      Performance-driven apparel made for every game, every session
+      and everything in between.
+    </p>
+
+    <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs font-bold uppercase tracking-[0.18em]">
+      <span>06 Pieces</span>
+
+      <span className="h-1 w-1 rounded-full bg-[#FF0000]" />
+
+      <span className="text-black/40 dark:text-white/40">
+        Performance
+      </span>
+    </div>
+  </motion.div>
+</div>
+
+      {/* =========================================================
+          VIDEO
+      ========================================================= */}
+
+      <div className="relative z-10 mt-14 sm:mt-20 lg:mt-24">
         <div
           className="
-            grid
-            items-center
-            gap-12
-
-            lg:grid-cols-[0.7fr_1.3fr]
-            lg:gap-20
+            relative
+            overflow-hidden
+            bg-[#111]
+            aspect-[4/5]
+            sm:aspect-[16/10]
+            lg:aspect-[16/9]
           "
         >
+          {/* RED CORNER FRAME */}
 
-          {/* =================================================
-              LEFT CONTENT
-          ================================================== */}
+          <div className="pointer-events-none absolute inset-0 z-20">
+            <div className="absolute left-0 top-0 h-16 w-16 border-l-2 border-t-2 border-[#FF0000] sm:h-24 sm:w-24" />
 
-          <motion.div
-            style={{ y: textY }}
+            <div className="absolute bottom-0 right-0 h-16 w-16 border-b-2 border-r-2 border-[#FF0000] sm:h-24 sm:w-24" />
+          </div>
+
+          {/* VIDEO */}
+
+          <motion.video
+            style={{ y: imageY }}
+            src={performanceVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
             className="
-              relative
-              z-10
-              max-w-md
-            "
-          >
-            <span
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.3em]
-                text-black/30
-                dark:text-white/30
-              "
-            >
-              Built for the game
-            </span>
-
-            <div className="mt-5 overflow-hidden sm:mt-6">
-              <motion.h3
-                initial={{
-                  y: "100%",
-                }}
-                whileInView={{
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="
-                  text-[clamp(3.2rem,12vw,6rem)]
-                  font-black
-                  uppercase
-                  leading-[0.8]
-                  tracking-[-0.07em]
-                  text-[#080808]
-                  dark:text-white
-                "
-              >
-                Own
-                <br />
-                the
-                <br />
-                <span className="text-[#FF0000]">
-                  game.
-                </span>
-              </motion.h3>
-            </div>
-
-            <motion.a
-              href="#"
-              initial={{
-                opacity: 0,
-                y: 12,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 0.25,
-              }}
-              className="
-                group
-                mt-8
-                flex
-                w-fit
-                items-center
-                gap-4
-                border-b
-                border-black/20
-                pb-3
-                text-xs
-                font-bold
-                uppercase
-                tracking-[0.2em]
-                transition-colors
-                hover:border-[#FF0000]
-                dark:border-white/20
-              "
-            >
-              Explore cricket
-
-              <MoveRight
-                size={17}
-                className="
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-2
-                  group-hover:text-[#FF0000]
-                "
-              />
-            </motion.a>
-          </motion.div>
-
-          {/* =================================================
-              IMAGE
-          ================================================== */}
-
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.96,
-            }}
-            whileInView={{
-              opacity: 1,
-              scale: 1,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.2,
-            }}
-            transition={{
-              duration: 0.9,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="
-              relative
+              absolute
+              inset-0
+              h-[110%]
               w-full
-              max-w-2xl
-              justify-self-center
-              lg:max-w-none
+              object-cover
+              scale-[1.02]
             "
-          >
-            {/* =================================================
-                RED CORNER
-            ================================================== */}
+          />
 
-            <div
-              className="
-                absolute
-                -left-2
-                -top-2
-                z-20
-                h-16
-                w-16
-                border-l
-                border-t
-                border-[#FF0000]
+          {/* CINEMATIC OVERLAY */}
 
-                sm:-left-4
-                sm:-top-4
-                sm:h-24
-                sm:w-24
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-black/10 to-black/20" />
 
-                lg:-left-5
-                lg:-top-5
-                lg:h-28
-                lg:w-28
-              "
-            />
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
 
-            {/* =================================================
-                IMAGE
-            ================================================== */}
+          {/* RED GLOW */}
 
-            <div
-              className="
-                relative
-                aspect-[4/5]
-                w-full
-                overflow-hidden
-                bg-[#E5E5E2]
-                dark:bg-[#0D0D0D]
-              "
-            >
-              <motion.img
-                src={cricketCollectionImage}
-                alt="Virat cricket collection"
-                draggable={false}
-                style={{
-                  y: imageY,
-                }}
-                className="
-                  absolute
-                  -inset-[4%]
-                  h-[108%]
-                  w-[108%]
-                  max-w-none
-                  object-cover
-                  select-none
-                "
-              />
+          <div className="pointer-events-none absolute bottom-[-20%] left-[-10%] z-10 h-[50%] w-[50%] rounded-full bg-[#FF0000]/10 blur-[100px]" />
 
-              {/* IMAGE GRADIENT */}
+          {/* =====================================================
+              VIDEO CONTENT
+          ===================================================== */}
 
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  bg-gradient-to-t
-                  from-black/65
-                  via-black/10
-                  to-transparent
-                "
-              />
+          <div className="absolute inset-x-0 bottom-0 z-30 p-6 sm:p-10 lg:p-14">
+            <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-xl">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF0000]" />
 
-              {/* =================================================
-                  TOP LABEL
-              ================================================== */}
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
+                    Performance / 2026
+                  </span>
+                </div>
 
-              <div
-                className="
-                  absolute
-                  left-5
-                  top-5
-
-                  sm:left-6
-                  sm:top-6
-                "
-              >
-                <span
+                <h3
                   className="
-                    text-[8px]
-                    font-bold
-                    uppercase
-                    tracking-[0.3em]
-                    text-white/70
-
-                    sm:text-[9px]
-                  "
-                >
-                  Virat / Cricket
-                </span>
-              </div>
-
-              {/* =================================================
-                  BOTTOM IMAGE TEXT
-              ================================================== */}
-
-              <div
-                className="
-                  absolute
-                  bottom-5
-                  left-5
-
-                  sm:bottom-6
-                  sm:left-6
-                "
-              >
-                <p
-                  className="
-                    text-[8px]
-                    uppercase
-                    tracking-[0.3em]
-                    text-white/60
-
-                    sm:text-[9px]
-                  "
-                >
-                  Built to perform
-                </p>
-
-                <p
-                  className="
-                    mt-1
-                    text-lg
+                    text-[clamp(2.5rem,8vw,6rem)]
                     font-black
                     uppercase
-                    tracking-[-0.04em]
+                    leading-[0.8]
+                    tracking-[-0.07em]
                     text-white
-
-                    sm:text-xl
                   "
                 >
-                  Every ball.
-                </p>
+                  Made for
+                  <br />
+                  motion<span className="text-[#FF0000]">.</span>
+                </h3>
               </div>
-            </div>
 
-            {/* =================================================
-                FLOATING CTA
-            ================================================== */}
+              {/* CTA */}
 
-            <a
-              href="#"
-              aria-label="Explore cricket collection"
-              className="
-                group
-                absolute
-                -bottom-4
-                -right-2
-                flex
-                h-16
-                w-16
-                items-center
-                justify-center
-                rounded-full
-                bg-[#FF0000]
-                text-white
-                transition-transform
-                duration-500
-                hover:scale-110
-
-                sm:-bottom-5
-                sm:-right-4
-                sm:h-20
-                sm:w-20
-
-                lg:-right-5
-                lg:h-24
-                lg:w-24
-              "
-            >
-              <ArrowUpRight
-                size={22}
-                strokeWidth={1.5}
+              <motion.a
+                href="/sports"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
                 className="
-                  transition-transform
-                  duration-300
-                  group-hover:-translate-y-1
-                  group-hover:translate-x-1
-
-                  sm:size-[25px]
+                  group
+                  flex
+                  w-fit
+                  items-center
+                  gap-4
+                  border
+                  border-white/30
+                  bg-white/10
+                  px-5
+                  py-4
+                  backdrop-blur-md
+                  transition-colors
+                  hover:border-[#FF0000]
+                  hover:bg-[#FF0000]
                 "
-              />
-            </a>
-          </motion.div>
+              >
+                <span className="text-xs font-bold uppercase tracking-[0.16em] text-white">
+                  Explore performance
+                </span>
+
+                <ArrowUpRight
+                  size={17}
+                  strokeWidth={2}
+                  className="
+                    text-white
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                    group-hover:-translate-y-1
+                  "
+                />
+              </motion.a>
+            </div>
+          </div>
+
+          {/* TOP VIDEO LABEL */}
+
+          <div className="absolute right-5 top-5 z-30 sm:right-8 sm:top-8">
+            <span className="border border-white/20 bg-black/20 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
+              VIRAT / PERFORMANCE
+            </span>
+          </div>
         </div>
+      </div>
 
-        {/* =====================================================
-            BOTTOM LINE
-        ====================================================== */}
+      {/* =========================================================
+          BOTTOM INFORMATION
+      ========================================================= */}
 
-        <div
-          className="
-            mt-16
-            flex
-            items-center
-            justify-between
-            border-t
-            border-black/10
-            pt-5
-            text-[9px]
-            font-bold
-            uppercase
-            tracking-[0.25em]
-            text-black/30
-            dark:border-white/10
-            dark:text-white/30
-
-            sm:mt-20
-
-            lg:mt-28
-          "
-        >
-          <span>01 / Cricket</span>
-
-          <span className="hidden sm:block">
-            Built to perform
+      <div className="relative z-10 mt-8 grid gap-6 border-t border-black/10 pt-6 sm:grid-cols-3 sm:items-center dark:border-white/10">
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#FF0000]">
+            03
           </span>
 
-          <span>Virat</span>
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-black/50 dark:text-white/50">
+            Performance
+          </span>
+        </div>
+
+        <div className="text-xs font-bold uppercase tracking-[0.18em] text-black/40 sm:text-center dark:text-white/40">
+          Built for movement
+        </div>
+
+        <div className="flex items-center gap-3 sm:justify-end">
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-black/40 dark:text-white/40">
+            Virat Sportswear
+          </span>
+
+          <MoveRight
+            size={18}
+            strokeWidth={1.5}
+            className="text-[#FF0000]"
+          />
         </div>
       </div>
     </section>
