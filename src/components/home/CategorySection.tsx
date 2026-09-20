@@ -2,39 +2,62 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
 import cricketImage from "../../assets/categories/cricket.jpg";
+import accessoriesImage from "../../assets/categories/accessories.png";
+import cricketfImage from "../../assets/categories/cricket-f.jpg";
 import casualImage from "../../assets/categories/casual.jpg";
+import TeamImage from "../../assets/categories/teamwear.png";
 import sportsImage from "../../assets/categories/sports.jpg";
 
 const categories = [
   {
     number: "01",
-    title: "Cricket",
-    description: "Built for the game.",
+    title: "Men",
+    description: "Built for every move.",
     image: cricketImage,
-    className: "md:col-span-2 md:row-span-2",
-    width: "105%",
+    className: "",
+    width: "115%",
     x: 0,
-    y: 50,
+    y: 2,
   },
   {
     number: "02",
+    title: "Women",
+    description: "Made to move.",
+    image: cricketfImage,
+    className: "",
+    width: "111%",
+    x: 0,
+    y: -5,
+  },
+  {
+    number: "03",
     title: "Casual",
     description: "Made for every day.",
     image: casualImage,
     className: "",
     width: "105%",
     x: 0,
-    y: 80,
+    y: 135,
   },
   {
-    number: "03",
-    title: "Sports",
-    description: "Move without limits.",
-    image: sportsImage,
+    number: "04",
+    title: "Accessories",
+    description: "Ready for the game.",
+    image: accessoriesImage,
     className: "",
+    width: "130%",
+    x: 0,
+    y: -5,
+  },
+  {
+    number: "05",
+    title: "Teamwear",
+    description: "Built for the team.",
+    image: TeamImage,
+    className: "md:col-span-2",
     width: "105%",
     x: 0,
-    y: 0,
+    y: 100,
   },
 ];
 
@@ -46,12 +69,15 @@ const CategorySection = () => {
         overflow-hidden
         bg-[#F5F5F2]
         px-5
-        py-24
+        pb-10
+        pt-10
         text-[#080808]
         sm:px-8
-        sm:py-28
+        sm:pb-16
+        sm:pt-16
         lg:px-10
-        lg:py-36
+        lg:pb-20
+        lg:pt-20
       "
     >
       {/* =====================================================
@@ -151,7 +177,7 @@ const CategorySection = () => {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 className="
-                  text-[clamp(4rem,14vw,9.5rem)]
+                  text-[clamp(3rem,9vw,6rem)]
                   font-black
                   uppercase
                   leading-[0.78]
@@ -222,7 +248,7 @@ const CategorySection = () => {
             >
               <span className="h-px w-8 bg-current" />
 
-              03 Categories
+              05 Categories
             </div>
           </motion.div>
         </div>
@@ -237,7 +263,7 @@ const CategorySection = () => {
             grid-cols-1
             gap-3
             sm:gap-4
-            md:grid-cols-2
+            md:grid-cols-3
             md:auto-rows-[260px]
             lg:auto-rows-[300px]
           "

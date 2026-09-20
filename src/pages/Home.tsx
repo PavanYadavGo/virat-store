@@ -6,6 +6,7 @@ import CricketCollection from "../components/home/CricketCollection";
 import OffTheField from "../components/home/OffTheField";
 import NewArrivals from "../components/home/NewArrivals";
 import FinalCTA from "../components/home/FinalCTA";
+import SeeItInAction from "../components/home/Seeitinaction";
 import Footer from "../components/layout/Footer";
 
 const Home = () => {
@@ -14,11 +15,12 @@ const Home = () => {
       <Navbar />
       <Hero />
       <CategorySection />
-      <FeaturedProducts />
       <CricketCollection />
+      <SeeItInAction />
+      {/* <FeaturedProducts />
       <OffTheField />
       <NewArrivals />
-      <FinalCTA />
+      <FinalCTA /> */}
       <Footer />
     </main>
   );

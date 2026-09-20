@@ -32,12 +32,15 @@ const CricketCollection = () => {
         overflow-hidden
         bg-[#F5F5F2]
         px-5
-        py-20
+        pb-20
+        pt-0
         text-[#080808]
         sm:px-8
-        sm:py-24
+        sm:pb-24
+        sm:pt-0
         lg:px-10
-        lg:py-36
+        lg:pb-36
+        lg:pt-0
       "
     >
       {/* =========================================================
@@ -160,7 +163,7 @@ const CricketCollection = () => {
               ease: "easeOut",
             }}
             className="
-              text-[clamp(4rem,13vw,9.5rem)]
+              text-[clamp(3rem,6vw,6rem)]
               font-black
               uppercase
               leading-[0.78]
@@ -338,9 +341,9 @@ const CricketCollection = () => {
                     text-white
                   "
                 >
-                  Made for
+                  Make
                   <br />
-                  motion<span className="text-[#FF0000]">.</span>
+                  History<span className="text-[#FF0000]">.</span>
                 </h3>
               </div>
 
