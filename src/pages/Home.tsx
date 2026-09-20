@@ -1,4 +1,3 @@
-import Navbar from "../components/layout/Navbar";
 import Hero from "../components/home/Hero";
 import CategorySection from "../components/home/CategorySection";
 // import FeaturedProducts from "../components/home/FeaturedProducts";
@@ -12,7 +11,6 @@ import PartnersCarousel from "../components/home/PartnersCarousel";
 const Home = () => {
   return (
     <main>
-      <Navbar />
       <Hero />
       <CategorySection />
       <CricketCollection />
