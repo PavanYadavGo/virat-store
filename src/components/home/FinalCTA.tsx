@@ -9,9 +9,6 @@ const FinalCTA = () => {
         bg-[#F5F5F2]
         px-5 py-20
         text-[#080808]
-        transition-colors duration-300
-        dark:bg-[#050505]
-        dark:text-white
         sm:px-8 sm:py-24
         lg:px-10 lg:py-36
       "
@@ -29,7 +26,6 @@ const FinalCTA = () => {
           leading-none
           tracking-[-0.1em]
           text-black/[0.045]
-          dark:text-white/[0.045]
         "
       >
         06
@@ -75,7 +71,6 @@ const FinalCTA = () => {
             leading-none
             tracking-[-0.15em]
             text-black/[0.025]
-            dark:text-white/[0.018]
             sm:text-[45vw]
             lg:text-[40vw]
           "
@@ -93,7 +88,6 @@ const FinalCTA = () => {
             flex flex-col gap-4
             border-b border-black/10
             pb-5
-            dark:border-white/10
             sm:mb-16
             sm:flex-row sm:items-center sm:justify-between
           "
@@ -122,7 +116,6 @@ const FinalCTA = () => {
               uppercase
               tracking-[0.25em]
               text-black/25
-              dark:text-white/25
               sm:text-[9px]
               sm:tracking-[0.3em]
             "
@@ -158,7 +151,6 @@ const FinalCTA = () => {
                   leading-[0.78]
                   tracking-[-0.08em]
                   text-[#080808]
-                  dark:text-white
                   sm:text-[clamp(5rem,13vw,10rem)]
                 "
               >
@@ -191,7 +183,6 @@ const FinalCTA = () => {
                 text-sm
                 leading-6
                 text-black/50
-                dark:text-white/50
                 sm:mt-10
                 sm:text-base
               "
@@ -232,7 +223,6 @@ const FinalCTA = () => {
                 uppercase
                 tracking-[0.3em]
                 text-black/30
-                dark:text-white/30
                 sm:mb-6
                 sm:text-[9px]
               "
@@ -255,7 +245,6 @@ const FinalCTA = () => {
                 tracking-[0.15em]
                 transition-colors
                 hover:border-[#FF0000]
-                dark:border-white/15
                 sm:pb-5
                 sm:text-sm
                 sm:tracking-[0.18em]
@@ -298,7 +287,6 @@ const FinalCTA = () => {
                 uppercase
                 tracking-[0.25em]
                 text-black/25
-                dark:text-white/25
                 sm:mt-6
                 sm:text-[9px]
                 sm:tracking-[0.3em]
@@ -330,7 +318,6 @@ const FinalCTA = () => {
             grid
             border-y
             border-black/10
-            dark:border-white/10
             sm:mt-20
             sm:grid-cols-3
           "
@@ -341,7 +328,6 @@ const FinalCTA = () => {
               border-b
               border-black/10
               px-0 py-5
-              dark:border-white/10
               sm:border-b-0
               sm:border-r
               sm:px-6
@@ -373,7 +359,6 @@ const FinalCTA = () => {
               border-b
               border-black/10
               px-0 py-5
-              dark:border-white/10
               sm:border-b-0
               sm:border-r
               sm:px-6
@@ -435,7 +420,6 @@ const FinalCTA = () => {
             uppercase
             tracking-[0.22em]
             text-black/25
-            dark:text-white/25
             sm:mt-6
             sm:flex-row
             sm:items-center

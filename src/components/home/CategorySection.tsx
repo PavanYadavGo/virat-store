@@ -48,10 +48,6 @@ const CategorySection = () => {
         px-5
         py-24
         text-[#080808]
-        transition-colors
-        duration-300
-        dark:bg-[#050505]
-        dark:text-white
         sm:px-8
         sm:py-28
         lg:px-10
@@ -77,7 +73,6 @@ const CategorySection = () => {
           leading-none
           tracking-[-0.1em]
           text-black/[0.055]
-          dark:text-white/[0.055]
         "
       >
         01
@@ -100,9 +95,7 @@ const CategorySection = () => {
             lg:items-end
           "
         >
-          {/* =================================================
-              LEFT HEADER
-          ================================================== */}
+          {/* LEFT HEADER */}
 
           <div>
             <motion.p
@@ -139,44 +132,43 @@ const CategorySection = () => {
               Explore the collection
             </motion.p>
 
-            {/* =================================================
-    BIG TITLE
-================================================== */}
-
-<div className="overflow-hidden">
-  <motion.h2
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{
-      once: true,
-      amount: 0.2,
-    }}
-    transition={{
-      duration: 0.9,
-      ease: [0.16, 1, 0.3, 1],
-    }}
-    className="
-      text-[clamp(4rem,14vw,9.5rem)]
-      font-black
-      uppercase
-      leading-[0.78]
-      tracking-[-0.075em]
-      text-[#080808]
-      dark:text-white
-    "
-  >
-    Find your
-    <br />
-    <span>
-      game<span className="text-[#FF0000]">.</span>
-    </span>
-  </motion.h2>
-</div>
+            <div className="overflow-hidden">
+              <motion.h2
+                initial={{
+                  opacity: 0,
+                  y: 40,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="
+                  text-[clamp(4rem,14vw,9.5rem)]
+                  font-black
+                  uppercase
+                  leading-[0.78]
+                  tracking-[-0.075em]
+                  text-[#080808]
+                "
+              >
+                Find your
+                <br />
+                <span>
+                  game<span className="text-[#FF0000]">.</span>
+                </span>
+              </motion.h2>
+            </div>
           </div>
 
-          {/* =================================================
-              RIGHT HEADER
-          ================================================== */}
+          {/* RIGHT HEADER */}
 
           <motion.div
             initial={{
@@ -206,7 +198,6 @@ const CategorySection = () => {
                 text-sm
                 leading-6
                 text-black/60
-                dark:text-white/60
                 sm:text-base
                 sm:leading-7
               "
@@ -227,7 +218,6 @@ const CategorySection = () => {
                 uppercase
                 tracking-[0.25em]
                 text-black/40
-                dark:text-white/40
               "
             >
               <span className="h-px w-8 bg-current" />
@@ -282,9 +272,7 @@ const CategorySection = () => {
                 md:min-h-0
               `}
             >
-              {/* =================================================
-                  IMAGE
-              ================================================== */}
+              {/* IMAGE */}
 
               <div
                 className="
@@ -321,9 +309,7 @@ const CategorySection = () => {
                 />
               </div>
 
-              {/* =================================================
-                  HOVER DARKEN
-              ================================================== */}
+              {/* HOVER DARKEN */}
 
               <div
                 className="
@@ -333,13 +319,10 @@ const CategorySection = () => {
                   transition-colors
                   duration-500
                   group-hover:bg-black/30
-                  dark:group-hover:bg-black/45
                 "
               />
 
-              {/* =================================================
-                  CINEMATIC GRADIENT
-              ================================================== */}
+              {/* CINEMATIC GRADIENT */}
 
               <div
                 className="
@@ -352,9 +335,7 @@ const CategorySection = () => {
                 "
               />
 
-              {/* =================================================
-                  RED GLOW
-              ================================================== */}
+              {/* RED GLOW */}
 
               <div
                 className="
@@ -373,9 +354,7 @@ const CategorySection = () => {
                 "
               />
 
-              {/* =================================================
-                  IMAGE SWEEP
-              ================================================== */}
+              {/* IMAGE SWEEP */}
 
               <motion.div
                 className="
@@ -399,9 +378,7 @@ const CategorySection = () => {
                 }}
               />
 
-              {/* =================================================
-                  CARD TOP
-              ================================================== */}
+              {/* CARD TOP */}
 
               <div
                 className="
@@ -443,9 +420,7 @@ const CategorySection = () => {
                 />
               </div>
 
-              {/* =================================================
-                  CARD CONTENT
-              ================================================== */}
+              {/* CARD CONTENT */}
 
               <div
                 className="
@@ -512,9 +487,7 @@ const CategorySection = () => {
                 </div>
               </div>
 
-              {/* =================================================
-                  HOVER BORDER
-              ================================================== */}
+              {/* HOVER BORDER */}
 
               <div
                 className="

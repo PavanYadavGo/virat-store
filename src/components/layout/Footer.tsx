@@ -2,9 +2,37 @@ import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 
 const footerLinks = {
-  Shop: ["Cricket", "Sports", "Casual", "New Arrivals"],
-  Help: ["Contact", "Shipping", "Returns", "Size Guide"],
-  Company: ["About Virat", "Our Story", "Journal"],
+  Shop: [
+    "New Arrivals",
+    "Men",
+    "Women",
+    "Cricket",
+    "Accessories",
+  ],
+  Sports: [
+    "Cricket",
+    "Football",
+    "Shooting",
+    "Training",
+    "India Merchandise",
+    "Shop Outlet",
+  ],
+  Categories: [
+    "Tops",
+    "Polos",
+    "Sleeveless",
+    "Long Sleeves",
+    "Jackets & Hoodies",
+    "Shorts",
+    "Pants & Leggings",
+    "Tracksuits",
+  ],
+  Support: [
+    "Contact",
+    "Shipping",
+    "Returns",
+    "Size Guide",
+  ],
 };
 
 const Footer = () => {
@@ -14,22 +42,20 @@ const Footer = () => {
         relative overflow-hidden
         bg-[#F5F5F2]
         text-[#080808]
-        transition-colors duration-300
-        dark:bg-[#050505]
-        dark:text-white
       "
     >
       {/* Top border */}
-      <div className="h-px w-full bg-black/10 dark:bg-white/10" />
+      <div className="h-px w-full bg-black/10" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+
         {/* Newsletter */}
         <div
           className="
             grid gap-10
             border-b border-black/10
             py-16
-            dark:border-white/10
+            sm:py-20
             lg:grid-cols-[1fr_0.8fr]
             lg:py-24
           "
@@ -40,7 +66,8 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="
-                mb-4 text-xs font-bold uppercase
+                mb-4
+                text-xs font-bold uppercase
                 tracking-[0.3em]
                 text-[#FF0000]
               "
@@ -51,13 +78,11 @@ const Footer = () => {
             <h2
               className="
                 max-w-2xl
-                text-4xl
+                text-[clamp(2.8rem,8vw,7rem)]
                 font-black
                 uppercase
-                leading-[0.9]
+                leading-[0.85]
                 tracking-[-0.06em]
-                sm:text-5xl
-                lg:text-7xl
               "
             >
               Get the latest
@@ -72,7 +97,6 @@ const Footer = () => {
                 mb-6 max-w-md
                 text-sm leading-6
                 text-black/40
-                dark:text-white/40
               "
             >
               New drops, product launches and everything happening across the
@@ -85,7 +109,6 @@ const Footer = () => {
                 border-b border-black/20
                 pb-3
                 focus-within:border-[#FF0000]
-                dark:border-white/20
               "
             >
               <input
@@ -99,8 +122,6 @@ const Footer = () => {
                   text-black
                   outline-none
                   placeholder:text-black/25
-                  dark:text-white
-                  dark:placeholder:text-white/25
                 "
               />
 
@@ -108,7 +129,8 @@ const Footer = () => {
                 type="submit"
                 aria-label="Subscribe"
                 className="
-                  group flex items-center gap-2
+                  group flex shrink-0
+                  items-center gap-2
                   text-xs font-bold uppercase
                   tracking-wider
                 "
@@ -131,16 +153,22 @@ const Footer = () => {
         {/* Main footer */}
         <div
           className="
-            grid gap-12
+            grid gap-x-8 gap-y-12
             py-16
             sm:grid-cols-2
-            lg:grid-cols-[1.3fr_1fr_1fr_1fr]
+            lg:grid-cols-[1.2fr_1fr_1fr_1fr_0.8fr]
             lg:py-20
           "
         >
           {/* Brand */}
           <div>
-            <div className="text-4xl font-black tracking-[-0.08em]">
+            <div
+              className="
+                text-4xl
+                font-black
+                tracking-[-0.08em]
+              "
+            >
               VIRAT<span className="text-[#FF0000]">.</span>
             </div>
 
@@ -149,7 +177,6 @@ const Footer = () => {
                 mt-5 max-w-xs
                 text-xs leading-5
                 text-black/30
-                dark:text-white/30
               "
             >
               Performance wear for the game. Sportswear for everything after
@@ -157,7 +184,7 @@ const Footer = () => {
             </p>
 
             {/* Socials */}
-            <div className="mt-7 flex gap-2">
+            <div className="mt-7 flex flex-wrap gap-2">
               {["Instagram", "X", "Facebook"].map((social) => (
                 <a
                   key={social}
@@ -177,8 +204,6 @@ const Footer = () => {
                     hover:border-[#FF0000]
                     hover:bg-[#FF0000]
                     hover:text-white
-                    dark:border-white/10
-                    dark:text-white/50
                   "
                 >
                   {social}
@@ -198,7 +223,6 @@ const Footer = () => {
                   uppercase
                   tracking-[0.3em]
                   text-black/25
-                  dark:text-white/25
                 "
               >
                 {title}
@@ -219,11 +243,22 @@ const Footer = () => {
                         text-black/55
                         transition-colors
                         hover:text-black
-                        dark:text-white/55
-                        dark:hover:text-white
                       "
                     >
-                      {link}
+                      <span
+                        className="
+                          h-1.5 w-1.5
+                          shrink-0
+                          rounded-full
+                          bg-[#FF0000]
+                          opacity-40
+                          transition-all duration-300
+                          group-hover:scale-150
+                          group-hover:opacity-100
+                        "
+                      />
+
+                      <span>{link}</span>
 
                       <ArrowUpRight
                         size={11}
@@ -244,24 +279,90 @@ const Footer = () => {
           ))}
         </div>
 
+        {/* Design Your Own */}
+        <div
+          className="
+            flex flex-col gap-5
+            border-t border-black/10
+            border-b border-black/10
+            py-8
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <div>
+            <p
+              className="
+                mb-2
+                text-[9px]
+                font-bold uppercase
+                tracking-[0.3em]
+                text-[#FF0000]
+              "
+            >
+              Personalise it
+            </p>
+
+            <h3
+              className="
+                text-2xl
+                font-black
+                uppercase
+                tracking-[-0.04em]
+                sm:text-3xl
+              "
+            >
+              Design Your Own<span className="text-[#FF0000]">.</span>
+            </h3>
+          </div>
+
+          <a
+            href="#"
+            className="
+              group flex w-fit
+              items-center gap-3
+              border border-black/10
+              px-5 py-3
+              text-[10px]
+              font-bold uppercase
+              tracking-[0.15em]
+              transition-all duration-300
+              hover:border-[#FF0000]
+              hover:bg-[#FF0000]
+              hover:text-white
+            "
+          >
+            Start designing
+
+            <ArrowUpRight
+              size={14}
+              className="
+                transition-transform duration-300
+                group-hover:-translate-y-0.5
+                group-hover:translate-x-0.5
+              "
+            />
+          </a>
+        </div>
+
         {/* Giant brand mark */}
         <div
           className="
             overflow-hidden
-            border-t border-black/10
-            dark:border-white/10
+            border-b border-black/10
           "
         >
           <div
             className="
               translate-y-[12%]
               select-none
+              whitespace-nowrap
               text-[25vw]
               font-black
               leading-[0.7]
               tracking-[-0.12em]
               text-black/[0.055]
-              dark:text-white/[0.055]
             "
           >
             VIRAT
@@ -272,14 +373,11 @@ const Footer = () => {
         <div
           className="
             flex flex-col gap-4
-            border-t border-black/10
             py-6
             text-[8px]
             uppercase
             tracking-[0.2em]
             text-black/20
-            dark:border-white/10
-            dark:text-white/20
             sm:flex-row
             sm:items-center
             sm:justify-between
@@ -293,7 +391,6 @@ const Footer = () => {
               className="
                 transition-colors
                 hover:text-black/60
-                dark:hover:text-white/60
               "
             >
               Privacy
@@ -304,7 +401,6 @@ const Footer = () => {
               className="
                 transition-colors
                 hover:text-black/60
-                dark:hover:text-white/60
               "
             >
               Terms

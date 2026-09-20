@@ -39,7 +39,7 @@ const products: Product[] = [
     imageY: 0,
 
     gradient:
-      "from-[#DDE1EA] via-[#F5F5F2] to-[#C9CDD8] dark:from-[#000045] dark:via-[#111111] dark:to-black",
+      "from-[#DDE1EA] via-[#F5F5F2] to-[#C9CDD8]",
   },
 
   {
@@ -55,7 +55,7 @@ const products: Product[] = [
     imageY: 0,
 
     gradient:
-      "from-[#E4E4E1] via-[#F5F5F2] to-[#D2D2D0] dark:from-[#181818] dark:via-[#101010] dark:to-black",
+      "from-[#E4E4E1] via-[#F5F5F2] to-[#D2D2D0]",
   },
 
   {
@@ -71,7 +71,7 @@ const products: Product[] = [
     imageY: 0,
 
     gradient:
-      "from-[#F0DADA] via-[#F5F5F2] to-[#E4C8C8] dark:from-[#250000] dark:via-[#111111] dark:to-black",
+      "from-[#F0DADA] via-[#F5F5F2] to-[#E4C8C8]",
   },
 
   {
@@ -87,7 +87,7 @@ const products: Product[] = [
     imageY: 0,
 
     gradient:
-      "from-[#E0E1DF] via-[#F5F5F2] to-[#D0D0CE] dark:from-[#151515] dark:via-[#080808] dark:to-black",
+      "from-[#E0E1DF] via-[#F5F5F2] to-[#D0D0CE]",
   },
 ];
 
@@ -135,8 +135,6 @@ const ProductVisual = ({
           sm:h-[45%]
           sm:w-[45%]
           sm:blur-[80px]
-          dark:bg-white/10
-          dark:group-hover:bg-[#FF0000]/10
         "
       />
 
@@ -200,7 +198,6 @@ const ProductVisual = ({
               -translate-x-1/2
               rounded-b-xl
               bg-black/[0.09]
-              dark:bg-white/[0.10]
             "
           />
 
@@ -220,8 +217,6 @@ const ProductVisual = ({
               duration-700
               group-hover:-translate-y-2
               group-hover:shadow-[0_40px_100px_rgba(0,0,0,0.2)]
-              dark:bg-white/[0.10]
-              dark:shadow-[0_30px_80px_rgba(0,0,0,0.4)]
             "
           >
             {/* Shoulder panels */}
@@ -236,7 +231,6 @@ const ProductVisual = ({
                 -rotate-[22deg]
                 rounded-full
                 bg-black/[0.07]
-                dark:bg-white/[0.07]
               "
             />
 
@@ -251,7 +245,6 @@ const ProductVisual = ({
                 rotate-[22deg]
                 rounded-full
                 bg-black/[0.07]
-                dark:bg-white/[0.07]
               "
             />
 
@@ -298,7 +291,6 @@ const ProductVisual = ({
                 font-black
                 tracking-[0.25em]
                 text-black/25
-                dark:text-white/25
               "
             >
               VIRAT
@@ -316,7 +308,6 @@ const ProductVisual = ({
               -rotate-[16deg]
               rounded-full
               bg-black/[0.065]
-              dark:bg-white/[0.065]
             "
           />
 
@@ -331,7 +322,6 @@ const ProductVisual = ({
               rotate-[16deg]
               rounded-full
               bg-black/[0.065]
-              dark:bg-white/[0.065]
             "
           />
 
@@ -347,7 +337,6 @@ const ProductVisual = ({
               rounded-full
               bg-black/10
               blur-xl
-              dark:bg-black/40
             "
           />
         </div>
@@ -368,7 +357,6 @@ const ProductVisual = ({
           from-black/[0.07]
           to-transparent
           sm:h-[35%]
-          dark:from-black/20
         "
       />
     </motion.div>
@@ -392,14 +380,10 @@ const FeaturedProducts = () => {
         px-5
         py-20
         text-[#080808]
-        transition-colors
-        duration-300
         sm:px-8
         sm:py-24
         lg:px-10
         lg:py-32
-        dark:bg-[#050505]
-        dark:text-white
       "
     >
       {/* ======================================================
@@ -421,7 +405,6 @@ const FeaturedProducts = () => {
           leading-none
           tracking-[-0.1em]
           text-black/[0.045]
-          dark:text-white/[0.045]
         "
       >
         02
@@ -495,7 +478,6 @@ const FeaturedProducts = () => {
                   leading-[0.78]
                   tracking-[-0.075em]
                   text-[#080808]
-                  dark:text-white
                 "
               >
                 Featured
@@ -534,7 +516,6 @@ const FeaturedProducts = () => {
               tracking-[0.25em]
               transition-colors
               hover:border-[#FF0000]
-              dark:border-white/20
               sm:flex
             "
           >
@@ -621,7 +602,6 @@ const FeaturedProducts = () => {
                   w-5
                   bg-black/20
                   sm:w-8
-                  dark:bg-white/20
                 "
               />
 
@@ -633,7 +613,6 @@ const FeaturedProducts = () => {
                   uppercase
                   tracking-[0.25em]
                   text-black/40
-                  dark:text-white/40
                   xs:inline
                 "
               >
@@ -659,7 +638,6 @@ const FeaturedProducts = () => {
                   text-black/50
                   sm:right-6
                   sm:top-6
-                  dark:text-white/50
                 "
               >
                 {featured.tag}
@@ -696,7 +674,6 @@ const FeaturedProducts = () => {
                 text-black/[0.035]
                 sm:text-[22vw]
                 lg:text-[18vw]
-                dark:text-white/[0.035]
               "
             >
               VIRAT
@@ -734,7 +711,6 @@ const FeaturedProducts = () => {
                     uppercase
                     tracking-[0.25em]
                     text-black/40
-                    dark:text-white/40
                   "
                 >
                   {featured.category} / Performance
@@ -796,7 +772,6 @@ const FeaturedProducts = () => {
                     hover:text-[#FF0000]
                     sm:gap-3
                     sm:text-[10px]
-                    dark:border-white/40
                   "
                 >
                   Shop product
@@ -830,7 +805,6 @@ const FeaturedProducts = () => {
                 from-black/[0.14]
                 to-transparent
                 sm:h-[38%]
-                dark:from-black/30
               "
             />
 
@@ -875,7 +849,6 @@ const FeaturedProducts = () => {
               border-b
               border-black/10
               pb-4
-              dark:border-white/10
             "
           >
             <span
@@ -885,7 +858,6 @@ const FeaturedProducts = () => {
                 uppercase
                 tracking-[0.3em]
                 text-black/40
-                dark:text-white/40
               "
             >
               More from Virat
@@ -897,7 +869,6 @@ const FeaturedProducts = () => {
                 uppercase
                 tracking-[0.2em]
                 text-black/30
-                dark:text-white/30
               "
             >
               02 — 04
@@ -964,7 +935,6 @@ const FeaturedProducts = () => {
                       text-black/35
                       sm:left-5
                       sm:top-5
-                      dark:text-white/35
                     "
                   >
                     {product.number}
@@ -1049,7 +1019,6 @@ const FeaturedProducts = () => {
                           uppercase
                           tracking-[0.2em]
                           text-black/35
-                          dark:text-white/35
                         "
                       >
                         {product.category}
@@ -1113,7 +1082,6 @@ const FeaturedProducts = () => {
             sm:flex-row
             sm:items-center
             sm:justify-between
-            dark:border-white/10
           "
         >
           <p
@@ -1122,7 +1090,6 @@ const FeaturedProducts = () => {
               uppercase
               tracking-[0.22em]
               text-black/35
-              dark:text-white/35
             "
           >
             Built for the game. Designed for everywhere.
@@ -1160,7 +1127,6 @@ const FeaturedProducts = () => {
             font-bold
             uppercase
             tracking-[0.2em]
-            dark:border-white/20
             sm:hidden
           "
         >

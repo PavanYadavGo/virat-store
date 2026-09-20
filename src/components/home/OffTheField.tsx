@@ -12,7 +12,7 @@ const products = [
     price: "₹899",
     image: performanceTee,
     gradient:
-      "from-[#E5E5E3] via-[#F5F5F2] to-[#D7D7D5] dark:from-[#191919] dark:via-[#0D0D0D] dark:to-black",
+      "from-[#E5E5E3] via-[#F5F5F2] to-[#D7D7D5]",
   },
   {
     name: "Street Polo",
@@ -20,7 +20,7 @@ const products = [
     price: "₹1,299",
     image: viratPolo,
     gradient:
-      "from-[#E3E5ED] via-[#F5F5F2] to-[#D5D7E0] dark:from-[#000045] dark:via-[#111111] dark:to-black",
+      "from-[#E3E5ED] via-[#F5F5F2] to-[#D5D7E0]",
   },
   {
     name: "Core Shorts",
@@ -28,7 +28,7 @@ const products = [
     price: "₹799",
     image: matchDayShorts,
     gradient:
-      "from-[#F0DEDE] via-[#F5F5F2] to-[#E4CECE] dark:from-[#220000] dark:via-[#111111] dark:to-black",
+      "from-[#F0DEDE] via-[#F5F5F2] to-[#E4CECE]",
   },
 ];
 
@@ -109,7 +109,6 @@ const ProductVisual = ({
             leading-none
             tracking-[-0.08em]
             text-black/[0.045]
-            dark:text-white/[0.045]
 
             ${
               large
@@ -153,17 +152,13 @@ const ProductVisual = ({
               w-full
               select-none
               object-contain
-
               transition-transform
               duration-700
               ease-[cubic-bezier(0.16,1,0.3,1)]
-
               scale-[1.12]
               group-hover:scale-[1.18]
-
               sm:scale-[1.18]
               sm:group-hover:scale-[1.24]
-
               md:scale-[1.22]
               md:group-hover:scale-[1.28]
 
@@ -190,7 +185,6 @@ const ProductVisual = ({
             from-black/10
             via-transparent
             to-transparent
-            dark:from-black/20
           "
         />
 
@@ -205,32 +199,10 @@ const ProductVisual = ({
             inset-0
             z-[4]
             opacity-[0.02]
-            dark:hidden
           "
           style={{
             backgroundImage:
               "linear-gradient(rgba(0,0,0,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,1) 1px, transparent 1px)",
-            backgroundSize: "45px 45px",
-          }}
-        />
-
-        {/* =================================================
-            DARK MODE GRID
-        ================================================== */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            z-[4]
-            hidden
-            opacity-[0.02]
-            dark:block
-          "
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
             backgroundSize: "45px 45px",
           }}
         />
@@ -249,7 +221,6 @@ const ProductVisual = ({
             flex
             items-center
             justify-between
-
             sm:left-5
             sm:right-5
             sm:top-5
@@ -262,7 +233,6 @@ const ProductVisual = ({
               uppercase
               tracking-[0.25em]
               text-black/45
-              dark:text-white/45
             "
           >
             {product.category}
@@ -281,13 +251,8 @@ const ProductVisual = ({
               backdrop-blur-sm
               transition-all
               duration-300
-
               group-hover:border-[#FF0000]
               group-hover:bg-[#FF0000]
-
-              dark:border-white/10
-              dark:bg-black/10
-
               sm:h-9
               sm:w-9
             "
@@ -314,7 +279,6 @@ const ProductVisual = ({
             bottom-4
             left-4
             z-10
-
             sm:bottom-5
             sm:left-5
           "
@@ -325,7 +289,6 @@ const ProductVisual = ({
               uppercase
               tracking-[0.3em]
               text-black/30
-              dark:text-white/35
             "
           >
             Virat / {product.category}
@@ -362,7 +325,6 @@ const ProductVisual = ({
           items-end
           justify-between
           gap-4
-
           sm:mt-4
         "
       >
@@ -390,8 +352,6 @@ const ProductVisual = ({
             text-xs
             font-semibold
             text-black/65
-            dark:text-white/65
-
             sm:text-sm
           "
         >
@@ -412,14 +372,8 @@ const OffTheField = () => {
         px-5
         py-20
         text-[#080808]
-        transition-colors
-        duration-300
-        dark:bg-[#0B0B0B]
-        dark:text-white
-
         sm:px-8
         sm:py-24
-
         lg:px-10
         lg:py-36
       "
@@ -443,21 +397,19 @@ const OffTheField = () => {
           leading-none
           tracking-[-0.1em]
           text-black/[0.045]
-          dark:text-white/[0.045]
         "
       >
         04
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
-
         {/* =====================================================
             HEADER
         ====================================================== */}
 
         <div className="mb-14 lg:mb-20">
-
           {/* TOP META */}
+
           <div
             className="
               flex
@@ -466,12 +418,9 @@ const OffTheField = () => {
               border-b
               border-black/10
               pb-5
-
               sm:flex-row
               sm:items-center
               sm:justify-between
-
-              dark:border-white/10
             "
           >
             <motion.div
@@ -525,7 +474,6 @@ const OffTheField = () => {
                 uppercase
                 tracking-[0.25em]
                 text-black/30
-                dark:text-white/30
               "
             >
               Collection 03 / 2026
@@ -558,7 +506,6 @@ const OffTheField = () => {
                 leading-[0.78]
                 tracking-[-0.085em]
                 text-[#080808]
-                dark:text-white
               "
             >
               Off The
@@ -577,7 +524,6 @@ const OffTheField = () => {
               flex
               flex-col
               gap-5
-
               sm:mt-8
               sm:flex-row
               sm:items-end
@@ -605,8 +551,6 @@ const OffTheField = () => {
                 text-sm
                 leading-6
                 text-black/55
-                dark:text-white/55
-
                 sm:text-base
                 sm:leading-7
               "
@@ -624,7 +568,6 @@ const OffTheField = () => {
                 uppercase
                 tracking-[0.25em]
                 text-black/30
-                dark:text-white/30
               "
             >
               Casual / Everyday / 03
@@ -640,7 +583,6 @@ const OffTheField = () => {
           className="
             grid
             gap-5
-
             lg:grid-cols-[1.25fr_0.75fr]
           "
         >
@@ -662,9 +604,7 @@ const OffTheField = () => {
             className="
               grid
               gap-5
-
               sm:grid-cols-2
-
               lg:grid-cols-1
             "
           >
@@ -707,15 +647,11 @@ const OffTheField = () => {
             border-t
             border-black/10
             pt-7
-
             sm:mt-16
             sm:flex-row
             sm:items-center
             sm:justify-between
-
             lg:mt-20
-
-            dark:border-white/10
           "
         >
           <div>
@@ -726,7 +662,6 @@ const OffTheField = () => {
                 uppercase
                 tracking-[0.2em]
                 text-black/60
-                dark:text-white/60
               "
             >
               Performance meets everyday.
@@ -739,7 +674,6 @@ const OffTheField = () => {
                 uppercase
                 tracking-[0.25em]
                 text-black/25
-                dark:text-white/25
               "
             >
               Built for everything after the game.

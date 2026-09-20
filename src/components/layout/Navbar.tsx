@@ -2,17 +2,15 @@ import {
   ShoppingBag,
   Search,
   Menu,
-  Sun,
-  Moon,
   X,
   ChevronDown,
   ArrowUpRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import logo from "../../assets/virat logo.png";
-import whiteLogo from "../../assets/Logo_white.png";
 
 /* =========================================================
    TYPES
@@ -36,46 +34,50 @@ type NavItem = {
 
 /* =========================================================
    NAVIGATION DATA
-   Based directly on the original HTML navbar
 ========================================================= */
 
 const navItems: NavItem[] = [
   {
-    label: "New Arrivals",
-    href: "#",
+    label: "NEW ARRIVALS",
+    href: "/new-arrivals",
   },
 
-  /* =========================
-     MEN
-  ========================= */
-
   {
-    label: "Men",
-    href: "#",
+    label: "MEN",
+    href: "/men",
     dropdownColumns: [
       {
         title: "Shop by Category",
         items: [
-          { label: "Tops", href: "#" },
-          { label: "Polos", href: "#" },
-          { label: "Sleeveless", href: "#" },
-          { label: "Long Sleeves", href: "#" },
-          { label: "Jacket and Hoodies", href: "#" },
-          { label: "Shorts", href: "#" },
-          { label: "Pants and Leggings", href: "#" },
-          { label: "Tracksuits", href: "#" },
+          { label: "Tops", href: "/men/tops" },
+          { label: "Polos", href: "/men/polos" },
+          { label: "Sleeveless", href: "/men/sleeveless" },
+          { label: "Long Sleeves", href: "/men/long-sleeves" },
+          {
+            label: "Jacket and Hoodies",
+            href: "/men/jackets-hoodies",
+          },
+          { label: "Shorts", href: "/men/shorts" },
+          {
+            label: "Pants and Leggings",
+            href: "/men/pants-leggings",
+          },
+          { label: "Tracksuits", href: "/men/tracksuits" },
         ],
       },
 
       {
         title: "Shop by Sport",
         items: [
-          { label: "Cricket", href: "#" },
-          { label: "Football", href: "#" },
-          { label: "Shooting", href: "#" },
-          { label: "Training", href: "#" },
-          { label: "India Merchandise", href: "#" },
-          { label: "Shop Outlet", href: "#" },
+          { label: "Cricket", href: "/men/cricket" },
+          { label: "Football", href: "/men/football" },
+          { label: "Shooting", href: "/men/shooting" },
+          { label: "Training", href: "/men/training" },
+          {
+            label: "India Merchandise",
+            href: "/men/india-merchandise",
+          },
+          { label: "Shop Outlet", href: "/men/outlet" },
         ],
       },
 
@@ -84,44 +86,49 @@ const navItems: NavItem[] = [
         items: [
           {
             label: "Compression and Baselayers",
-            href: "#",
+            href: "/men/compression-baselayers",
           },
         ],
       },
     ],
   },
 
-  /* =========================
-     WOMEN
-  ========================= */
-
   {
-    label: "Women",
-    href: "#",
+    label: "WOMEN",
+    href: "/women",
     dropdownColumns: [
       {
         title: "Shop by Category",
         items: [
-          { label: "Tops", href: "#" },
-          { label: "Polos", href: "#" },
-          { label: "Sleeveless", href: "#" },
-          { label: "Long Sleeves", href: "#" },
-          { label: "Jacket and Hoodies", href: "#" },
-          { label: "Shorts", href: "#" },
-          { label: "Pants and Leggings", href: "#" },
-          { label: "Tracksuits", href: "#" },
+          { label: "Tops", href: "/women/tops" },
+          { label: "Polos", href: "/women/polos" },
+          { label: "Sleeveless", href: "/women/sleeveless" },
+          { label: "Long Sleeves", href: "/women/long-sleeves" },
+          {
+            label: "Jacket and Hoodies",
+            href: "/women/jackets-hoodies",
+          },
+          { label: "Shorts", href: "/women/shorts" },
+          {
+            label: "Pants and Leggings",
+            href: "/women/pants-leggings",
+          },
+          { label: "Tracksuits", href: "/women/tracksuits" },
         ],
       },
 
       {
         title: "Shop by Sport",
         items: [
-          { label: "Cricket", href: "#" },
-          { label: "Football", href: "#" },
-          { label: "Shooting", href: "#" },
-          { label: "Training", href: "#" },
-          { label: "India Merchandise", href: "#" },
-          { label: "Shop Outlet", href: "#" },
+          { label: "Cricket", href: "/women/cricket" },
+          { label: "Football", href: "/women/football" },
+          { label: "Shooting", href: "/women/shooting" },
+          { label: "Training", href: "/women/training" },
+          {
+            label: "India Merchandise",
+            href: "/women/india-merchandise",
+          },
+          { label: "Shop Outlet", href: "/women/outlet" },
         ],
       },
 
@@ -130,76 +137,100 @@ const navItems: NavItem[] = [
         items: [
           {
             label: "Compression and Baselayers",
-            href: "#",
+            href: "/women/compression-baselayers",
           },
         ],
       },
     ],
   },
 
-  /* =========================
-     CRICKET
-  ========================= */
-
   {
-    label: "Cricket",
-    href: "#",
+    label: "CRICKET",
+    href: "/cricket",
     dropdownColumns: [
       {
         title: "Shop Cricket",
         items: [
-          { label: "Cricket Helmets", href: "#" },
-          { label: "Clothing", href: "#" },
-          { label: "Cricket Balls", href: "#" },
-          { label: "Bags and Duffles", href: "#" },
-          { label: "Accessories", href: "#" },
-          { label: "Shoes", href: "#" },
-          { label: "Shop Outlet", href: "#" },
+          {
+            label: "Cricket Helmets",
+            href: "/cricket/helmets",
+          },
+          {
+            label: "Clothing",
+            href: "/cricket/clothing",
+          },
+          {
+            label: "Cricket Balls",
+            href: "/cricket/balls",
+          },
+          {
+            label: "Bags and Duffles",
+            href: "/cricket/bags",
+          },
+          {
+            label: "Accessories",
+            href: "/cricket/accessories",
+          },
+          {
+            label: "Shoes",
+            href: "/cricket/shoes",
+          },
+          {
+            label: "Shop Outlet",
+            href: "/cricket/outlet",
+          },
         ],
       },
     ],
   },
 
-  /* =========================
-     ACCESSORIES
-  ========================= */
-
   {
-    label: "Accessories",
-    href: "#",
+    label: "ACCESSORIES",
+    href: "/accessories",
     dropdownColumns: [
       {
         title: "Shop Accessories",
         items: [
-          { label: "Bags and Duffles", href: "#" },
-          { label: "Hats and Caps", href: "#" },
-          { label: "Socks", href: "#" },
-          { label: "Supporters", href: "#" },
+          {
+            label: "Bags and Duffles",
+            href: "/accessories/bags",
+          },
+          {
+            label: "Hats and Caps",
+            href: "/accessories/hats-caps",
+          },
+          {
+            label: "Socks",
+            href: "/accessories/socks",
+          },
+          {
+            label: "Supporters",
+            href: "/accessories/supporters",
+          },
           {
             label: "Compression and Baselayers",
-            href: "#",
+            href: "/accessories/compression-baselayers",
           },
-          { label: "Shoes", href: "#" },
+          {
+            label: "Shoes",
+            href: "/accessories/shoes",
+          },
           {
             label: "RECOVERY Foam Rollers",
-            href: "#",
+            href: "/accessories/foam-rollers",
           },
           {
             label: "Loop Bands and Support",
-            href: "#",
+            href: "/accessories/loop-bands",
           },
         ],
       },
     ],
   },
 
-  /* =========================
-     DESIGN YOUR OWN
-  ========================= */
-
   {
-    label: "Design Your Own",
-    href: "#",
+    label: "DESIGN YOUR OWN",
+    href: "/design-your-own",
   },
 ];
 
@@ -208,67 +239,13 @@ const navItems: NavItem[] = [
 ========================================================= */
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Desktop dropdown
   const [activeDropdown, setActiveDropdown] =
     useState<string | null>(null);
 
-  // Mobile accordion
   const [mobileDropdown, setMobileDropdown] =
     useState<string | null>(null);
-
-  /* =======================================================
-     LOAD SAVED THEME
-  ======================================================== */
-
-  useEffect(() => {
-    const savedTheme =
-      localStorage.getItem("virat-theme");
-
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add(
-        "dark",
-      );
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove(
-        "dark",
-      );
-    }
-  }, []);
-
-  /* =======================================================
-     THEME TOGGLE
-  ======================================================== */
-
-  const toggleTheme = () => {
-    const nextTheme = !darkMode;
-
-    setDarkMode(nextTheme);
-
-    if (nextTheme) {
-      document.documentElement.classList.add(
-        "dark",
-      );
-
-      localStorage.setItem(
-        "virat-theme",
-        "dark",
-      );
-    } else {
-      document.documentElement.classList.remove(
-        "dark",
-      );
-
-      localStorage.setItem(
-        "virat-theme",
-        "light",
-      );
-    }
-  };
 
   /* =======================================================
      CLOSE MENUS
@@ -284,21 +261,18 @@ const Navbar = () => {
      MOBILE ACCORDION
   ======================================================== */
 
-  const toggleMobileDropdown = (
-    label: string,
-  ) => {
+  const toggleMobileDropdown = (label: string) => {
     setMobileDropdown((current) =>
       current === label ? null : label,
     );
   };
 
   /* =======================================================
-     GET ACTIVE NAV ITEM
+     ACTIVE NAV ITEM
   ======================================================== */
 
   const activeNavItem = navItems.find(
-    (item) =>
-      item.label === activeDropdown,
+    (item) => item.label === activeDropdown,
   );
 
   /* =======================================================
@@ -324,13 +298,8 @@ const Navbar = () => {
         border-b border-black/[0.08]
         bg-[#F5F5F2]/95
         backdrop-blur-md
-        transition-colors duration-300
-        dark:border-white/[0.08]
-        dark:bg-[#050505]/90
       "
-      onMouseLeave={() =>
-        setActiveDropdown(null)
-      }
+      onMouseLeave={() => setActiveDropdown(null)}
     >
       {/* ===================================================
           MAIN NAVBAR
@@ -352,36 +321,36 @@ const Navbar = () => {
             LOGO
         ================================================== */}
 
-        <motion.a
-          href="/"
+        <motion.div
           whileHover={{
             x: 2,
           }}
           transition={{
             duration: 0.2,
           }}
-          onClick={closeMenu}
           className="
             flex shrink-0
             items-center
           "
         >
-          <img
-            src={
-              darkMode
-                ? whiteLogo
-                : logo
-            }
-            alt="VIRAT"
-            className="
-              h-11
-              w-auto
-              object-contain
-              sm:h-12
-              lg:h-15
-            "
-          />
-        </motion.a>
+          <Link
+            to="/"
+            onClick={closeMenu}
+            aria-label="Virat home"
+          >
+            <img
+              src={logo}
+              alt="VIRAT"
+              className="
+                h-11
+                w-auto
+                object-contain
+                sm:h-12
+                lg:h-15
+              "
+            />
+          </Link>
+        </motion.div>
 
         {/* =================================================
             DESKTOP NAV
@@ -397,31 +366,24 @@ const Navbar = () => {
           "
         >
           {navItems.map((item) => {
-            const hasDropdown =
-              Boolean(
-                item.dropdownColumns?.length,
-              );
+            const hasDropdown = Boolean(
+              item.dropdownColumns?.length,
+            );
 
             return (
               <div
                 key={item.label}
-                className="
-                  relative h-full
-                "
+                className="relative h-full"
                 onMouseEnter={() => {
                   if (hasDropdown) {
-                    setActiveDropdown(
-                      item.label,
-                    );
+                    setActiveDropdown(item.label);
                   } else {
-                    setActiveDropdown(
-                      null,
-                    );
+                    setActiveDropdown(null);
                   }
                 }}
               >
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className="
                     group
                     relative
@@ -437,8 +399,6 @@ const Navbar = () => {
                     transition-colors
                     duration-300
                     hover:text-black
-                    dark:text-white/65
-                    dark:hover:text-white
                   "
                 >
                   {item.label}
@@ -455,7 +415,6 @@ const Navbar = () => {
                     />
                   )}
 
-                  {/* Red underline */}
                   <span
                     className="
                       absolute
@@ -469,7 +428,7 @@ const Navbar = () => {
                       group-hover:w-full
                     "
                   />
-                </a>
+                </Link>
               </div>
             );
           })}
@@ -486,11 +445,11 @@ const Navbar = () => {
             gap-3
             text-[#080808]
             sm:gap-4
-            dark:text-white
           "
         >
           {/* Search */}
-          <button
+          <Link
+            to="/search"
             aria-label="Search"
             className="
               hidden
@@ -505,81 +464,11 @@ const Navbar = () => {
               size={19}
               strokeWidth={1.8}
             />
-          </button>
-
-          {/* Theme */}
-          <motion.button
-            aria-label={
-              darkMode
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-            }
-            onClick={toggleTheme}
-            whileTap={{
-              scale: 0.9,
-            }}
-            className="
-              relative flex
-              h-9 w-9
-              shrink-0
-              items-center
-              justify-center
-              overflow-hidden
-              rounded-full
-              border border-black/10
-              bg-black/[0.03]
-              text-black
-              transition-all
-              duration-300
-              hover:border-[#FF0000]/50
-              hover:text-[#FF0000]
-              dark:border-white/10
-              dark:bg-white/[0.04]
-              dark:text-white
-            "
-          >
-            <motion.div
-              key={
-                darkMode
-                  ? "sun"
-                  : "moon"
-              }
-              initial={{
-                rotate: -90,
-                opacity: 0,
-                scale: 0.6,
-              }}
-              animate={{
-                rotate: 0,
-                opacity: 1,
-                scale: 1,
-              }}
-              transition={{
-                duration: 0.35,
-                ease: [
-                  0.16,
-                  1,
-                  0.3,
-                  1,
-                ],
-              }}
-            >
-              {darkMode ? (
-                <Sun
-                  size={17}
-                  strokeWidth={1.8}
-                />
-              ) : (
-                <Moon
-                  size={17}
-                  strokeWidth={1.8}
-                />
-              )}
-            </motion.div>
-          </motion.button>
+          </Link>
 
           {/* Shopping Bag */}
-          <button
+          <Link
+            to="/cart"
             aria-label="Shopping bag"
             className="
               relative shrink-0
@@ -612,7 +501,7 @@ const Navbar = () => {
             >
               0
             </span>
-          </button>
+          </Link>
 
           {/* Mobile Menu */}
           <button
@@ -623,9 +512,7 @@ const Navbar = () => {
             }
             aria-expanded={menuOpen}
             onClick={() =>
-              setMenuOpen(
-                (prev) => !prev,
-              )
+              setMenuOpen((prev) => !prev)
             }
             className="
               flex
@@ -719,13 +606,9 @@ const Navbar = () => {
                 border-black/[0.08]
                 bg-[#F5F5F2]/95
                 backdrop-blur-xl
-                dark:border-white/[0.08]
-                dark:bg-[#050505]/95
               "
               onMouseEnter={() =>
-                setActiveDropdown(
-                  activeDropdown,
-                )
+                setActiveDropdown(activeDropdown)
               }
               onMouseLeave={() =>
                 setActiveDropdown(null)
@@ -747,16 +630,13 @@ const Navbar = () => {
                     lg:grid-cols-[0.65fr_1.35fr]
                   "
                 >
-                  {/* =========================================
-                      LEFT SIDE
-                  ========================================== */}
+                  {/* LEFT SIDE */}
 
                   <div
                     className="
                       border-r
                       border-black/[0.08]
                       pr-10
-                      dark:border-white/[0.08]
                     "
                   >
                     <p
@@ -780,18 +660,14 @@ const Navbar = () => {
                         leading-none
                         tracking-[-0.06em]
                         text-[#080808]
-                        dark:text-white
                       "
                     >
-                      {
-                        activeNavItem.label
-                      }
+                      {activeNavItem.label}
                     </h3>
 
-                    <a
-                      href={
-                        activeNavItem.href
-                      }
+                    <Link
+                      to={activeNavItem.href}
+                      onClick={closeMenu}
                       className="
                         mt-6
                         inline-flex
@@ -804,20 +680,15 @@ const Navbar = () => {
                         text-black/50
                         transition-colors
                         hover:text-[#FF0000]
-                        dark:text-white/50
                       "
                     >
                       Shop collection
 
-                      <ArrowUpRight
-                        size={14}
-                      />
-                    </a>
+                      <ArrowUpRight size={14} />
+                    </Link>
                   </div>
 
-                  {/* =========================================
-                      RIGHT SIDE — COLUMNS
-                  ========================================== */}
+                  {/* RIGHT SIDE */}
 
                   <div
                     className="
@@ -833,14 +704,11 @@ const Navbar = () => {
                         columnIndex,
                       ) => (
                         <div
-                          key={
-                            column.title
-                          }
-                          className="
-                            min-w-0
-                          "
+                          key={column.title}
+                          className="min-w-0"
                         >
                           {/* Column title */}
+
                           <div
                             className="
                               mb-3
@@ -865,28 +733,23 @@ const Navbar = () => {
                                 uppercase
                                 tracking-[0.18em]
                                 text-[#080808]
-                                dark:text-white
                               "
                             >
-                              {
-                                column.title
-                              }
+                              {column.title}
                             </p>
                           </div>
 
                           {/* Column items */}
+
                           <div>
                             {column.items.map(
                               (
                                 dropdownItem,
                                 itemIndex,
                               ) => (
-                                <motion.a
+                                <motion.div
                                   key={
                                     dropdownItem.label
-                                  }
-                                  href={
-                                    dropdownItem.href
                                   }
                                   initial={{
                                     opacity: 0,
@@ -899,65 +762,73 @@ const Navbar = () => {
                                   transition={{
                                     duration: 0.25,
                                     delay:
-                                      (columnIndex *
-                                        0.08) +
-                                      (itemIndex *
-                                        0.035),
+                                      columnIndex *
+                                        0.08 +
+                                      itemIndex *
+                                        0.035,
                                   }}
-                                  className="
-                                    group
-                                    flex
-                                    items-center
-                                    gap-3
-                                    border-b
-                                    border-black/[0.08]
-                                    py-3
-                                    text-xs
-                                    font-semibold
-                                    uppercase
-                                    tracking-[0.06em]
-                                    text-black/60
-                                    transition-colors
-                                    hover:text-[#FF0000]
-                                    dark:border-white/[0.08]
-                                    dark:text-white/60
-                                  "
                                 >
-                                  {/* 🔴 RED BULLET */}
-                                  <span
-                                    className="
-                                      h-1.5
-                                      w-1.5
-                                      shrink-0
-                                      rounded-full
-                                      bg-[#FF0000]
-                                      opacity-50
-                                      transition-all
-                                      duration-300
-                                      group-hover:scale-150
-                                      group-hover:opacity-100
-                                    "
-                                  />
-
-                                  <span className="flex-1">
-                                    {
-                                      dropdownItem.label
+                                  <Link
+                                    to={
+                                      dropdownItem.href
                                     }
-                                  </span>
-
-                                  <ArrowUpRight
-                                    size={12}
+                                    onClick={
+                                      closeMenu
+                                    }
                                     className="
-                                      shrink-0
-                                      opacity-0
-                                      transition-all
-                                      duration-200
-                                      group-hover:translate-x-0.5
-                                      group-hover:-translate-y-0.5
-                                      group-hover:opacity-100
+                                      group
+                                      flex
+                                      items-center
+                                      gap-3
+                                      border-b
+                                      border-black/[0.08]
+                                      py-3
+                                      text-xs
+                                      font-semibold
+                                      uppercase
+                                      tracking-[0.06em]
+                                      text-black/60
+                                      transition-colors
+                                      hover:text-[#FF0000]
                                     "
-                                  />
-                                </motion.a>
+                                  >
+                                    {/* Red bullet */}
+
+                                    <span
+                                      className="
+                                        h-1.5
+                                        w-1.5
+                                        shrink-0
+                                        rounded-full
+                                        bg-[#FF0000]
+                                        opacity-50
+                                        transition-all
+                                        duration-300
+                                        group-hover:scale-150
+                                        group-hover:opacity-100
+                                      "
+                                    />
+
+                                    <span className="flex-1">
+                                      {
+                                        dropdownItem.label
+                                      }
+                                    </span>
+
+                                    <ArrowUpRight
+                                      size={12}
+                                      className="
+                                        shrink-0
+                                        opacity-0
+                                        transition-all
+                                        duration-200
+                                        group-hover:translate-x-0.5
+                                        group-hover:-translate-y-0.5
+                                        group-hover:opacity-100
+                                      "
+                                    />
+                                  </Link>
+                                </motion.div>
                               ),
                             )}
                           </div>
@@ -999,211 +870,189 @@ const Navbar = () => {
               border-t
               border-black/[0.08]
               bg-[#F5F5F2]
-              dark:border-white/[0.08]
-              dark:bg-[#050505]
               lg:hidden
             "
           >
-            <div
-              className="
-                px-5
-                py-6
-              "
-            >
-              {navItems.map(
-                (item) => {
-                  const hasDropdown =
-                    Boolean(
-                      item.dropdownColumns?.length,
-                    );
+            <div className="px-5 py-6">
+              {navItems.map((item) => {
+                const hasDropdown = Boolean(
+                  item.dropdownColumns?.length,
+                );
 
-                  return (
+                return (
+                  <div
+                    key={item.label}
+                    className="
+                      border-b
+                      border-black/[0.08]
+                      last:border-b-0
+                    "
+                  >
+                    {/* MAIN MOBILE ITEM */}
+
                     <div
-                      key={item.label}
                       className="
-                        border-b
-                        border-black/[0.08]
-                        last:border-b-0
-                        dark:border-white/[0.08]
+                        flex
+                        items-center
+                        justify-between
+                        py-5
                       "
                     >
-                      {/* =================================
-                          MAIN MOBILE ITEM
-                      ================================== */}
-
-                      <div
+                      <Link
+                        to={item.href}
+                        onClick={closeMenu}
                         className="
-                          flex
-                          items-center
-                          justify-between
-                          py-5
+                          text-sm
+                          font-bold
+                          uppercase
+                          tracking-[0.12em]
+                          text-[#080808]
                         "
                       >
-                        <a
-                          href={
-                            item.href
-                          }
-                          onClick={
-                            closeMenu
+                        {item.label}
+                      </Link>
+
+                      {hasDropdown && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            toggleMobileDropdown(
+                              item.label,
+                            )
                           }
                           className="
-                            text-sm
-                            font-bold
-                            uppercase
-                            tracking-[0.12em]
-                            text-[#080808]
-                            dark:text-white
+                            flex
+                            h-9
+                            w-9
+                            items-center
+                            justify-center
+                            text-black/50
                           "
+                          aria-label={`Toggle ${item.label} submenu`}
                         >
-                          {
-                            item.label
-                          }
-                        </a>
+                          <ChevronDown
+                            size={17}
+                            className={`
+                              transition-transform
+                              duration-300
+                              ${
+                                mobileDropdown ===
+                                item.label
+                                  ? "rotate-180"
+                                  : ""
+                              }
+                            `}
+                          />
+                        </button>
+                      )}
+                    </div>
 
-                        {hasDropdown && (
-                          <button
-                            type="button"
-                            onClick={() =>
-                              toggleMobileDropdown(
-                                item.label,
-                              )
-                            }
-                            className="
-                              flex
-                              h-9
-                              w-9
-                              items-center
-                              justify-center
-                              text-black/50
-                              dark:text-white/50
-                            "
-                            aria-label={`Toggle ${item.label} submenu`}
+                    {/* MOBILE COLUMNS */}
+
+                    <AnimatePresence>
+                      {mobileDropdown ===
+                        item.label &&
+                        item.dropdownColumns && (
+                          <motion.div
+                            initial={{
+                              opacity: 0,
+                              height: 0,
+                            }}
+                            animate={{
+                              opacity: 1,
+                              height: "auto",
+                            }}
+                            exit={{
+                              opacity: 0,
+                              height: 0,
+                            }}
+                            transition={{
+                              duration: 0.25,
+                            }}
+                            className="overflow-hidden"
                           >
-                            <ChevronDown
-                              size={17}
-                              className={`
-                                transition-transform
-                                duration-300
-                                ${
-                                  mobileDropdown ===
-                                  item.label
-                                    ? "rotate-180"
-                                    : ""
-                                }
-                              `}
-                            />
-                          </button>
-                        )}
-                      </div>
-
-                      {/* =================================
-                          MOBILE COLUMNS
-                      ================================== */}
-
-                      <AnimatePresence>
-                        {mobileDropdown ===
-                          item.label &&
-                          item.dropdownColumns && (
-                            <motion.div
-                              initial={{
-                                opacity: 0,
-                                height: 0,
-                              }}
-                              animate={{
-                                opacity: 1,
-                                height: "auto",
-                              }}
-                              exit={{
-                                opacity: 0,
-                                height: 0,
-                              }}
-                              transition={{
-                                duration: 0.25,
-                              }}
+                            <div
                               className="
-                                overflow-hidden
+                                space-y-6
+                                pb-5
+                                pl-2
                               "
                             >
-                              <div
-                                className="
-                                  space-y-6
-                                  pb-5
-                                  pl-2
-                                "
-                              >
-                                {item.dropdownColumns.map(
-                                  (
-                                    column,
-                                  ) => (
+                              {item.dropdownColumns.map(
+                                (column) => (
+                                  <div
+                                    key={
+                                      column.title
+                                    }
+                                  >
+                                    {/* Column title */}
+
                                     <div
-                                      key={
-                                        column.title
-                                      }
+                                      className="
+                                        mb-2
+                                        flex
+                                        items-center
+                                        gap-2
+                                      "
                                     >
-                                      {/* Column title */}
-                                      <div
+                                      <span
                                         className="
-                                          mb-2
-                                          flex
-                                          items-center
-                                          gap-2
+                                          h-1
+                                          w-1
+                                          rounded-full
+                                          bg-[#FF0000]
+                                        "
+                                      />
+
+                                      <p
+                                        className="
+                                          text-[9px]
+                                          font-bold
+                                          uppercase
+                                          tracking-[0.2em]
+                                          text-[#FF0000]
                                         "
                                       >
-                                        <span
-                                          className="
-                                            h-1
-                                            w-1
-                                            rounded-full
-                                            bg-[#FF0000]
-                                          "
-                                        />
+                                        {
+                                          column.title
+                                        }
+                                      </p>
+                                    </div>
 
-                                        <p
-                                          className="
-                                            text-[9px]
-                                            font-bold
-                                            uppercase
-                                            tracking-[0.2em]
-                                            text-[#FF0000]
-                                          "
-                                        >
-                                          {
-                                            column.title
-                                          }
-                                        </p>
-                                      </div>
+                                    {/* Items */}
 
-                                      {/* Items */}
-                                      <div>
-                                        {column.items.map(
-                                          (
-                                            dropdownItem,
-                                            itemIndex,
-                                          ) => (
-                                            <motion.a
-                                              key={
-                                                dropdownItem.label
-                                              }
-                                              href={
+                                    <div>
+                                      {column.items.map(
+                                        (
+                                          dropdownItem,
+                                          itemIndex,
+                                        ) => (
+                                          <motion.div
+                                            key={
+                                              dropdownItem.label
+                                            }
+                                            initial={{
+                                              opacity: 0,
+                                              x: -8,
+                                            }}
+                                            animate={{
+                                              opacity: 1,
+                                              x: 0,
+                                            }}
+                                            transition={{
+                                              duration: 0.2,
+                                              delay:
+                                                itemIndex *
+                                                0.035,
+                                            }}
+                                          >
+                                            <Link
+                                              to={
                                                 dropdownItem.href
                                               }
                                               onClick={
                                                 closeMenu
                                               }
-                                              initial={{
-                                                opacity: 0,
-                                                x: -8,
-                                              }}
-                                              animate={{
-                                                opacity: 1,
-                                                x: 0,
-                                              }}
-                                              transition={{
-                                                duration: 0.2,
-                                                delay:
-                                                  itemIndex *
-                                                  0.035,
-                                              }}
                                               className="
                                                 group
                                                 flex
@@ -1221,11 +1070,10 @@ const Navbar = () => {
                                                 transition-colors
                                                 last:border-b-0
                                                 hover:text-[#FF0000]
-                                                dark:border-white/[0.05]
-                                                dark:text-white/50
                                               "
                                             >
-                                              {/* 🔴 RED BULLET */}
+                                              {/* Red bullet */}
+
                                               <span
                                                 className="
                                                   h-1.5
@@ -1259,32 +1107,28 @@ const Navbar = () => {
                                                   group-hover:opacity-100
                                                 "
                                               />
-                                            </motion.a>
-                                          ),
-                                        )}
-                                      </div>
+                                            </Link>
+                                          </motion.div>
+                                        ),
+                                      )}
                                     </div>
-                                  ),
-                                )}
-                              </div>
-                            </motion.div>
-                          )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                },
-              )}
+                                  </div>
+                                ),
+                              )}
+                            </div>
+                          </motion.div>
+                        )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
 
-              {/* =========================================
-                  MOBILE SEARCH
-              ========================================== */}
+              {/* MOBILE SEARCH */}
 
               <div className="mt-6">
-                <a
-                  href="/search"
-                  onClick={
-                    closeMenu
-                  }
+                <Link
+                  to="/search"
+                  onClick={closeMenu}
                   className="
                     flex
                     items-center
@@ -1301,16 +1145,11 @@ const Navbar = () => {
                     transition-colors
                     hover:border-[#FF0000]
                     hover:text-[#FF0000]
-                    dark:border-white/[0.1]
-                    dark:text-white/60
                   "
                 >
-                  <Search
-                    size={16}
-                  />
-
+                  <Search size={16} />
                   Search
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

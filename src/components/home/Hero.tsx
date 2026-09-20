@@ -45,17 +45,13 @@ const Hero = () => {
 
   const previousSlide = () => {
     setDirection(-1);
-    setCurrent(
-      (prev) => (prev - 1 + slides.length) % slides.length
-    );
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  /*
-   * Automatic slideshow
-   */
   useEffect(() => {
     const timer = setInterval(() => {
-      nextSlide();
+      setDirection(1);
+      setCurrent((prev) => (prev + 1) % slides.length);
     }, 6500);
 
     return () => clearInterval(timer);
@@ -113,13 +109,12 @@ const Hero = () => {
               className="
                 h-full
                 w-full
-                object-cover
                 select-none
+                object-cover
               "
             />
 
             {/* Image darkening */}
-
             <div
               className="
                 absolute
@@ -129,7 +124,6 @@ const Hero = () => {
             />
 
             {/* Bottom gradient */}
-
             <div
               className="
                 absolute
@@ -142,7 +136,6 @@ const Hero = () => {
             />
 
             {/* Left gradient */}
-
             <div
               className="
                 absolute
@@ -233,7 +226,6 @@ const Hero = () => {
         "
       >
         <div className="w-full">
-
           {/* =================================================
               EYEBROW
           ================================================= */}
@@ -442,9 +434,7 @@ const Hero = () => {
             {String(current + 1).padStart(2, "0")}
           </span>
 
-          <span className="text-white/30">
-            /
-          </span>
+          <span className="text-white/30">/</span>
 
           <span className="text-white/40">
             {String(slides.length).padStart(2, "0")}
@@ -458,9 +448,7 @@ const Hero = () => {
             <button
               key={index}
               onClick={() => {
-                setDirection(
-                  index > current ? 1 : -1
-                );
+                setDirection(index > current ? 1 : -1);
                 setCurrent(index);
               }}
               aria-label={`Go to slide ${index + 1}`}
@@ -485,8 +473,7 @@ const Hero = () => {
 
               <motion.span
                 animate={{
-                  scaleX:
-                    index === current ? 1 : 0,
+                  scaleX: index === current ? 1 : 0,
                 }}
                 transition={{
                   duration: 0.4,

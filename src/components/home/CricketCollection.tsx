@@ -38,8 +38,6 @@ const CricketCollection = () => {
         sm:py-24
         lg:px-10
         lg:py-36
-        dark:bg-[#050505]
-        dark:text-white
       "
     >
       {/* =========================================================
@@ -61,7 +59,6 @@ const CricketCollection = () => {
           leading-none
           tracking-[-0.1em]
           text-black/[0.045]
-          dark:text-white/[0.045]
         "
       >
         03
@@ -71,16 +68,48 @@ const CricketCollection = () => {
           TOP META
       ========================================================= */}
 
-      <div className="relative z-10 mb-12 flex flex-col gap-4 border-b border-black/10 pb-6 sm:mb-16 sm:flex-row sm:items-end sm:justify-between dark:border-white/10">
+      <div
+        className="
+          relative
+          z-10
+          mb-12
+          flex
+          flex-col
+          gap-4
+          border-b
+          border-black/10
+          pb-6
+          sm:mb-16
+          sm:flex-row
+          sm:items-end
+          sm:justify-between
+        "
+      >
         <div className="flex items-center gap-3">
           <span className="h-2 w-2 rounded-full bg-[#FF0000]" />
 
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/60">
+          <span
+            className="
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              text-black/60
+            "
+          >
             Performance Collection
           </span>
         </div>
 
-        <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40">
+        <span
+          className="
+            text-xs
+            font-bold
+            uppercase
+            tracking-[0.2em]
+            text-black/40
+          "
+        >
           Collection 03 / 2026
         </span>
       </div>
@@ -88,73 +117,103 @@ const CricketCollection = () => {
       {/* =========================================================
           HEADER
       ========================================================= */}
-<div className="relative z-20 grid gap-10 lg:grid-cols-[1fr_0.55fr] lg:items-end lg:gap-16">
-  <div>
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{
-        duration: 0.6,
-        ease: "easeOut",
-      }}
-      className="
-        mb-6
-        text-xs
-        font-bold
-        uppercase
-        tracking-[0.25em]
-        text-[#FF0000]
-      "
-    >
-      Made for motion.
-    </motion.p>
 
-    <motion.h2
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{
-        duration: 0.8,
-        delay: 0.05,
-        ease: "easeOut",
-      }}
-      className="
-        text-[clamp(4rem,13vw,9.5rem)]
-        font-black
-        uppercase
-        leading-[0.78]
-        tracking-[-0.085em]
-        text-[#080808]
-        dark:text-white
-      "
-    >
-      Built to
-      <br />
-      Move<span className="text-[#FF0000]">.</span>
-    </motion.h2>
-  </div>
+      <div
+        className="
+          relative
+          z-20
+          grid
+          gap-10
+          lg:grid-cols-[1fr_0.55fr]
+          lg:items-end
+          lg:gap-16
+        "
+      >
+        <div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+            }}
+            className="
+              mb-6
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.25em]
+              text-[#FF0000]
+            "
+          >
+            Made for motion.
+          </motion.p>
 
-  <motion.div
-    style={{ y: textY }}
-    className="relative z-20 max-w-md lg:pb-3"
-  >
-    <p className="text-base leading-relaxed text-black/60 sm:text-lg dark:text-white/60">
-      Performance-driven apparel made for every game, every session
-      and everything in between.
-    </p>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.05,
+              ease: "easeOut",
+            }}
+            className="
+              text-[clamp(4rem,13vw,9.5rem)]
+              font-black
+              uppercase
+              leading-[0.78]
+              tracking-[-0.085em]
+              text-[#080808]
+            "
+          >
+            Built to
+            <br />
+            Move<span className="text-[#FF0000]">.</span>
+          </motion.h2>
+        </div>
 
-    <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs font-bold uppercase tracking-[0.18em]">
-      <span>06 Pieces</span>
+        <motion.div
+          style={{ y: textY }}
+          className="relative z-20 max-w-md lg:pb-3"
+        >
+          <p
+            className="
+              text-base
+              leading-relaxed
+              text-black/60
+              sm:text-lg
+            "
+          >
+            Performance-driven apparel made for every game, every session
+            and everything in between.
+          </p>
 
-      <span className="h-1 w-1 rounded-full bg-[#FF0000]" />
+          <div
+            className="
+              mt-7
+              flex
+              flex-wrap
+              items-center
+              gap-x-8
+              gap-y-3
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.18em]
+            "
+          >
+            <span>06 Pieces</span>
 
-      <span className="text-black/40 dark:text-white/40">
-        Performance
-      </span>
-    </div>
-  </motion.div>
-</div>
+            <span className="h-1 w-1 rounded-full bg-[#FF0000]" />
+
+            <span className="text-black/40">
+              Performance
+            </span>
+          </div>
+        </motion.div>
+      </div>
 
       {/* =========================================================
           VIDEO
@@ -164,9 +223,9 @@ const CricketCollection = () => {
         <div
           className="
             relative
+            aspect-[4/5]
             overflow-hidden
             bg-[#111]
-            aspect-[4/5]
             sm:aspect-[16/10]
             lg:aspect-[16/9]
           "
@@ -174,9 +233,35 @@ const CricketCollection = () => {
           {/* RED CORNER FRAME */}
 
           <div className="pointer-events-none absolute inset-0 z-20">
-            <div className="absolute left-0 top-0 h-16 w-16 border-l-2 border-t-2 border-[#FF0000] sm:h-24 sm:w-24" />
+            <div
+              className="
+                absolute
+                left-0
+                top-0
+                h-16
+                w-16
+                border-l-2
+                border-t-2
+                border-[#FF0000]
+                sm:h-24
+                sm:w-24
+              "
+            />
 
-            <div className="absolute bottom-0 right-0 h-16 w-16 border-b-2 border-r-2 border-[#FF0000] sm:h-24 sm:w-24" />
+            <div
+              className="
+                absolute
+                bottom-0
+                right-0
+                h-16
+                w-16
+                border-b-2
+                border-r-2
+                border-[#FF0000]
+                sm:h-24
+                sm:w-24
+              "
+            />
           </div>
 
           {/* VIDEO */}
@@ -194,8 +279,8 @@ const CricketCollection = () => {
               inset-0
               h-[110%]
               w-full
-              object-cover
               scale-[1.02]
+              object-cover
             "
           />
 
@@ -207,11 +292,22 @@ const CricketCollection = () => {
 
           {/* RED GLOW */}
 
-          <div className="pointer-events-none absolute bottom-[-20%] left-[-10%] z-10 h-[50%] w-[50%] rounded-full bg-[#FF0000]/10 blur-[100px]" />
+          <div
+            className="
+              pointer-events-none
+              absolute
+              bottom-[-20%]
+              left-[-10%]
+              z-10
+              h-[50%]
+              w-[50%]
+              rounded-full
+              bg-[#FF0000]/10
+              blur-[100px]
+            "
+          />
 
-          {/* =====================================================
-              VIDEO CONTENT
-          ===================================================== */}
+          {/* VIDEO CONTENT */}
 
           <div className="absolute inset-x-0 bottom-0 z-30 p-6 sm:p-10 lg:p-14">
             <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
@@ -219,7 +315,15 @@ const CricketCollection = () => {
                 <div className="mb-4 flex items-center gap-3">
                   <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF0000]" />
 
-                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      uppercase
+                      tracking-[0.25em]
+                      text-white/70
+                    "
+                  >
                     Performance / 2026
                   </span>
                 </div>
@@ -263,7 +367,15 @@ const CricketCollection = () => {
                   hover:bg-[#FF0000]
                 "
               >
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-white">
+                <span
+                  className="
+                    text-xs
+                    font-bold
+                    uppercase
+                    tracking-[0.16em]
+                    text-white
+                  "
+                >
                   Explore performance
                 </span>
 
@@ -285,7 +397,21 @@ const CricketCollection = () => {
           {/* TOP VIDEO LABEL */}
 
           <div className="absolute right-5 top-5 z-30 sm:right-8 sm:top-8">
-            <span className="border border-white/20 bg-black/20 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/70 backdrop-blur-md">
+            <span
+              className="
+                border
+                border-white/20
+                bg-black/20
+                px-3
+                py-2
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.2em]
+                text-white/70
+                backdrop-blur-md
+              "
+            >
               VIRAT / PERFORMANCE
             </span>
           </div>
@@ -296,23 +422,69 @@ const CricketCollection = () => {
           BOTTOM INFORMATION
       ========================================================= */}
 
-      <div className="relative z-10 mt-8 grid gap-6 border-t border-black/10 pt-6 sm:grid-cols-3 sm:items-center dark:border-white/10">
+      <div
+        className="
+          relative
+          z-10
+          mt-8
+          grid
+          gap-6
+          border-t
+          border-black/10
+          pt-6
+          sm:grid-cols-3
+          sm:items-center
+        "
+      >
         <div className="flex items-center gap-3">
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#FF0000]">
+          <span
+            className="
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.18em]
+              text-[#FF0000]
+            "
+          >
             03
           </span>
 
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-black/50 dark:text-white/50">
+          <span
+            className="
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.18em]
+              text-black/50
+            "
+          >
             Performance
           </span>
         </div>
 
-        <div className="text-xs font-bold uppercase tracking-[0.18em] text-black/40 sm:text-center dark:text-white/40">
+        <div
+          className="
+            text-xs
+            font-bold
+            uppercase
+            tracking-[0.18em]
+            text-black/40
+            sm:text-center
+          "
+        >
           Built for movement
         </div>
 
         <div className="flex items-center gap-3 sm:justify-end">
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-black/40 dark:text-white/40">
+          <span
+            className="
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.18em]
+              text-black/40
+            "
+          >
             Virat Sportswear
           </span>
 

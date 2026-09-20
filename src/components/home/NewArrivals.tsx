@@ -18,7 +18,7 @@ const products = [
     image: velocityJersey,
     imageScale: 1.5,
     gradient:
-      "from-[#E3E5ED] via-[#F5F5F2] to-[#D5D7E0] dark:from-[#000045] dark:via-[#111111] dark:to-black",
+      "from-[#E3E5ED] via-[#F5F5F2] to-[#D5D7E0]",
     accent: "CRICKET",
   },
   {
@@ -31,7 +31,7 @@ const products = [
     image: performanceTee,
     imageScale: 1.5,
     gradient:
-      "from-[#E6E6E4] via-[#F5F5F2] to-[#D7D7D5] dark:from-[#1b1b1b] dark:via-[#0d0d0d] dark:to-black",
+      "from-[#E6E6E4] via-[#F5F5F2] to-[#D7D7D5]",
     accent: "TRAIN",
   },
   {
@@ -44,7 +44,7 @@ const products = [
     image: viratPolo,
     imageScale: 1.5,
     gradient:
-      "from-[#F0DEDE] via-[#F5F5F2] to-[#E4CECE] dark:from-[#220000] dark:via-[#111111] dark:to-black",
+      "from-[#F0DEDE] via-[#F5F5F2] to-[#E4CECE]",
     accent: "EVERYDAY",
   },
   {
@@ -57,7 +57,7 @@ const products = [
     image: matchDayShorts,
     imageScale: 1.5,
     gradient:
-      "from-[#E3E5ED] via-[#E9E9E7] to-[#D8D9E0] dark:from-[#151515] dark:via-[#000045] dark:to-black",
+      "from-[#E3E5ED] via-[#E9E9E7] to-[#D8D9E0]",
     accent: "MOVE",
   },
 ];
@@ -86,14 +86,10 @@ const NewArrivals = () => {
         px-5
         py-20
         text-[#080808]
-        transition-colors
-        duration-300
         sm:px-8
         sm:py-24
         lg:px-10
         lg:py-36
-        dark:bg-[#050505]
-        dark:text-white
       "
     >
       {/* ======================================================
@@ -115,14 +111,12 @@ const NewArrivals = () => {
           leading-none
           tracking-[-0.1em]
           text-black/[0.045]
-          dark:text-white/[0.045]
         "
       >
         05
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
-
         {/* ======================================================
             HEADER
         ====================================================== */}
@@ -140,7 +134,6 @@ const NewArrivals = () => {
             sm:flex-row
             sm:items-end
             sm:justify-between
-            dark:border-white/10
             lg:mb-16
           "
         >
@@ -179,7 +172,6 @@ const NewArrivals = () => {
                   leading-[0.78]
                   tracking-[-0.075em]
                   text-[#080808]
-                  dark:text-white
                 "
               >
                 New
@@ -198,7 +190,6 @@ const NewArrivals = () => {
               tracking-[0.25em]
               text-black/25
               sm:block
-              dark:text-white/25
             "
           >
             September
@@ -219,7 +210,6 @@ const NewArrivals = () => {
             lg:gap-8
           "
         >
-
           {/* ====================================================
               PRODUCT IMAGE
           ==================================================== */}
@@ -230,14 +220,12 @@ const NewArrivals = () => {
               min-h-[500px]
               overflow-hidden
               bg-[#E8E8E5]
-              dark:bg-[#0B0B0B]
               sm:min-h-[620px]
               md:min-h-[680px]
               lg:min-h-[650px]
             "
           >
             <AnimatePresence mode="wait">
-
               <motion.div
                 key={product.number}
                 initial={{
@@ -261,7 +249,6 @@ const NewArrivals = () => {
                   ${product.gradient}
                 `}
               >
-
                 {/* Red lighting */}
 
                 <div
@@ -295,7 +282,6 @@ const NewArrivals = () => {
                     sm:h-96
                     sm:w-96
                     sm:blur-[120px]
-                    dark:bg-[#000045]/60
                   "
                 />
 
@@ -304,7 +290,6 @@ const NewArrivals = () => {
                 ================================================== */}
 
                 <div className="absolute inset-0 flex items-center justify-center">
-
                   <motion.img
                     key={product.number}
                     src={product.image}
@@ -329,8 +314,8 @@ const NewArrivals = () => {
                       z-10
                       h-[82%]
                       w-[88%]
-                      object-contain
                       select-none
+                      object-contain
                       transition-transform
                       duration-700
                       ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -339,7 +324,6 @@ const NewArrivals = () => {
                       sm:w-[88%]
                     "
                   />
-
                 </div>
 
                 {/* ==================================================
@@ -352,31 +336,10 @@ const NewArrivals = () => {
                     absolute
                     inset-0
                     opacity-[0.035]
-                    dark:hidden
                   "
                   style={{
                     backgroundImage:
                       "linear-gradient(rgba(0,0,0,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,1) 1px, transparent 1px)",
-                    backgroundSize: "55px 55px",
-                  }}
-                />
-
-                {/* ==================================================
-                    DARK MODE GRID
-                ================================================== */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    hidden
-                    opacity-[0.025]
-                    dark:block
-                  "
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
                     backgroundSize: "55px 55px",
                   }}
                 />
@@ -402,7 +365,6 @@ const NewArrivals = () => {
                       tracking-[0.3em]
                       text-black/35
                       sm:text-[10px]
-                      dark:text-white/35
                     "
                   >
                     {product.number} / {products.length}
@@ -428,14 +390,11 @@ const NewArrivals = () => {
                     text-black/20
                     md:block
                     lg:right-6
-                    dark:text-white/20
                   "
                 >
                   {product.accent}
                 </div>
-
               </motion.div>
-
             </AnimatePresence>
 
             {/* ======================================================
@@ -474,9 +433,6 @@ const NewArrivals = () => {
                   hover:text-white
                   sm:h-11
                   sm:w-11
-                  dark:border-white/15
-                  dark:bg-black/30
-                  dark:text-white
                 "
               >
                 <ChevronLeft size={18} />
@@ -502,9 +458,6 @@ const NewArrivals = () => {
                   hover:text-white
                   sm:h-11
                   sm:w-11
-                  dark:border-white/15
-                  dark:bg-black/30
-                  dark:text-white
                 "
               >
                 <ChevronRight size={18} />
@@ -517,10 +470,8 @@ const NewArrivals = () => {
           ====================================================== */}
 
           <div className="flex flex-col justify-between">
-
             <div>
               <AnimatePresence mode="wait">
-
                 <motion.div
                   key={product.number}
                   initial={{
@@ -539,7 +490,6 @@ const NewArrivals = () => {
                     duration: 0.35,
                   }}
                 >
-
                   <p
                     className="
                       mb-3
@@ -562,7 +512,6 @@ const NewArrivals = () => {
                       leading-[0.85]
                       tracking-[-0.06em]
                       text-[#080808]
-                      dark:text-white
                     "
                   >
                     {product.name}
@@ -577,7 +526,6 @@ const NewArrivals = () => {
                       leading-6
                       text-black/40
                       sm:mt-6
-                      dark:text-white/40
                     "
                   >
                     {product.description}
@@ -611,10 +559,6 @@ const NewArrivals = () => {
                       sm:px-6
                       sm:py-4
                       sm:text-xs
-                      dark:bg-white
-                      dark:text-black
-                      dark:hover:bg-[#FF0000]
-                      dark:hover:text-white
                     "
                   >
                     Shop product
@@ -629,9 +573,7 @@ const NewArrivals = () => {
                       "
                     />
                   </a>
-
                 </motion.div>
-
               </AnimatePresence>
             </div>
 
@@ -640,7 +582,6 @@ const NewArrivals = () => {
             ================================================== */}
 
             <div className="mt-14 lg:mt-12">
-
               <p
                 className="
                   mb-4
@@ -649,16 +590,13 @@ const NewArrivals = () => {
                   uppercase
                   tracking-[0.25em]
                   text-black/25
-                  dark:text-white/25
                 "
               >
                 Browse the drop
               </p>
 
               <div className="space-y-1">
-
                 {products.map((item, index) => (
-
                   <button
                     key={item.number}
                     onClick={() => setActiveIndex(index)}
@@ -677,11 +615,10 @@ const NewArrivals = () => {
                       ${
                         activeIndex === index
                           ? "border-[#FF0000]"
-                          : "border-black/10 dark:border-white/10"
+                          : "border-black/10"
                       }
                     `}
                   >
-
                     <div
                       className="
                         flex
@@ -691,7 +628,6 @@ const NewArrivals = () => {
                         sm:gap-4
                       "
                     >
-
                       <span
                         className={`
                           shrink-0
@@ -699,7 +635,7 @@ const NewArrivals = () => {
                           ${
                             activeIndex === index
                               ? "text-[#FF0000]"
-                              : "text-black/25 dark:text-white/25"
+                              : "text-black/25"
                           }
                         `}
                       >
@@ -717,14 +653,13 @@ const NewArrivals = () => {
                           sm:text-xs
                           ${
                             activeIndex === index
-                              ? "text-black dark:text-white"
-                              : "text-black/40 group-hover:text-black dark:text-white/40 dark:group-hover:text-white"
+                              ? "text-black"
+                              : "text-black/40 group-hover:text-black"
                           }
                         `}
                       >
                         {item.name}
                       </span>
-
                     </div>
 
                     <span
@@ -733,19 +668,14 @@ const NewArrivals = () => {
                         text-[11px]
                         text-black/30
                         sm:text-xs
-                        dark:text-white/30
                       "
                     >
                       {item.price}
                     </span>
-
                   </button>
-
                 ))}
-
               </div>
             </div>
-
           </div>
         </div>
 
@@ -766,7 +696,6 @@ const NewArrivals = () => {
             sm:flex-row
             sm:items-center
             sm:justify-between
-            dark:border-white/10
           "
         >
           <span
@@ -775,7 +704,6 @@ const NewArrivals = () => {
               uppercase
               tracking-[0.25em]
               text-black/25
-              dark:text-white/25
             "
           >
             Designed to move
@@ -787,13 +715,11 @@ const NewArrivals = () => {
               uppercase
               tracking-[0.25em]
               text-black/25
-              dark:text-white/25
             "
           >
             Virat / New arrivals
           </span>
         </div>
-
       </div>
     </section>
   );
