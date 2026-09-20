@@ -138,8 +138,6 @@ const DesignYourOwn = () => {
           </div>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 };

@@ -21,8 +21,6 @@ const Accessories = () => {
           "Recovery",
         ]}
       />
-
-      <Footer />
     </>
   );
 };

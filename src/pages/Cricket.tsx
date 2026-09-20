@@ -21,8 +21,6 @@ const Cricket = () => {
           "Outlet",
         ]}
       />
-
-      <Footer />
     </>
   );
 };

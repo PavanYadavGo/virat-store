@@ -18,8 +18,6 @@ const NewArrivals = () => {
           "Sports",
         ]}
       />
-
-      <Footer />
     </>
   );
 };
