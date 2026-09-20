@@ -112,9 +112,9 @@ const CategoryPage = () => {
   }, [sort]);
 
   return (
-    <main className="min-h-screen bg-[#F5F5F2] text-[#080808] transition-colors duration-300 dark:bg-[#050505] dark:text-white">
+    <main className="min-h-screen bg-[#F5F5F2] text-[#080808]">
       {/* HEADER */}
-      <section className="relative overflow-hidden border-b border-black/10 pt-32 dark:border-white/10 sm:pt-36">
+      <section className="relative overflow-hidden border-b border-black/10 pt-28 sm:pt-32">
         {/* Background number */}
         <div
           aria-hidden="true"
@@ -123,22 +123,21 @@ const CategoryPage = () => {
             absolute right-[-10px] top-1/2
             z-0 -translate-y-1/2
             select-none
-            text-[12rem]
+            text-[10rem]
             font-black
             leading-none
             tracking-[-0.1em]
             text-black/[0.045]
-            dark:text-white/[0.045]
-            sm:text-[18rem]
-            lg:text-[25rem]
+            sm:text-[15rem]
+            lg:text-[22rem]
           "
         >
           01
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pb-14 lg:px-10 lg:pb-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 pb-12 lg:px-10 lg:pb-16">
           {/* Breadcrumb */}
-          <div className="mb-10 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40">
+          <div className="mb-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
             <Link
               to="/"
               className="transition-colors hover:text-[#FF0000]"
@@ -155,9 +154,7 @@ const CategoryPage = () => {
               </>
             )}
 
-            <span className="text-black dark:text-white">
-              {categoryName}
-            </span>
+            <span className="text-black">{categoryName}</span>
           </div>
 
           <div className="max-w-5xl">
@@ -165,7 +162,7 @@ const CategoryPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#FF0000]"
+              className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-[#FF0000]"
             >
               Virat Sportswear
             </motion.p>
@@ -175,11 +172,11 @@ const CategoryPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
               className="
-                text-[clamp(4rem,14vw,10rem)]
+                text-[clamp(2rem,4vw,5rem)]
                 font-black
                 uppercase
-                leading-[0.78]
-                tracking-[-0.085em]
+                leading-[0.82]
+                tracking-[-0.075em]
               "
             >
               {categoryName}
@@ -190,7 +187,7 @@ const CategoryPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-8 max-w-xl text-sm leading-relaxed text-black/55 dark:text-white/55 sm:text-base"
+              className="mt-6 max-w-xl text-sm leading-relaxed text-black/55 sm:text-base"
             >
               Performance-driven apparel designed for movement,
               training and everyday life.
@@ -200,9 +197,9 @@ const CategoryPage = () => {
       </section>
 
       {/* TOOLBAR */}
-      <section className="sticky top-0 z-30 border-b border-black/10 bg-[#F5F5F2]/95 backdrop-blur-xl dark:border-white/10 dark:bg-[#050505]/95">
+      <section className="sticky top-0 z-30 border-b border-black/10 bg-[#F5F5F2]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-10">
-          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/40 dark:text-white/40">
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
             {sortedProducts.length} Products
           </div>
 
@@ -221,8 +218,6 @@ const CategoryPage = () => {
                 tracking-[0.15em]
                 transition-all
                 hover:border-black/30
-                dark:border-white/10
-                dark:hover:border-white/30
               "
             >
               <SlidersHorizontal size={14} />
@@ -246,7 +241,6 @@ const CategoryPage = () => {
                   uppercase
                   tracking-[0.15em]
                   outline-none
-                  dark:border-white/10
                 "
               >
                 <option value="featured">Featured</option>
@@ -269,7 +263,7 @@ const CategoryPage = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="border-t border-black/10 dark:border-white/10"
+            className="border-t border-black/10"
           >
             <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 sm:grid-cols-3 lg:px-10">
               <FilterGroup
@@ -315,7 +309,6 @@ const CategoryPage = () => {
                   aspect-[4/5]
                   overflow-hidden
                   bg-[#E8E8E5]
-                  dark:bg-[#111111]
                 "
               >
                 {product.badge && (
@@ -352,7 +345,6 @@ const CategoryPage = () => {
                   "
                 />
 
-                {/* Hover overlay */}
                 <div
                   className="
                     absolute
@@ -361,7 +353,6 @@ const CategoryPage = () => {
                     transition-colors
                     duration-500
                     group-hover:bg-black/[0.04]
-                    dark:group-hover:bg-white/[0.03]
                   "
                 />
 
@@ -392,7 +383,7 @@ const CategoryPage = () => {
 
               {/* INFO */}
               <div className="pt-4">
-                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-black/40 dark:text-white/40">
+                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-black/40">
                   {product.category}
                 </p>
 
@@ -454,7 +445,6 @@ const FilterGroup = ({ title, items }: FilterGroupProps) => {
               transition-colors
               hover:border-[#FF0000]
               hover:text-[#FF0000]
-              dark:border-white/10
             "
           >
             {item}

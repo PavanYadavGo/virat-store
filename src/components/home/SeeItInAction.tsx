@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
-import { motion } from "motion/react";
-import { useEffect, useRef } from "react";
+import { motion, useAnimationControls } from "motion/react";
+import { useState } from "react";
 
 import action01 from "../../assets/action/action-01.jpeg";
 import action02 from "../../assets/action/action-02.jpeg";
@@ -64,82 +64,33 @@ const videos = [
 ];
 
 const SeeItInAction = () => {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
-  const isPausedRef = useRef(false);
+  const controls = useAnimationControls();
+
+  const [isPaused, setIsPaused] = useState(false);
 
   /*
    * =========================================================
-   * INFINITE AUTO SCROLL
+   * MANUAL CAROUSEL CONTROLS
    * =========================================================
+   *
+   * The automatic animation remains continuous.
+   * The buttons simply speed the track in the requested
+   * direction for a short moment.
    */
 
-  useEffect(() => {
-    const carousel = carouselRef.current;
+  const moveCarousel = async (direction: "left" | "right") => {
+    setIsPaused(true);
 
-    if (!carousel) return;
-
-    let lastTime = performance.now();
-
-    const speed = 35;
-
-    const animate = (currentTime: number) => {
-      const delta = currentTime - lastTime;
-      lastTime = currentTime;
-
-      if (!isPausedRef.current) {
-        carousel.scrollLeft += (speed * delta) / 1000;
-
-        /*
-         * The cards are duplicated.
-         * Once we've passed the first complete set,
-         * jump back by exactly that set's width.
-         *
-         * Because both sets are identical, the user
-         * sees a completely seamless infinite loop.
-         */
-
-        const halfWidth = carousel.scrollWidth / 2;
-
-        if (carousel.scrollLeft >= halfWidth) {
-          carousel.scrollLeft -= halfWidth;
-        }
-      }
-
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
-
-  /*
-   * =========================================================
-   * MANUAL CONTROLS
-   * =========================================================
-   */
-
-  const scrollCarousel = (direction: "left" | "right") => {
-    if (!carouselRef.current) return;
-
-    const amount = carouselRef.current.clientWidth * 0.75;
-
-    carouselRef.current.scrollBy({
-      left: direction === "right" ? amount : -amount,
-      behavior: "smooth",
+    await controls.start({
+      x: direction === "right" ? "-10%" : "0%",
+      transition: {
+        duration: 1.2,
+        ease: "easeInOut",
+      },
     });
-  };
 
-  /*
-   * =========================================================
-   * RENDER
-   * =========================================================
-   */
+    setIsPaused(false);
+  };
 
   return (
     <section
@@ -284,7 +235,7 @@ const SeeItInAction = () => {
         <div className="mb-5 flex items-center justify-end gap-2">
           <button
             type="button"
-            onClick={() => scrollCarousel("left")}
+            onClick={() => moveCarousel("left")}
             aria-label="Previous"
             className="
               flex
@@ -307,7 +258,7 @@ const SeeItInAction = () => {
 
           <button
             type="button"
-            onClick={() => scrollCarousel("right")}
+            onClick={() => moveCarousel("right")}
             aria-label="Next"
             className="
               flex
@@ -330,390 +281,400 @@ const SeeItInAction = () => {
         </div>
 
         {/* =====================================================
-            INFINITE IMAGE CAROUSEL
+            INFINITE CAROUSEL
         ====================================================== */}
 
         <div
-          ref={carouselRef}
-          onMouseEnter={() => {
-            isPausedRef.current = true;
-          }}
-          onMouseLeave={() => {
-            isPausedRef.current = false;
-          }}
-          className="
-            flex
-            gap-4
-            overflow-x-auto
-            pb-4
-            [scrollbar-width:none]
-            [&::-webkit-scrollbar]:hidden
-          "
+          className="relative overflow-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          {/* =================================================
-              FIRST SET
-          ================================================= */}
+          <motion.div
+            className="flex w-max gap-4"
+            animate={
+              isPaused
+                ? undefined
+                : {
+                    x: ["0%", "-50%"],
+                  }
+            }
+            transition={{
+              x: {
+                duration: 32,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "linear",
+              },
+            }}
+          >
+            {/* =================================================
+                FIRST SET
+            ================================================= */}
 
-          {videos.map((video, index) => (
-            <motion.article
-              key={`first-${video.id}`}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.05,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="
-                group
-                relative
-                w-[82vw]
-                shrink-0
-                overflow-hidden
-                border
-                border-black/10
-                bg-[#080808]
-                sm:w-[46vw]
-                lg:w-[calc((100vw-10rem)/4)]
-                lg:max-w-[320px]
-              "
-            >
-              <div className="relative aspect-[9/16] overflow-hidden">
-
-                <img
-                  src={video.image}
-                  alt={video.title}
-                  draggable={false}
+            <div className="flex shrink-0 gap-4">
+              {videos.map((video, index) => (
+                <motion.article
+                  key={`first-${video.id}`}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.05,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="
-                    absolute
-                    inset-0
-                    h-full
-                    w-full
-                    object-cover
-                    transition-transform
-                    duration-700
-                    ease-out
-                    group-hover:scale-[1.04]
-                  "
-                />
-
-                {/* OVERLAY */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/75
-                    via-transparent
-                    to-black/10
-                    opacity-70
-                  "
-                />
-
-                {/* TOP META */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    left-4
-                    right-4
-                    top-4
-                    z-10
-                    flex
-                    items-center
-                    justify-between
+                    group
+                    relative
+                    w-[82vw]
+                    shrink-0
+                    overflow-hidden
+                    border
+                    border-black/10
+                    bg-[#080808]
+                    sm:w-[46vw]
+                    lg:w-[calc((100vw-10rem)/4)]
+                    lg:max-w-[320px]
                   "
                 >
-                  <span
-                    className="
-                      text-[10px]
-                      font-bold
-                      tracking-[0.2em]
-                      text-white/70
-                    "
-                  >
-                    {video.id}
-                  </span>
+                  <div className="relative aspect-[9/16] overflow-hidden">
 
-                  <div
-                    className="
-                      flex
-                      h-8
-                      w-8
-                      items-center
-                      justify-center
-                      rounded-full
-                      border
-                      border-white/20
-                      bg-black/20
-                      backdrop-blur-sm
-                    "
-                  >
-                    <FaInstagram size={14} className="text-white" />
-                  </div>
-                </div>
-
-                {/* BOTTOM INFO */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    bottom-4
-                    left-4
-                    right-4
-                    z-10
-                  "
-                >
-                  <p
-                    className="
-                      mb-1
-                      text-[9px]
-                      font-bold
-                      uppercase
-                      tracking-[0.2em]
-                      text-[#FF0000]
-                    "
-                  >
-                    {video.description}
-                  </p>
-
-                  <div className="flex items-end justify-between gap-3">
-                    <h3
+                    <img
+                      src={video.image}
+                      alt={video.title}
+                      draggable={false}
                       className="
-                        text-xl
-                        font-black
-                        uppercase
-                        leading-none
-                        tracking-[-0.04em]
-                        text-white
-                        sm:text-2xl
+                        absolute
+                        inset-0
+                        h-full
+                        w-full
+                        object-cover
+                        transition-transform
+                        duration-700
+                        ease-out
+                        group-hover:scale-[1.04]
+                      "
+                    />
+
+                    {/* OVERLAY */}
+
+                    <div
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        bg-gradient-to-t
+                        from-black/75
+                        via-transparent
+                        to-black/10
+                        opacity-70
+                      "
+                    />
+
+                    {/* TOP META */}
+
+                    <div
+                      className="
+                        pointer-events-none
+                        absolute
+                        left-4
+                        right-4
+                        top-4
+                        z-10
+                        flex
+                        items-center
+                        justify-between
                       "
                     >
-                      {video.title}
-                      <span className="text-[#FF0000]">.</span>
-                    </h3>
+                      <span
+                        className="
+                          text-[10px]
+                          font-bold
+                          tracking-[0.2em]
+                          text-white/70
+                        "
+                      >
+                        {video.id}
+                      </span>
 
-                    <ArrowUpRight
-                      size={18}
-                      strokeWidth={1.5}
+                      <div
+                        className="
+                          flex
+                          h-8
+                          w-8
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          border-white/20
+                          bg-black/20
+                          backdrop-blur-sm
+                        "
+                      >
+                        <FaInstagram size={14} className="text-white" />
+                      </div>
+                    </div>
+
+                    {/* BOTTOM INFO */}
+
+                    <div
                       className="
-                        text-white/70
-                        transition-all
-                        duration-300
-                        group-hover:-translate-y-1
-                        group-hover:translate-x-1
-                        group-hover:text-[#FF0000]
+                        pointer-events-none
+                        absolute
+                        bottom-4
+                        left-4
+                        right-4
+                        z-10
+                      "
+                    >
+                      <p
+                        className="
+                          mb-1
+                          text-[9px]
+                          font-bold
+                          uppercase
+                          tracking-[0.2em]
+                          text-[#FF0000]
+                        "
+                      >
+                        {video.description}
+                      </p>
+
+                      <div className="flex items-end justify-between gap-3">
+                        <h3
+                          className="
+                            text-xl
+                            font-black
+                            uppercase
+                            leading-none
+                            tracking-[-0.04em]
+                            text-white
+                            sm:text-2xl
+                          "
+                        >
+                          {video.title}
+                          <span className="text-[#FF0000]">.</span>
+                        </h3>
+
+                        <ArrowUpRight
+                          size={18}
+                          strokeWidth={1.5}
+                          className="
+                            text-white/70
+                            transition-all
+                            duration-300
+                            group-hover:-translate-y-1
+                            group-hover:translate-x-1
+                            group-hover:text-[#FF0000]
+                          "
+                        />
+                      </div>
+                    </div>
+
+                    {/* HOVER BORDER */}
+
+                    <div
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        z-20
+                        border
+                        border-transparent
+                        transition-colors
+                        duration-500
+                        group-hover:border-[#FF0000]/70
                       "
                     />
                   </div>
-                </div>
+                </motion.article>
+              ))}
+            </div>
 
-                {/* HOVER BORDER */}
+            {/* =================================================
+                SECOND IDENTICAL SET
+            ================================================= */}
 
-                <div
+            <div className="flex shrink-0 gap-4">
+              {videos.map((video, index) => (
+                <motion.article
+                  key={`second-${video.id}`}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.05,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    z-20
+                    group
+                    relative
+                    w-[82vw]
+                    shrink-0
+                    overflow-hidden
                     border
-                    border-transparent
-                    transition-colors
-                    duration-500
-                    group-hover:border-[#FF0000]/70
-                  "
-                />
-              </div>
-            </motion.article>
-          ))}
-
-          {/* =================================================
-              SECOND SET
-              IDENTICAL COPY FOR INFINITE LOOP
-          ================================================= */}
-
-          {videos.map((video, index) => (
-            <motion.article
-              key={`second-${video.id}`}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.05,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="
-                group
-                relative
-                w-[82vw]
-                shrink-0
-                overflow-hidden
-                border
-                border-black/10
-                bg-[#080808]
-                sm:w-[46vw]
-                lg:w-[calc((100vw-10rem)/4)]
-                lg:max-w-[320px]
-              "
-            >
-              <div className="relative aspect-[9/16] overflow-hidden">
-
-                <img
-                  src={video.image}
-                  alt={video.title}
-                  draggable={false}
-                  className="
-                    absolute
-                    inset-0
-                    h-full
-                    w-full
-                    object-cover
-                    transition-transform
-                    duration-700
-                    ease-out
-                    group-hover:scale-[1.04]
-                  "
-                />
-
-                {/* OVERLAY */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/75
-                    via-transparent
-                    to-black/10
-                    opacity-70
-                  "
-                />
-
-                {/* TOP META */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    left-4
-                    right-4
-                    top-4
-                    z-10
-                    flex
-                    items-center
-                    justify-between
+                    border-black/10
+                    bg-[#080808]
+                    sm:w-[46vw]
+                    lg:w-[calc((100vw-10rem)/4)]
+                    lg:max-w-[320px]
                   "
                 >
-                  <span
-                    className="
-                      text-[10px]
-                      font-bold
-                      tracking-[0.2em]
-                      text-white/70
-                    "
-                  >
-                    {video.id}
-                  </span>
+                  <div className="relative aspect-[9/16] overflow-hidden">
 
-                  <div
-                    className="
-                      flex
-                      h-8
-                      w-8
-                      items-center
-                      justify-center
-                      rounded-full
-                      border
-                      border-white/20
-                      bg-black/20
-                      backdrop-blur-sm
-                    "
-                  >
-                    <FaInstagram size={14} className="text-white" />
-                  </div>
-                </div>
-
-                {/* BOTTOM INFO */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    bottom-4
-                    left-4
-                    right-4
-                    z-10
-                  "
-                >
-                  <p
-                    className="
-                      mb-1
-                      text-[9px]
-                      font-bold
-                      uppercase
-                      tracking-[0.2em]
-                      text-[#FF0000]
-                    "
-                  >
-                    {video.description}
-                  </p>
-
-                  <div className="flex items-end justify-between gap-3">
-                    <h3
+                    <img
+                      src={video.image}
+                      alt={video.title}
+                      draggable={false}
                       className="
-                        text-xl
-                        font-black
-                        uppercase
-                        leading-none
-                        tracking-[-0.04em]
-                        text-white
-                        sm:text-2xl
+                        absolute
+                        inset-0
+                        h-full
+                        w-full
+                        object-cover
+                        transition-transform
+                        duration-700
+                        ease-out
+                        group-hover:scale-[1.04]
+                      "
+                    />
+
+                    {/* OVERLAY */}
+
+                    <div
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        bg-gradient-to-t
+                        from-black/75
+                        via-transparent
+                        to-black/10
+                        opacity-70
+                      "
+                    />
+
+                    {/* TOP META */}
+
+                    <div
+                      className="
+                        pointer-events-none
+                        absolute
+                        left-4
+                        right-4
+                        top-4
+                        z-10
+                        flex
+                        items-center
+                        justify-between
                       "
                     >
-                      {video.title}
-                      <span className="text-[#FF0000]">.</span>
-                    </h3>
+                      <span
+                        className="
+                          text-[10px]
+                          font-bold
+                          tracking-[0.2em]
+                          text-white/70
+                        "
+                      >
+                        {video.id}
+                      </span>
 
-                    <ArrowUpRight
-                      size={18}
-                      strokeWidth={1.5}
+                      <div
+                        className="
+                          flex
+                          h-8
+                          w-8
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          border-white/20
+                          bg-black/20
+                          backdrop-blur-sm
+                        "
+                      >
+                        <FaInstagram size={14} className="text-white" />
+                      </div>
+                    </div>
+
+                    {/* BOTTOM INFO */}
+
+                    <div
                       className="
-                        text-white/70
-                        transition-all
-                        duration-300
-                        group-hover:-translate-y-1
-                        group-hover:translate-x-1
-                        group-hover:text-[#FF0000]
+                        pointer-events-none
+                        absolute
+                        bottom-4
+                        left-4
+                        right-4
+                        z-10
+                      "
+                    >
+                      <p
+                        className="
+                          mb-1
+                          text-[9px]
+                          font-bold
+                          uppercase
+                          tracking-[0.2em]
+                          text-[#FF0000]
+                        "
+                      >
+                        {video.description}
+                      </p>
+
+                      <div className="flex items-end justify-between gap-3">
+                        <h3
+                          className="
+                            text-xl
+                            font-black
+                            uppercase
+                            leading-none
+                            tracking-[-0.04em]
+                            text-white
+                            sm:text-2xl
+                          "
+                        >
+                          {video.title}
+                          <span className="text-[#FF0000]">.</span>
+                        </h3>
+
+                        <ArrowUpRight
+                          size={18}
+                          strokeWidth={1.5}
+                          className="
+                            text-white/70
+                            transition-all
+                            duration-300
+                            group-hover:-translate-y-1
+                            group-hover:translate-x-1
+                            group-hover:text-[#FF0000]
+                          "
+                        />
+                      </div>
+                    </div>
+
+                    {/* HOVER BORDER */}
+
+                    <div
+                      className="
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        z-20
+                        border
+                        border-transparent
+                        transition-colors
+                        duration-500
+                        group-hover:border-[#FF0000]/70
                       "
                     />
                   </div>
-                </div>
-
-                {/* HOVER BORDER */}
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    z-20
-                    border
-                    border-transparent
-                    transition-colors
-                    duration-500
-                    group-hover:border-[#FF0000]/70
-                  "
-                />
-              </div>
-            </motion.article>
-          ))}
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
         {/* =====================================================
