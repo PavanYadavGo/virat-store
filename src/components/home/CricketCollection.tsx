@@ -32,15 +32,15 @@ const CricketCollection = () => {
         overflow-hidden
         bg-[#F5F5F2]
         px-5
-        pb-20
-        pt-0
+        pb-4
+        pt-6
         text-[#080808]
         sm:px-8
-        sm:pb-24
-        sm:pt-0
+        sm:pb-6
+        sm:pt-10
         lg:px-10
-        lg:pb-36
-        lg:pt-0
+        lg:pb-8
+        lg:pt-12
       "
     >
       {/* =========================================================
@@ -163,7 +163,7 @@ const CricketCollection = () => {
               ease: "easeOut",
             }}
             className="
-              text-[clamp(3rem,6vw,6rem)]
+              text-[clamp(3rem,9vw,6rem)]
               font-black
               uppercase
               leading-[0.78]
@@ -222,7 +222,7 @@ const CricketCollection = () => {
           VIDEO
       ========================================================= */}
 
-      <div className="relative z-10 mt-14 sm:mt-20 lg:mt-24">
+      <div className="relative z-10 mt-8 sm:mt-12 lg:mt-16">
         <div
           className="
             relative
@@ -363,7 +363,6 @@ const CricketCollection = () => {
                   border-white/30
                   bg-white/10
                   px-5
-                  py-4
                   backdrop-blur-md
                   transition-colors
                   hover:border-[#FF0000]
@@ -406,7 +405,6 @@ const CricketCollection = () => {
                 border-white/20
                 bg-black/20
                 px-3
-                py-2
                 text-[9px]
                 font-bold
                 uppercase
@@ -429,12 +427,12 @@ const CricketCollection = () => {
         className="
           relative
           z-10
-          mt-8
+          mt-4
           grid
-          gap-6
+          gap-4
           border-t
           border-black/10
-          pt-6
+          pt-4
           sm:grid-cols-3
           sm:items-center
         "

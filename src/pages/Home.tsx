@@ -6,7 +6,8 @@ import CricketCollection from "../components/home/CricketCollection";
 import OffTheField from "../components/home/OffTheField";
 import NewArrivals from "../components/home/NewArrivals";
 import FinalCTA from "../components/home/FinalCTA";
-import SeeItInAction from "../components/home/Seeitinaction";
+import SeeItInAction from "../components/home/SeeItInAction";
+import PartnersCarousel from "../components/home/PartnersCarousel";
 import Footer from "../components/layout/Footer";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <CategorySection />
       <CricketCollection />
       <SeeItInAction />
+      <PartnersCarousel />
       {/* <FeaturedProducts />
       <OffTheField />
       <NewArrivals />
