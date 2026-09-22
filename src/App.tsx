@@ -9,6 +9,7 @@ import Cricket from "./pages/Cricket";
 import Accessories from "./pages/Accessories";
 import DesignYourOwn from "./pages/DesignYourOwn";
 import CategoryPage from "./pages/CategoryPage";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
@@ -17,22 +18,17 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/new-arrivals" element={<NewArrivals />} />
-
         <Route path="/cricket" element={<Cricket />} />
-
         <Route path="/accessories" element={<Accessories />} />
-
         <Route path="/design-your-own" element={<DesignYourOwn />} />
-
+        
         <Route path="/men/*" element={<CategoryPage />} />
-
         <Route path="/women/*" element={<CategoryPage />} />
-
         <Route path="/cricket/*" element={<CategoryPage />} />
-
         <Route path="/accessories/*" element={<CategoryPage />} />
+        
+        <Route path="/product/:id" element={<ProductPage />} />
 
         <Route path="*" element={<Home />} />
       </Routes>
