@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { ArrowRight, ChevronRight, Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 import performanceTee from "../assets/products/performance-tee.png";
 import viratPolo from "../assets/products/virat-polo.png";
