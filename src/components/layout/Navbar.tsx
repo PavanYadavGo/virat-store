@@ -232,6 +232,10 @@ const navItems: NavItem[] = [
     label: "DESIGN YOUR OWN",
     href: "/design-your-own",
   },
+  {
+    label: "Contact",
+    href: "/contact",
+  },
 ];
 
 /* =========================================================

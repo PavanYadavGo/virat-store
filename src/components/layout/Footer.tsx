@@ -1,37 +1,39 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 // import { motion } from "motion/react";
+
 
 const footerLinks = {
   Shop: [
-    "New Arrivals",
-    "Men",
-    "Women",
-    "Cricket",
-    "Accessories",
+    { name: "New Arrivals", href: "/new-arrivals" },
+    { name: "Men", href: "/men" },
+    { name: "Women", href: "/women" },
+    { name: "Cricket", href: "/cricket" },
+    { name: "Accessories", href: "/accessories" },
   ],
   Sports: [
-    "Cricket",
-    "Football",
-    "Shooting",
-    "Training",
-    "India Merchandise",
-    "Shop Outlet",
+    { name: "Cricket", href: "/cricket" },
+    { name: "Football", href: "#" },
+    { name: "Shooting", href: "#" },
+    { name: "Training", href: "#" },
+    { name: "India Merchandise", href: "#" },
+    { name: "Shop Outlet", href: "#" },
   ],
   Categories: [
-    "Tops",
-    "Polos",
-    "Sleeveless",
-    "Long Sleeves",
-    "Jackets & Hoodies",
-    "Shorts",
-    "Pants & Leggings",
-    "Tracksuits",
+    { name: "Tops", href: "#" },
+    { name: "Polos", href: "#" },
+    { name: "Sleeveless", href: "#" },
+    { name: "Long Sleeves", href: "#" },
+    { name: "Jackets & Hoodies", href: "#" },
+    { name: "Shorts", href: "#" },
+    { name: "Pants & Leggings", href: "#" },
+    { name: "Tracksuits", href: "#" },
   ],
   Support: [
-    "Contact",
-    "Shipping",
-    "Returns",
-    "Size Guide",
+    { name: "Contact", href: "/contact" },
+    { name: "Shipping", href: "#" },
+    { name: "Returns", href: "#" },
+    { name: "Size Guide", href: "#" },
   ],
 };
 
@@ -129,9 +131,9 @@ const Footer = () => {
 
               <ul className="space-y-4">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
+                  <li key={link.name}>
+                    <Link
+                      to={link.href}
                       className="
                         group flex w-fit
                         items-center gap-2
@@ -157,7 +159,7 @@ const Footer = () => {
                         "
                       />
 
-                      <span>{link}</span>
+                      <span>{link.name}</span>
 
                       <ArrowUpRight
                         size={11}
@@ -170,7 +172,7 @@ const Footer = () => {
                           group-hover:text-[#FF0000]
                         "
                       />
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
