@@ -6,7 +6,7 @@ import accessoriesImage from "../../assets/categories/accessories.png";
 import cricketfImage from "../../assets/categories/cricket-f.jpg";
 import casualImage from "../../assets/categories/casual.jpg";
 import TeamImage from "../../assets/categories/teamwear.png";
-import sportsImage from "../../assets/categories/sports.jpg";
+// import sportsImage from "../../assets/categories/sports.jpg";
 
 const categories = [
   {

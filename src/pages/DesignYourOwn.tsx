@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
 import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
+// import Footer from "../components/layout/Footer";
 
 const DesignYourOwn = () => {
   return (
