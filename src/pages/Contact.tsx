@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 
 const Contact = () => {
