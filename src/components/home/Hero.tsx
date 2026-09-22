@@ -1,4 +1,4 @@
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -6,32 +6,14 @@ import header01 from "../../assets/hero/header-1.png";
 import header02 from "../../assets/hero/header-2.png";
 import header03 from "../../assets/hero/header-3.png";
 import header04 from "../../assets/hero/header-4.png";
+import header05 from "../../assets/hero/header-5.png";
 
 const slides = [
-  {
-    image: header01,
-    eyebrow: "VIRAT / 01",
-    title: "Play",
-    accent: "Harder.",
-  },
-  {
-    image: header02,
-    eyebrow: "VIRAT / 02",
-    title: "Own",
-    accent: "The Game.",
-  },
-  {
-    image: header03,
-    eyebrow: "VIRAT / 03",
-    title: "Built",
-    accent: "To Move.",
-  },
-  {
-    image: header04,
-    eyebrow: "VIRAT / 04",
-    title: "Never",
-    accent: "Settle.",
-  },
+  header01,
+  header02,
+  header03,
+  header04,
+  header05,
 ];
 
 const Hero = () => {
@@ -66,7 +48,6 @@ const Hero = () => {
         min-h-[100svh]
         overflow-hidden
         bg-black
-        text-white
       "
     >
       {/* =====================================================
@@ -103,7 +84,7 @@ const Hero = () => {
             className="absolute inset-0"
           >
             <img
-              src={slide.image}
+              src={slide}
               alt=""
               draggable={false}
               className="
@@ -111,39 +92,6 @@ const Hero = () => {
                 w-full
                 select-none
                 object-cover
-              "
-            />
-
-            {/* Image darkening */}
-            <div
-              className="
-                absolute
-                inset-0
-                bg-black/35
-              "
-            />
-
-            {/* Bottom gradient */}
-            <div
-              className="
-                absolute
-                inset-0
-                bg-gradient-to-t
-                from-black
-                via-black/20
-                to-black/10
-              "
-            />
-
-            {/* Left gradient */}
-            <div
-              className="
-                absolute
-                inset-0
-                bg-gradient-to-r
-                from-black/65
-                via-black/20
-                to-transparent
               "
             />
           </motion.div>
@@ -156,8 +104,8 @@ const Hero = () => {
 
       <motion.div
         animate={{
-          opacity: [0.15, 0.3, 0.15],
-          scale: [1, 1.15, 1],
+          opacity: [0.08, 0.16, 0.08],
+          scale: [1, 1.1, 1],
         }}
         transition={{
           duration: 5,
@@ -172,7 +120,7 @@ const Hero = () => {
           h-[400px]
           w-[400px]
           rounded-full
-          bg-[#FF0000]/20
+          bg-[#FF0000]/10
           blur-[150px]
         "
       />
@@ -202,205 +150,6 @@ const Hero = () => {
           to-transparent
         "
       />
-
-      {/* =====================================================
-          MAIN CONTENT
-      ====================================================== */}
-
-      <div
-        className="
-          relative
-          z-20
-          mx-auto
-          flex
-          min-h-[100svh]
-          max-w-7xl
-          items-end
-          px-5
-          pb-28
-          pt-32
-          sm:px-8
-          sm:pb-32
-          lg:px-10
-          lg:pb-28
-        "
-      >
-        <div className="w-full">
-          {/* =================================================
-              EYEBROW
-          ================================================= */}
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`eyebrow-${current}`}
-              initial={{
-                opacity: 0,
-                y: 15,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              exit={{
-                opacity: 0,
-                y: -10,
-              }}
-              transition={{
-                duration: 0.5,
-              }}
-              className="
-                mb-5
-                flex
-                items-center
-                gap-3
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.3em]
-                text-white/65
-                sm:text-xs
-              "
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-[#FF0000]" />
-
-              {slide.eyebrow}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* =================================================
-              TITLE
-          ================================================= */}
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`title-${current}`}
-              initial={{
-                opacity: 0,
-                y: 50,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              exit={{
-                opacity: 0,
-                y: -30,
-              }}
-              transition={{
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <h1
-                className="
-                  max-w-4xl
-                  text-[clamp(4.5rem,13vw,10rem)]
-                  font-black
-                  uppercase
-                  leading-[0.78]
-                  tracking-[-0.075em]
-                "
-              >
-                {slide.title}
-                <br />
-
-                <span className="text-[#FF0000]">
-                  {slide.accent}
-                </span>
-              </h1>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* =================================================
-              BOTTOM CONTENT
-          ================================================= */}
-
-          <div
-            className="
-              mt-8
-              flex
-              flex-col
-              gap-7
-              sm:mt-10
-              lg:flex-row
-              lg:items-end
-              lg:justify-between
-            "
-          >
-            {/* Description */}
-
-            <motion.p
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                delay: 0.4,
-                duration: 0.6,
-              }}
-              className="
-                max-w-sm
-                text-sm
-                leading-6
-                text-white/65
-                sm:text-base
-              "
-            >
-              Performance wear built for cricket,
-              sports and everything beyond the game.
-            </motion.p>
-
-            {/* CTA */}
-
-            <motion.button
-              whileHover="hover"
-              whileTap={{
-                scale: 0.96,
-              }}
-              className="
-                group
-                flex
-                w-fit
-                items-center
-                gap-4
-                border
-                border-white/30
-                bg-white/[0.06]
-                px-6
-                py-3.5
-                text-xs
-                font-bold
-                uppercase
-                tracking-wider
-                backdrop-blur-md
-                transition-colors
-                hover:border-white
-                hover:bg-white
-                hover:text-black
-                sm:px-7
-                sm:py-4
-              "
-            >
-              Shop collection
-
-              <motion.span
-                variants={{
-                  hover: {
-                    x: 5,
-                    y: -5,
-                  },
-                }}
-              >
-                <ArrowUpRight size={17} />
-              </motion.span>
-            </motion.button>
-          </div>
-        </div>
-      </div>
 
       {/* =====================================================
           SLIDE CONTROLS
