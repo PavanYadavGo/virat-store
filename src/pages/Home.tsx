@@ -5,6 +5,7 @@ import CricketCollection from "../components/home/CricketCollection";
 // import OffTheField from "../components/home/OffTheField";
 // import NewArrivals from "../components/home/NewArrivals";
 // import FinalCTA from "../components/home/FinalCTA";
+import AboutSection from "../components/home/AboutSection";
 import SeeItInAction from "../components/home/SeeItInAction";
 import PartnersCarousel from "../components/home/PartnersCarousel";
 
@@ -15,6 +16,7 @@ const Home = () => {
       <CategorySection />
       <CricketCollection />
       <SeeItInAction />
+      <AboutSection />
       <PartnersCarousel />
       {/* <FeaturedProducts />
       <OffTheField />
