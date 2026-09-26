@@ -71,7 +71,7 @@ const CricketCollection = () => {
           TOP META
       ========================================================= */}
 
-      <div
+      {/* <div
         className="
           relative
           z-10
@@ -115,13 +115,13 @@ const CricketCollection = () => {
         >
           Collection 03 / 2026
         </span>
-      </div>
+      </div> */}
 
       {/* =========================================================
           HEADER
       ========================================================= */}
 
-      <div
+      {/* <div
         className="
           relative
           z-20
@@ -216,7 +216,7 @@ const CricketCollection = () => {
             </span>
           </div>
         </motion.div>
-      </div>
+      </div> */}
 
       {/* =========================================================
           VIDEO

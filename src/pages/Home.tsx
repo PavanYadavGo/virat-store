@@ -8,6 +8,7 @@ import CricketCollection from "../components/home/CricketCollection";
 import AboutSection from "../components/home/AboutSection";
 import SeeItInAction from "../components/home/SeeItInAction";
 import PartnersCarousel from "../components/home/PartnersCarousel";
+import TeamWearSection from "../components/home/TeamwearSection";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Hero />
       <CategorySection />
       <CricketCollection />
+      <TeamWearSection />
       <SeeItInAction />
       <AboutSection />
       <PartnersCarousel />

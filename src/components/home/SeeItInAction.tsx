@@ -300,7 +300,7 @@ const SeeItInAction = () => {
             }
             transition={{
               x: {
-                duration: 32,
+                duration: 55, // Increased from 32 to 55 to slow it down
                 repeat: Infinity,
                 repeatType: "loop",
                 ease: "linear",
