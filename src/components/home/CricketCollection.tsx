@@ -18,11 +18,11 @@ const CricketCollection = () => {
     ["-5%", "5%"]
   );
 
-  const textY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["20px", "-20px"]
-  );
+  // const textY = useTransform(
+  //   scrollYProgress,
+  //   [0, 1],
+  //   ["20px", "-20px"]
+  // );
 
   return (
     <section
