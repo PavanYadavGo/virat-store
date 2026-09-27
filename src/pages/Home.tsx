@@ -19,7 +19,7 @@ const Home = () => {
       <TeamWearSection />
       <SeeItInAction />
       <PartnersCarousel />
-      <ContactUs />
+      <ContactUs /> 
       {/* <FeaturedProducts />
       <OffTheField />
       <NewArrivals />
