@@ -5,8 +5,8 @@ import CricketCollection from "../components/home/CricketCollection";
 // import OffTheField from "../components/home/OffTheField";
 // import NewArrivals from "../components/home/NewArrivals";
 // import FinalCTA from "../components/home/FinalCTA";
-import ContactUs from "../components/home/ContactusSection";
 import SeeItInAction from "../components/home/SeeItInAction";
+import ContactUs from "../components/home/ContactSection";
 import PartnersCarousel from "../components/home/PartnersCarousel";
 import TeamWearSection from "../components/home/TeamwearSection";
 
