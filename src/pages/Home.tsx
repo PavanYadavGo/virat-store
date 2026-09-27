@@ -5,7 +5,7 @@ import CricketCollection from "../components/home/CricketCollection";
 // import OffTheField from "../components/home/OffTheField";
 // import NewArrivals from "../components/home/NewArrivals";
 // import FinalCTA from "../components/home/FinalCTA";
-import AboutSection from "../components/home/AboutSection";
+import ContactUs from "../components/home/ContactusSection";
 import SeeItInAction from "../components/home/SeeItInAction";
 import PartnersCarousel from "../components/home/PartnersCarousel";
 import TeamWearSection from "../components/home/TeamwearSection";
@@ -18,8 +18,8 @@ const Home = () => {
       <CricketCollection />
       <TeamWearSection />
       <SeeItInAction />
-      <AboutSection />
       <PartnersCarousel />
+      <ContactUs />
       {/* <FeaturedProducts />
       <OffTheField />
       <NewArrivals />

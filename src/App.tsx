@@ -10,7 +10,7 @@ import Accessories from "./pages/Accessories";
 import DesignYourOwn from "./pages/DesignYourOwn";
 import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
-import Contact from "./pages/Contact";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
         <Route path="/accessories/*" element={<CategoryPage />} />
         
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
 
         <Route path="*" element={<Home />} />
       </Routes>

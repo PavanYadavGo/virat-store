@@ -233,8 +233,8 @@ const navItems: NavItem[] = [
     href: "/design-your-own",
   },
   {
-    label: "Contact",
-    href: "/contact",
+    label: "About",
+    href: "/about",
   },
 ];
 
