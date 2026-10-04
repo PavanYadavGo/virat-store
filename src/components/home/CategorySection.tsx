@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 import cricketImage from "../../assets/categories/Category images/mens.png";
 import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.png";
-import cap from "../../assets/categories/Category images/CAP.png";
+import cap from "../../assets/categories/Category images/cap.png";
 import cricketfImage from "../../assets/categories/Category images/women.png";
 import casualImage from "../../assets/categories/cricket.jpg";
 import TeamImage from "../../assets/categories/Category images/bagpack.png";
