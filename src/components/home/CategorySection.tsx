@@ -1,11 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
-import cricketImage from "../../assets/categories/cricket.jpg";
-import accessoriesImage from "../../assets/categories/accessories.png";
-import cricketfImage from "../../assets/categories/cricket-f.jpg";
-import casualImage from "../../assets/categories/casual.jpg";
-import TeamImage from "../../assets/categories/teamwear.png";
+import cricketImage from "../../assets/categories/Category images/mens.png";
+import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.png";
+import cap from "../../assets/categories/Category images/CAP.png";
+import cricketfImage from "../../assets/categories/Category images/women.png";
+import casualImage from "../../assets/categories/cricket.jpg";
+import TeamImage from "../../assets/categories/Category images/bagpack.png";
 
 const categories = [
   {
@@ -13,67 +14,62 @@ const categories = [
     title: "Men's",
     image: cricketImage,
     href: "/men",
-    imageClass: "object-cover",
     width: "11%",
     x: 0,
-    y: 2,
+    y: 50, // Adjust this value up/down to shift the framing vertically
   },
   {
     number: "02",
     title: "Women",
     image: cricketfImage,
     href: "/women",
-    imageClass: "object-cover",
     width: "115%",
     x: 0,
-    y: 2,
+    y: 0, // Adjust this value to bring the head into view
   },
   {
     number: "03",
     title: "Youth",
     image: casualImage,
     href: "#",
-    imageClass: "object-cover",
-    width: "115%",
+    width: "90%",
     x: 0,
-    y: 2,
+    y: 42, // Adjust this value to bring the head into view
   },
   {
     number: "04",
     title: "Cap",
-    image: accessoriesImage,
+    image: cap,
     href: "/accessories",
-    imageClass: "object-cover",
     width: "115%",
     x: 0,
-    y: 2,
+    y: 10, // Adjust this value to bring the cap/subject into view
   },
   {
     number: "05",
     title: "Bag & Kitbag Range",
     image: TeamImage,
     href: "/accessories",
-    imageClass: "object-cover",
-    width: "115%",
+    width: "100%",
     x: 0,
-    y: 2,
+    y: 30,
   },
   {
     number: "06",
     title: "Accessories",
     image: accessoriesImage,
     href: "/accessories",
-    imageClass: "object-cover",
     width: "115%",
     x: 0,
-    y: 2,
+    y: 50,
   },
 ];
 
 const CategorySection = () => {
   return (
     <section className="bg-[#F5F5F2] text-[#080808] mt-10">
-      {/* =====================================================
+
+{/* =====================================================
           FIND YOUR GAME
       ====================================================== */}
 
@@ -137,6 +133,7 @@ const CategorySection = () => {
           <img
             src={cricketImage}
             alt="Cricket"
+            style={{ objectPosition: "center 35%" }}
             className="
               absolute
               inset-0
@@ -227,6 +224,7 @@ const CategorySection = () => {
           <img
             src={cricketfImage}
             alt="Cricket collection"
+            style={{ objectPosition: "center 2%" }}
             className="
               absolute
               inset-0
@@ -333,6 +331,7 @@ const CategorySection = () => {
             <img
               src={category.image}
               alt={category.title}
+              style={{ objectPosition: `center ${category.y}%` }}
               className="
                 absolute
                 inset-0

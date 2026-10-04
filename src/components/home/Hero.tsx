@@ -42,14 +42,17 @@ const Hero = () => {
   const slide = slides[current];
 
   return (
-    <section
-      className="
-        relative
-        min-h-[100svh]
-        overflow-hidden
-        bg-black
-      "
-    >
+<section
+  className="
+    relative
+    mt-[68px]
+    min-h-[calc(100svh-68px)]
+    overflow-hidden
+    bg-black
+    sm:mt-20
+    sm:min-h-[calc(100svh-80px)]
+  "
+>
       {/* =====================================================
           BACKGROUND SLIDESHOW
       ====================================================== */}
@@ -137,17 +140,17 @@ const Hero = () => {
           ease: [0.76, 0, 0.24, 1],
         }}
         className="
-          absolute
-          left-0
-          top-20
-          z-30
-          h-px
-          w-full
-          origin-left
-          bg-gradient-to-r
-          from-[#FF0000]
-          via-white/40
-          to-transparent
+            absolute
+  left-0
+  top-0
+  z-30
+  h-px
+  w-full
+  origin-left
+  bg-gradient-to-r
+  from-[#FF0000]
+  via-white/40
+  to-transparent
         "
       />
 
