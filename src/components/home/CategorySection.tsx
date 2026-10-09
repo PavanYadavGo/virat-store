@@ -1,3 +1,4 @@
+
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
@@ -16,7 +17,7 @@ const categories = [
     href: "/men",
     width: "11%",
     x: 0,
-    y: 50, // Adjust this value up/down to shift the framing vertically
+    y: 50,
   },
   {
     number: "02",
@@ -25,7 +26,7 @@ const categories = [
     href: "/women",
     width: "115%",
     x: 0,
-    y: 0, // Adjust this value to bring the head into view
+    y: 0,
   },
   {
     number: "03",
@@ -34,7 +35,7 @@ const categories = [
     href: "#",
     width: "90%",
     x: 0,
-    y: 42, // Adjust this value to bring the head into view
+    y: 42,
   },
   {
     number: "04",
@@ -43,7 +44,7 @@ const categories = [
     href: "/accessories",
     width: "115%",
     x: 0,
-    y: 10, // Adjust this value to bring the cap/subject into view
+    y: 10,
   },
   {
     number: "05",
@@ -67,42 +68,25 @@ const categories = [
 
 const CategorySection = () => {
   return (
-    <section className="bg-[#F5F5F2] text-[#080808] mt-10">
-
-{/* =====================================================
-          FIND YOUR GAME
-      ====================================================== */}
+    <section className="mt-10 bg-[#F5F5F2] text-[#080808]">
+      {/* FIND YOUR GAME */}
 
       <div className="grid border-y border-black/30 md:grid-cols-4">
-        {/* FIND YOUR GAME */}
-
         <motion.div
           initial={{ opacity: 0, x: -25 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="
-            flex
-            min-h-[150px]
-            items-center
-            justify-center
-            border-b
-            border-black/30
-            px-6
-            py-10
-            text-center
-            md:min-h-[185px]
-            md:border-b-0
-            md:border-r
+            flex min-h-[150px] items-center justify-center
+            border-b border-black/30 px-6 py-10 text-center
+            md:min-h-[185px] md:border-b-0 md:border-r
           "
         >
           <h2
             className="
               text-[clamp(2rem,4vw,3.5rem)]
-              font-black
-              uppercase
-              leading-[0.85]
-              tracking-[-0.06em]
+              font-black uppercase leading-[0.85] tracking-[-0.06em]
             "
           >
             Find Your
@@ -120,14 +104,8 @@ const CategorySection = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
           className="
-            group
-            relative
-            min-h-[185px]
-            overflow-hidden
-            border-b
-            border-black/30
-            md:border-b-0
-            md:border-r
+            group relative min-h-[185px] overflow-hidden
+            border-b border-black/30 md:border-b-0 md:border-r
           "
         >
           <img
@@ -135,14 +113,8 @@ const CategorySection = () => {
             alt="Cricket"
             style={{ objectPosition: "center 35%" }}
             className="
-              absolute
-              inset-0
-              h-full
-              w-full
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-105
+              absolute inset-0 h-full w-full object-cover
+              transition-transform duration-700 group-hover:scale-105
             "
           />
 
@@ -150,19 +122,9 @@ const CategorySection = () => {
 
           <div
             className="
-              absolute
-              bottom-4
-              right-4
-              flex
-              h-9
-              w-9
-              items-center
-              justify-center
-              bg-white
-              opacity-0
-              transition-all
-              duration-300
-              group-hover:opacity-100
+              absolute bottom-4 right-4 flex h-9 w-9 items-center
+              justify-center bg-white opacity-0 transition-all
+              duration-300 group-hover:opacity-100
             "
           >
             <ArrowUpRight size={17} />
@@ -178,35 +140,23 @@ const CategorySection = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="
-            flex
-            min-h-[120px]
-            items-center
-            justify-center
-            border-b
-            border-black/30
-            px-6
-            md:min-h-[185px]
-            md:border-b-0
-            md:border-r
+            flex min-h-[120px] items-center justify-center
+            border-b border-black/30 px-6
+            md:min-h-[185px] md:border-b-0 md:border-r
           "
         >
           <h3
             className="
               text-[clamp(2rem,4vw,3.5rem)]
-              font-black
-              uppercase
-              leading-none
-              tracking-[-0.06em]
-              transition-colors
-              duration-300
-              hover:text-[#FF0000]
+              font-black uppercase leading-none tracking-[-0.06em]
+              transition-colors duration-300 hover:text-[#FF0000]
             "
           >
             Cricket
           </h3>
         </motion.a>
 
-        {/* CRICKET IMAGE 2 */}
+        {/* WOMEN'S CRICKET IMAGE */}
 
         <motion.a
           href="/cricket"
@@ -214,26 +164,15 @@ const CategorySection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
-          className="
-            group
-            relative
-            min-h-[185px]
-            overflow-hidden
-          "
+          className="group relative min-h-[185px] overflow-hidden"
         >
           <img
             src={cricketfImage}
             alt="Cricket collection"
             style={{ objectPosition: "center 2%" }}
             className="
-              absolute
-              inset-0
-              h-full
-              w-full
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-105
+              absolute inset-0 h-full w-full object-cover
+              transition-transform duration-700 group-hover:scale-105
             "
           />
 
@@ -241,19 +180,9 @@ const CategorySection = () => {
 
           <div
             className="
-              absolute
-              bottom-4
-              right-4
-              flex
-              h-9
-              w-9
-              items-center
-              justify-center
-              bg-white
-              opacity-0
-              transition-all
-              duration-300
-              group-hover:opacity-100
+              absolute bottom-4 right-4 flex h-9 w-9 items-center
+              justify-center bg-white opacity-0 transition-all
+              duration-300 group-hover:opacity-100
             "
           >
             <ArrowUpRight size={17} />
@@ -261,21 +190,12 @@ const CategorySection = () => {
         </motion.a>
       </div>
 
-      {/* =====================================================
-          SHOP BY CATEGORY HEADER
-      ====================================================== */}
+      {/* SHOP BY CATEGORY HEADER */}
 
       <div
         className="
-          flex
-          min-h-[74px]
-          items-center
-          justify-center
-          border-b
-          border-black/30
-          px-5
-          py-5
-          sm:min-h-[90px]
+          flex min-h-[74px] items-center justify-center
+          border-b border-black/30 px-5 py-5 sm:min-h-[90px]
         "
       >
         <motion.h2
@@ -284,21 +204,15 @@ const CategorySection = () => {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5 }}
           className="
-            text-center
-            text-[clamp(1.5rem,3vw,2.5rem)]
-            font-black
-            uppercase
-            leading-none
-            tracking-[-0.05em]
+            text-center text-[clamp(1.5rem,3vw,2.5rem)]
+            font-black uppercase leading-none tracking-[-0.05em]
           "
         >
           Shop By Category
         </motion.h2>
       </div>
 
-      {/* =====================================================
-          CATEGORY GRID
-      ====================================================== */}
+      {/* CATEGORY GRID */}
 
       <div className="grid border-b border-black/30 md:grid-cols-3">
         {categories.map((category, index) => (
@@ -314,13 +228,8 @@ const CategorySection = () => {
               ease: [0.16, 1, 0.3, 1],
             }}
             className={`
-              group
-              relative
-              h-[260px]
-              overflow-hidden
-              border-b
-              border-black/30
-              md:h-[300px]
+              group relative overflow-hidden border-b border-black/30
+              ${index < 3 ? "h-[380px] md:h-[450px]" : "h-[260px] md:h-[300px]"}
               md:border-r
               md:[&:nth-child(3n)]:border-r-0
               md:[&:nth-child(n+4)]:border-b-0
@@ -333,14 +242,8 @@ const CategorySection = () => {
               alt={category.title}
               style={{ objectPosition: `center ${category.y}%` }}
               className="
-                absolute
-                inset-0
-                h-full
-                w-full
-                object-cover
-                transition-transform
-                duration-700
-                group-hover:scale-105
+                absolute inset-0 h-full w-full object-cover
+                transition-transform duration-700 group-hover:scale-105
               "
             />
 
@@ -348,13 +251,8 @@ const CategorySection = () => {
 
             <div
               className="
-                absolute
-                inset-0
-                bg-gradient-to-b
-                from-black/30
-                via-transparent
-                to-transparent
-                opacity-70
+                absolute inset-0 bg-gradient-to-b
+                from-black/30 via-transparent to-transparent opacity-70
               "
             />
 
@@ -362,26 +260,14 @@ const CategorySection = () => {
 
             <div
               className="
-                absolute
-                left-5
-                top-4
-                right-5
-                flex
-                items-center
-                justify-between
-                sm:left-6
-                sm:right-6
-                sm:top-5
+                absolute left-5 right-5 top-4 flex items-center
+                justify-between sm:left-6 sm:right-6 sm:top-5
               "
             >
               <span
                 className="
-                  text-sm
-                  font-bold
-                  uppercase
-                  tracking-[-0.02em]
-                  text-white
-                  drop-shadow-sm
+                  text-sm font-bold uppercase tracking-[-0.02em]
+                  text-white drop-shadow-sm
                 "
               >
                 {category.title}
@@ -389,10 +275,7 @@ const CategorySection = () => {
 
               <span
                 className="
-                  text-[10px]
-                  font-medium
-                  tracking-[0.15em]
-                  text-white/70
+                  text-[10px] font-medium tracking-[0.15em] text-white/70
                 "
               >
                 {category.number}
@@ -403,26 +286,18 @@ const CategorySection = () => {
 
             <div
               className="
-                absolute
-                bottom-5
-                right-5
-                flex
-                h-10
-                w-10
-                translate-y-3
-                items-center
-                justify-center
-                bg-white
-                opacity-0
-                transition-all
-                duration-300
-                group-hover:translate-y-0
-                group-hover:opacity-100
+                absolute bottom-5 right-5 flex h-10 w-10
+                translate-y-3 items-center justify-center bg-white
+                opacity-0 transition-all duration-300
+                group-hover:translate-y-0 group-hover:opacity-100
               "
             >
               <ArrowUpRight
                 size={18}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                className="
+                  transition-transform duration-300
+                  group-hover:translate-x-0.5 group-hover:-translate-y-0.5
+                "
               />
             </div>
 
@@ -430,16 +305,8 @@ const CategorySection = () => {
 
             <div
               className="
-                absolute
-                bottom-0
-                left-0
-                h-1
-                w-full
-                origin-left
-                scale-x-0
-                bg-[#FF0000]
-                transition-transform
-                duration-500
+                absolute bottom-0 left-0 h-1 w-full origin-left
+                scale-x-0 bg-[#FF0000] transition-transform duration-500
                 group-hover:scale-x-100
               "
             />
