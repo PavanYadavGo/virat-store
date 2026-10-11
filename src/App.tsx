@@ -1,7 +1,9 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import GoToTop from "./components/GoToTop";
 
 import Home from "./pages/Home";
 import NewArrivals from "./pages/NewArrivals";
@@ -23,18 +25,22 @@ function App() {
         <Route path="/cricket" element={<Cricket />} />
         <Route path="/accessories" element={<Accessories />} />
         <Route path="/design-your-own" element={<DesignYourOwn />} />
-        
+
+        <Route path="/men" element={<CategoryPage />} />
         <Route path="/men/*" element={<CategoryPage />} />
+
+        <Route path="/women" element={<CategoryPage />} />
         <Route path="/women/*" element={<CategoryPage />} />
-        <Route path="/cricket/*" element={<CategoryPage />} />
-        <Route path="/accessories/*" element={<CategoryPage />} />
-        
+
+        <Route path="/accessories/*" element={<Accessories />} />
+
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/about" element={<About />} />
 
         <Route path="*" element={<Home />} />
       </Routes>
 
+      <GoToTop />
       <Footer />
     </BrowserRouter>
   );

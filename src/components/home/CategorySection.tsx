@@ -1,6 +1,7 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 
 import cricketImage from "../../assets/categories/Category images/mens.png";
 import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.png";
@@ -8,6 +9,8 @@ import cap from "../../assets/categories/Category images/cap.png";
 import cricketfImage from "../../assets/categories/Category images/women.png";
 import casualImage from "../../assets/categories/cricket.jpg";
 import TeamImage from "../../assets/categories/Category images/bagpack.png";
+
+const MotionLink = motion.create(Link);
 
 const categories = [
   {
@@ -32,7 +35,7 @@ const categories = [
     number: "03",
     title: "Youth",
     image: casualImage,
-    href: "#",
+    href: "/cricket",
     width: "90%",
     x: 0,
     y: 42,
@@ -71,129 +74,147 @@ const CategorySection = () => {
     <section className="mt-10 bg-[#F5F5F2] text-[#080808]">
       {/* FIND YOUR GAME */}
 
+      <div className="grid border-y border-black/30 md:grid-cols-4">
+        {/* HEADING */}
 
-<div className="grid border-y border-black/30 md:grid-cols-4">
-  {/* FIND YOUR GAME */}
+        <motion.div
+          initial={{ opacity: 0, x: -25 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="
+            flex min-h-[200px] items-center justify-center
+            border-b border-black/30 px-6 py-10 text-center
+            md:min-h-[260px] md:border-b-0 md:border-r
+          "
+        >
+          <h2
+            className="
+              text-[clamp(2rem,4vw,3.5rem)]
+              font-black uppercase leading-[0.85] tracking-[-0.06em]
+            "
+          >
+            Find Your
+            <br />
+            Game
+          </h2>
+        </motion.div>
 
-  <motion.div
-    initial={{ opacity: 0, x: -25 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.6 }}
-    className="
-      flex min-h-[200px] items-center justify-center
-      border-b border-black/30 px-6 py-10 text-center
-      md:min-h-[260px] md:border-b-0 md:border-r
-    "
-  >
-    <h2
-      className="
-        text-[clamp(2rem,4vw,3.5rem)]
-        font-black uppercase leading-[0.85] tracking-[-0.06em]
-      "
-    >
-      Find Your
-      <br />
-      Game
-    </h2>
-  </motion.div>
+        {/* CRICKET IMAGE */}
 
-  {/* CRICKET IMAGE */}
+        <MotionLink
+          to="/cricket"
+          aria-label="Explore cricket collection"
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className="
+            group relative min-h-[220px] overflow-hidden
+            border-b border-black/30 md:min-h-[260px]
+            md:border-b-0 md:border-r
+          "
+        >
+          <img
+            src={cricketImage}
+            alt="Cricket collection"
+            loading="lazy"
+            decoding="async"
+            style={{ objectPosition: "center 35%" }}
+            className="
+              absolute inset-0 h-full w-full object-cover
+              transition-transform duration-700 group-hover:scale-105
+            "
+          />
 
-  <motion.a
-    href="/cricket"
-    initial={{ opacity: 0, scale: 0.97 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.7 }}
-    className="
-      group relative min-h-[220px] overflow-hidden
-      border-b border-black/30 md:min-h-[260px]
-      md:border-b-0 md:border-r
-    "
-  >
-    <img
-      src={cricketImage}
-      alt="Cricket"
-      style={{ objectPosition: "center 35%" }}
-      className="
-        absolute inset-0 h-full w-full object-cover
-        transition-transform duration-700 group-hover:scale-105
-      "
-    />
+          <div
+            className="
+              absolute inset-0 bg-black/0
+              transition-colors duration-500 group-hover:bg-black/10
+            "
+          />
 
-    <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
+          <div
+            className="
+              absolute bottom-4 right-4 flex h-9 w-9 items-center
+              justify-center bg-white opacity-0 transition-all
+              duration-300 group-hover:opacity-100
+            "
+          >
+            <ArrowUpRight size={17} />
+          </div>
+        </MotionLink>
 
-    <div
-      className="
-        absolute bottom-4 right-4 flex h-9 w-9 items-center
-        justify-center bg-white opacity-0 transition-all
-        duration-300 group-hover:opacity-100
-      "
-    >
-      <ArrowUpRight size={17} />
-    </div>
-  </motion.a>
+        {/* CRICKET TITLE */}
 
-  {/* CRICKET TITLE */}
+        <MotionLink
+          to="/cricket"
+          aria-label="Explore cricket collection"
+          initial={{ opacity: 0, x: 25 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="
+            flex min-h-[180px] items-center justify-center
+            border-b border-black/30 px-6
+            md:min-h-[260px] md:border-b-0 md:border-r
+          "
+        >
+          <h3
+            className="
+              text-[clamp(2rem,4vw,3.5rem)]
+              font-black uppercase leading-none tracking-[-0.06em]
+              transition-colors duration-300 hover:text-[#FF0000]
+            "
+          >
+            Cricket
+          </h3>
+        </MotionLink>
 
-  <motion.a
-    href="/cricket"
-    initial={{ opacity: 0, x: 25 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.6 }}
-    className="
-      flex min-h-[180px] items-center justify-center
-      border-b border-black/30 px-6
-      md:min-h-[260px] md:border-b-0 md:border-r
-    "
-  >
-    <h3
-      className="
-        text-[clamp(2rem,4vw,3.5rem)]
-        font-black uppercase leading-none tracking-[-0.06em]
-        transition-colors duration-300 hover:text-[#FF0000]
-      "
-    >
-      Cricket
-    </h3>
-  </motion.a>
+        {/* WOMEN'S CRICKET IMAGE */}
 
-  {/* WOMEN'S CRICKET IMAGE */}
+        <MotionLink
+          to="/women"
+          aria-label="Explore women's collection"
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className="
+            group relative min-h-[220px] overflow-hidden
+            md:min-h-[260px]
+          "
+        >
+          <img
+            src={cricketfImage}
+            alt="Women's cricket collection"
+            loading="lazy"
+            decoding="async"
+            style={{ objectPosition: "center 2%" }}
+            className="
+              absolute inset-0 h-full w-full object-cover
+              transition-transform duration-700 group-hover:scale-105
+            "
+          />
 
-  <motion.a
-    href="/cricket"
-    initial={{ opacity: 0, scale: 0.97 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.7 }}
-    className="group relative min-h-[220px] overflow-hidden md:min-h-[260px]"
-  >
-    <img
-      src={cricketfImage}
-      alt="Cricket collection"
-      style={{ objectPosition: "center 2%" }}
-      className="
-        absolute inset-0 h-full w-full object-cover
-        transition-transform duration-700 group-hover:scale-105
-      "
-    />
+          <div
+            className="
+              absolute inset-0 bg-black/0
+              transition-colors duration-500 group-hover:bg-black/10
+            "
+          />
 
-    <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
-
-    <div
-      className="
-        absolute bottom-4 right-4 flex h-9 w-9 items-center
-        justify-center bg-white opacity-0 transition-all
-        duration-300 group-hover:opacity-100
-      "
-    >
-      <ArrowUpRight size={17} />
-    </div>
-  </motion.a>
-</div>
-
+          <div
+            className="
+              absolute bottom-4 right-4 flex h-9 w-9 items-center
+              justify-center bg-white opacity-0 transition-all
+              duration-300 group-hover:opacity-100
+            "
+          >
+            <ArrowUpRight size={17} />
+          </div>
+        </MotionLink>
+      </div>
 
       {/* SHOP BY CATEGORY HEADER */}
 
@@ -221,9 +242,9 @@ const CategorySection = () => {
 
       <div className="grid border-b border-black/30 md:grid-cols-3">
         {categories.map((category, index) => (
-          <motion.a
+          <MotionLink
             key={category.number}
-            href={category.href}
+            to={category.href}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -234,7 +255,11 @@ const CategorySection = () => {
             }}
             className={`
               group relative overflow-hidden border-b border-black/30
-              ${index < 3 ? "h-[380px] md:h-[450px]" : "h-[260px] md:h-[300px]"}
+              ${
+                index < 3
+                  ? "h-[380px] md:h-[450px]"
+                  : "h-[260px] md:h-[300px]"
+              }
               md:border-r
               md:[&:nth-child(3n)]:border-r-0
               md:[&:nth-child(n+4)]:border-b-0
@@ -245,6 +270,8 @@ const CategorySection = () => {
             <img
               src={category.image}
               alt={category.title}
+              loading="lazy"
+              decoding="async"
               style={{ objectPosition: `center ${category.y}%` }}
               className="
                 absolute inset-0 h-full w-full object-cover
@@ -315,7 +342,7 @@ const CategorySection = () => {
                 group-hover:scale-x-100
               "
             />
-          </motion.a>
+          </MotionLink>
         ))}
       </div>
     </section>
