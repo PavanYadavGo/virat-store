@@ -1,184 +1,87 @@
-import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
-import TeamImage from "../../assets/categories/teamwear.png";
+import TeamImage from "../../assets/categories/TEAM.png";
+import TrendingImage from "../../assets/products/velocity-jersey.png";
 
 const TeamwearSection = () => {
   return (
-    <section className="bg-[#F5F5F2] text-[#080808] mb-10">
-      {/* TEAMWEAR HEADER */}
-      <div
-        className="
-          flex
-          min-h-[74px]
-          items-center
-          justify-center
-          border-b
-          border-black/30
-          px-5
-          py-5
-          sm:min-h-[90px]
-        "
-      >
+    <section className="mb-10 bg-[#F5F5F2] text-[#080808]">
+      {/* SECTION HEADER */}
+      <div className="flex min-h-[74px] items-center justify-center border-b border-black/30 px-5 py-5 sm:min-h-[90px]">
         <motion.h2
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5 }}
           className="
-            text-center
-            text-[clamp(1.5rem,3vw,2.5rem)]
-            font-black
-            uppercase
-            leading-none
-            tracking-[-0.05em]
+            text-center text-[clamp(1.5rem,3vw,2.5rem)]
+            font-black uppercase leading-none tracking-[-0.05em]
           "
         >
-          Teamwear
+          Explore Collections
         </motion.h2>
       </div>
 
-      {/* TEAMWEAR IMAGE */}
-      <motion.a
-        href="/teamwear"
-        initial={{ opacity: 0, scale: 0.97 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{
-          duration: 0.7,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-        className="
-          group
-          relative
-          block
-          h-[320px]
-          overflow-hidden
-          border-b
-          border-black/30
-          sm:h-[420px]
-          md:h-[520px]
-          lg:h-[600px]
-        "
-      >
-        <img
-          src={TeamImage}
-          alt="Teamwear"
+      {/* TEAMWEAR + TRENDING PRODUCTS (80:20 Ratio on Desktop) */}
+      <div className="grid grid-cols-1 md:grid-cols-[80%_20%]">
+        {/* TEAMWEAR CARD (80%) */}
+        <motion.a
+          href="/teamwear"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            object-cover
-            transition-transform
-            duration-700
-            group-hover:scale-105
+            group relative flex h-[240px] items-center justify-center
+            overflow-hidden border-b border-black/30 p-0
+            sm:h-[320px] md:h-[380px] md:border-r lg:h-[440px]
           "
-        />
-
-        {/* IMAGE OVERLAY */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-b
-            from-black/30
-            via-transparent
-            to-black/30
-          "
-        />
-
-        {/* CONTENT */}
-        <div
-          className="
-            absolute
-            inset-x-5
-            bottom-5
-            flex
-            items-end
-            justify-between
-            sm:inset-x-8
-            sm:bottom-8
-            md:inset-x-10
-            md:bottom-10
-          "
+          aria-label="Explore Teamwear"
         >
-          <div>
-            <p
-              className="
-                mb-2
-                text-xs
-                font-bold
-                uppercase
-                tracking-[0.15em]
-                text-white/80
-              "
-            >
-              Built For The Team
-            </p>
-
-            <h3
-              className="
-                text-[clamp(2.5rem,7vw,6rem)]
-                font-black
-                uppercase
-                leading-[0.8]
-                tracking-[-0.07em]
-                text-white
-              "
-            >
-              Teamwear
-            </h3>
-          </div>
-
-          {/* ARROW */}
-          <div
+          <img
+            src={TeamImage}
+            alt="Teamwear collection"
+            loading="lazy"
+            decoding="async"
             className="
-              flex
-              h-11
-              w-11
-              translate-y-3
-              items-center
-              justify-center
-              bg-white
-              opacity-0
-              transition-all
-              duration-300
-              group-hover:translate-y-0
-              group-hover:opacity-100
-              sm:h-14
-              sm:w-14
+              h-full w-full object-fill
+              transition-transform duration-500
+              group-hover:scale-[1.02]
             "
-          >
-            <ArrowUpRight
-              size={22}
-              className="
-                transition-transform
-                duration-300
-                group-hover:translate-x-0.5
-                group-hover:-translate-y-0.5
-              "
-            />
-          </div>
-        </div>
+          />
+        </motion.a>
 
-        {/* RED HOVER LINE */}
-        <div
+        {/* TRENDING PRODUCTS CARD (20%) */}
+        <motion.a
+          href="/shop"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            duration: 0.6,
+            delay: 0.1,
+            ease: [0.16, 1, 0.3, 1],
+          }}
           className="
-            absolute
-            bottom-0
-            left-0
-            h-1
-            w-full
-            origin-left
-            scale-x-0
-            bg-[#FF0000]
-            transition-transform
-            duration-500
-            group-hover:scale-x-100
+            group relative flex h-[240px] items-center justify-center
+            overflow-hidden border-b border-black/30 p-0
+            sm:h-[320px] md:h-[380px] lg:h-[440px]
           "
-        />
-      </motion.a>
+          aria-label="Explore Trending Products"
+        >
+          <img
+            src={TrendingImage}
+            alt="Trending products"
+            loading="lazy"
+            decoding="async"
+            className="
+              h-full w-full object-fill
+              transition-transform duration-500
+              group-hover:scale-[1.02]
+            "
+          />
+        </motion.a>
+      </div>
     </section>
   );
 };

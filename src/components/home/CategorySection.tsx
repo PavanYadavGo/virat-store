@@ -71,124 +71,129 @@ const CategorySection = () => {
     <section className="mt-10 bg-[#F5F5F2] text-[#080808]">
       {/* FIND YOUR GAME */}
 
-      <div className="grid border-y border-black/30 md:grid-cols-4">
-        <motion.div
-          initial={{ opacity: 0, x: -25 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="
-            flex min-h-[150px] items-center justify-center
-            border-b border-black/30 px-6 py-10 text-center
-            md:min-h-[185px] md:border-b-0 md:border-r
-          "
-        >
-          <h2
-            className="
-              text-[clamp(2rem,4vw,3.5rem)]
-              font-black uppercase leading-[0.85] tracking-[-0.06em]
-            "
-          >
-            Find Your
-            <br />
-            Game
-          </h2>
-        </motion.div>
 
-        {/* CRICKET IMAGE */}
+<div className="grid border-y border-black/30 md:grid-cols-4">
+  {/* FIND YOUR GAME */}
 
-        <motion.a
-          href="/cricket"
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
-          className="
-            group relative min-h-[185px] overflow-hidden
-            border-b border-black/30 md:border-b-0 md:border-r
-          "
-        >
-          <img
-            src={cricketImage}
-            alt="Cricket"
-            style={{ objectPosition: "center 35%" }}
-            className="
-              absolute inset-0 h-full w-full object-cover
-              transition-transform duration-700 group-hover:scale-105
-            "
-          />
+  <motion.div
+    initial={{ opacity: 0, x: -25 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.6 }}
+    className="
+      flex min-h-[200px] items-center justify-center
+      border-b border-black/30 px-6 py-10 text-center
+      md:min-h-[260px] md:border-b-0 md:border-r
+    "
+  >
+    <h2
+      className="
+        text-[clamp(2rem,4vw,3.5rem)]
+        font-black uppercase leading-[0.85] tracking-[-0.06em]
+      "
+    >
+      Find Your
+      <br />
+      Game
+    </h2>
+  </motion.div>
 
-          <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
+  {/* CRICKET IMAGE */}
 
-          <div
-            className="
-              absolute bottom-4 right-4 flex h-9 w-9 items-center
-              justify-center bg-white opacity-0 transition-all
-              duration-300 group-hover:opacity-100
-            "
-          >
-            <ArrowUpRight size={17} />
-          </div>
-        </motion.a>
+  <motion.a
+    href="/cricket"
+    initial={{ opacity: 0, scale: 0.97 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.7 }}
+    className="
+      group relative min-h-[220px] overflow-hidden
+      border-b border-black/30 md:min-h-[260px]
+      md:border-b-0 md:border-r
+    "
+  >
+    <img
+      src={cricketImage}
+      alt="Cricket"
+      style={{ objectPosition: "center 35%" }}
+      className="
+        absolute inset-0 h-full w-full object-cover
+        transition-transform duration-700 group-hover:scale-105
+      "
+    />
 
-        {/* CRICKET TITLE */}
+    <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
 
-        <motion.a
-          href="/cricket"
-          initial={{ opacity: 0, x: 25 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="
-            flex min-h-[120px] items-center justify-center
-            border-b border-black/30 px-6
-            md:min-h-[185px] md:border-b-0 md:border-r
-          "
-        >
-          <h3
-            className="
-              text-[clamp(2rem,4vw,3.5rem)]
-              font-black uppercase leading-none tracking-[-0.06em]
-              transition-colors duration-300 hover:text-[#FF0000]
-            "
-          >
-            Cricket
-          </h3>
-        </motion.a>
+    <div
+      className="
+        absolute bottom-4 right-4 flex h-9 w-9 items-center
+        justify-center bg-white opacity-0 transition-all
+        duration-300 group-hover:opacity-100
+      "
+    >
+      <ArrowUpRight size={17} />
+    </div>
+  </motion.a>
 
-        {/* WOMEN'S CRICKET IMAGE */}
+  {/* CRICKET TITLE */}
 
-        <motion.a
-          href="/cricket"
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
-          className="group relative min-h-[185px] overflow-hidden"
-        >
-          <img
-            src={cricketfImage}
-            alt="Cricket collection"
-            style={{ objectPosition: "center 2%" }}
-            className="
-              absolute inset-0 h-full w-full object-cover
-              transition-transform duration-700 group-hover:scale-105
-            "
-          />
+  <motion.a
+    href="/cricket"
+    initial={{ opacity: 0, x: 25 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.6 }}
+    className="
+      flex min-h-[180px] items-center justify-center
+      border-b border-black/30 px-6
+      md:min-h-[260px] md:border-b-0 md:border-r
+    "
+  >
+    <h3
+      className="
+        text-[clamp(2rem,4vw,3.5rem)]
+        font-black uppercase leading-none tracking-[-0.06em]
+        transition-colors duration-300 hover:text-[#FF0000]
+      "
+    >
+      Cricket
+    </h3>
+  </motion.a>
 
-          <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
+  {/* WOMEN'S CRICKET IMAGE */}
 
-          <div
-            className="
-              absolute bottom-4 right-4 flex h-9 w-9 items-center
-              justify-center bg-white opacity-0 transition-all
-              duration-300 group-hover:opacity-100
-            "
-          >
-            <ArrowUpRight size={17} />
-          </div>
-        </motion.a>
-      </div>
+  <motion.a
+    href="/cricket"
+    initial={{ opacity: 0, scale: 0.97 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.7 }}
+    className="group relative min-h-[220px] overflow-hidden md:min-h-[260px]"
+  >
+    <img
+      src={cricketfImage}
+      alt="Cricket collection"
+      style={{ objectPosition: "center 2%" }}
+      className="
+        absolute inset-0 h-full w-full object-cover
+        transition-transform duration-700 group-hover:scale-105
+      "
+    />
+
+    <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
+
+    <div
+      className="
+        absolute bottom-4 right-4 flex h-9 w-9 items-center
+        justify-center bg-white opacity-0 transition-all
+        duration-300 group-hover:opacity-100
+      "
+    >
+      <ArrowUpRight size={17} />
+    </div>
+  </motion.a>
+</div>
+
 
       {/* SHOP BY CATEGORY HEADER */}
 
