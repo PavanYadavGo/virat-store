@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 
 import TeamImage from "../../assets/categories/TEAM.png";
-import TrendingImage from "../../assets/products/velocity-jersey.png";
 
 const TeamwearSection = () => {
   return (
@@ -63,23 +62,25 @@ const TeamwearSection = () => {
             ease: [0.16, 1, 0.3, 1],
           }}
           className="
-            group relative flex h-[240px] items-center justify-center
-            overflow-hidden border-b border-black/30 p-0
+            group relative flex h-[200px] items-center justify-center
+            border-b border-black/30 bg-white px-5 py-8 text-center
+            transition-colors duration-300
             sm:h-[320px] md:h-[380px] lg:h-[440px]
           "
           aria-label="Explore Trending Products"
         >
-          <img
-            src={TrendingImage}
-            alt="Trending products"
-            loading="lazy"
-            decoding="async"
+          <h3
             className="
-              h-full w-full object-fill
-              transition-transform duration-500
-              group-hover:scale-[1.02]
+              text-[clamp(1.75rem,2.5vw,2.75rem)]
+              font-extrabold uppercase leading-[1.1] tracking-[-0.03em]
+              text-[#080808] transition-colors duration-300
+              group-hover:text-[#FF0000]
             "
-          />
+          >
+            Trending
+            <br />
+            Products
+          </h3>
         </motion.a>
       </div>
     </section>

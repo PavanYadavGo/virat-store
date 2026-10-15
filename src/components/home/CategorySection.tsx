@@ -1,9 +1,10 @@
-
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
-import cricketImage from "../../assets/categories/Category images/mens.png";
+import cricketImage from "../../assets/categories/Category images/Surya.jpeg";
+import cricketcategorieImage from "../../assets/categories/Category images/Rohit.jpeg";
+import cricketcategoriesecondImage from "../../assets/categories/Category images/SuryaY.jpeg";
 import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.png";
 import cap from "../../assets/categories/Category images/cap.png";
 import cricketfImage from "../../assets/categories/Category images/women.png";
@@ -116,7 +117,7 @@ const CategorySection = () => {
           "
         >
           <img
-            src={cricketImage}
+            src={cricketcategorieImage}
             alt="Cricket collection"
             loading="lazy"
             decoding="async"
@@ -186,7 +187,7 @@ const CategorySection = () => {
           "
         >
           <img
-            src={cricketfImage}
+            src={cricketcategoriesecondImage}
             alt="Women's cricket collection"
             loading="lazy"
             decoding="async"
@@ -272,7 +273,7 @@ const CategorySection = () => {
               alt={category.title}
               loading="lazy"
               decoding="async"
-              style={{ objectPosition: `center ${category.y}%` }}
+              style={{ objectPosition: 'center ${category.y}%' }}
               className="
                 absolute inset-0 h-full w-full object-cover
                 transition-transform duration-700 group-hover:scale-105
