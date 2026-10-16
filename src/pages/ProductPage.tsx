@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, Check } from "lucide-react";
+import { useCart } from "../context/CartContext";
+import { api } from "../services/api";
 
 import performanceTee from "../assets/products/performance-tee.png";
 import viratPolo from "../assets/products/virat-polo.png";
 import matchDayShorts from "../assets/products/match-day-shorts.png";
 
-// Mock database to simulate fetching product by ID
+// Mock database to simulate fetching product by ID if backend is offline
 const productsDatabase = [
   {
-    id: "performance-tee",
+    id: "core-performance-tee",
     name: "Core Performance Tee",
     category: "T-Shirts",
     price: 999,
@@ -20,7 +22,7 @@ const productsDatabase = [
     badge: "NEW",
   },
   {
-    id: "virat-polo",
+    id: "virat-performance-polo",
     name: "Virat Performance Polo",
     category: "Polos",
     price: 1299,
@@ -42,17 +44,63 @@ const productsDatabase = [
 
 const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
+interface ProductDetail {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  description: string;
+  features?: string[];
+  images: string[];
+  badge?: string;
+}
+
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
+  const { addToCart } = useCart();
   
-  // Find product or fallback to a default one for demo purposes
-  const product = productsDatabase.find((p) => p.id === id) || productsDatabase[0];
+  const [productData, setProductData] = useState<ProductDetail>(() => {
+    return productsDatabase.find((p) => p.id === id) || productsDatabase[0];
+  });
 
   const [selectedSize, setSelectedSize] = useState<string>("M");
   const [activeImage, setActiveImage] = useState<number>(0);
   const [isAdded, setIsAdded] = useState(false);
 
+  useEffect(() => {
+    if (!id) return;
+    api.getProductById(id).then((fetched) => {
+      if (fetched) {
+        setProductData({
+          ...fetched,
+          // If images in API are paths, ensure we have an array
+          images: fetched.images && fetched.images.length > 0
+            ? fetched.images.map((img) => {
+                if (img.includes("performance-tee")) return performanceTee;
+                if (img.includes("virat-polo")) return viratPolo;
+                if (img.includes("match-day-shorts")) return matchDayShorts;
+                return img;
+              })
+            : [performanceTee],
+        });
+      }
+    });
+  }, [id]);
+
+  const product = productData;
+
   const handleAddToCart = () => {
+    addToCart(
+      {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: Array.isArray(product.images) ? product.images[0] : performanceTee,
+        category: product.category,
+      },
+      selectedSize,
+      1
+    );
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
   };
@@ -81,7 +129,7 @@ const ProductPage = () => {
         <div className="flex flex-col-reverse gap-4 md:flex-row lg:h-[700px]">
           {/* Thumbnails */}
           <div className="flex gap-3 md:flex-col md:w-20 lg:w-24 shrink-0">
-            {product.images.map((img, idx) => (
+            {product.images.map((img: string, idx: number) => (
               <button
                 key={idx}
                 onClick={() => setActiveImage(idx)}
@@ -215,7 +263,7 @@ const ProductPage = () => {
               Features
             </h3>
             <ul className="flex flex-col gap-2">
-              {product.features.map((feature, idx) => (
+              {product.features?.map((feature: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-3 text-sm text-black/70">
                   <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF0000]" />
                   {feature}

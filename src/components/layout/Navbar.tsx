@@ -9,6 +9,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 import logo from "../../assets/virat logo.png";
 
@@ -37,6 +38,10 @@ type NavItem = {
 ========================================================= */
 
 const navItems: NavItem[] = [
+  {
+    label: "ALL PRODUCTS",
+    href: "/products",
+  },
   {
     label: "NEW ARRIVALS",
     href: "/new-arrivals",
@@ -180,7 +185,7 @@ const navItems: NavItem[] = [
 ========================================================= */
 
 const Navbar = () => {
-
+  const { itemCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
@@ -354,15 +359,18 @@ const Navbar = () => {
           >
             <ShoppingBag size={19} strokeWidth={1.8} />
 
-            <span
-              className="
-                absolute -right-2 -top-2 flex h-4 w-4
-                items-center justify-center rounded-full
-                bg-[#FF0000] text-[9px] font-bold text-white
-              "
-            >
-              0
-            </span>
+            {itemCount > 0 && (
+              <span
+                className="
+                  absolute -right-2 -top-2 flex h-4 w-4
+                  items-center justify-center rounded-full
+                  bg-[#FF0000] text-[9px] font-bold text-white
+                  animate-scale-in
+                "
+              >
+                {itemCount > 99 ? "99+" : itemCount}
+              </span>
+            )}
           </Link>
 
           {/* MOBILE MENU BUTTON */}
