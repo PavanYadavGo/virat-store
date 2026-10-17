@@ -7,12 +7,10 @@ const videos = [
     id: "01",
     title: "Match Day",
     description: "Built for the pressure.",
-    platform: "Facebook",
-    url: "https://www.facebook.com/share/v/1e1KpzWoju/",
-    embedUrl: `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
-      "https://www.facebook.com/share/v/1e1KpzWoju/"
-    )}&show_text=false&width=500`,
-    Icon: FaFacebookF,
+    platform: "Instagram",
+    url: "https://www.instagram.com/reels/DeY9WWXM0l_/",
+    embedUrl: "https://www.instagram.com/reel/DeY9WWXM0l_/embed",
+    Icon: FaInstagram,
   },
   {
     id: "02",
