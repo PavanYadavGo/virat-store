@@ -6,39 +6,226 @@ import { useCart } from "../context/CartContext";
 import { api } from "../services/api";
 
 import performanceTee from "../assets/products/performance-tee.png";
-import viratPolo from "../assets/products/virat-polo.png";
-import matchDayShorts from "../assets/products/match-day-shorts.png";
 
-// Mock database to simulate fetching product by ID if backend is offline
+// Verified client products fallback database
 const productsDatabase = [
   {
-    id: "core-performance-tee",
-    name: "Core Performance Tee",
-    category: "T-Shirts",
-    price: 999,
-    description: "Built for every move. The Core Performance Tee is engineered with sweat-wicking technology and a lightweight feel, keeping you focused on the game.",
-    features: ["Moisture-wicking fabric", "Athletic fit", "Reflective details", "100% Recycled Polyester"],
-    images: [performanceTee, performanceTee, performanceTee],
-    badge: "NEW",
+    id: "virat-classic-cap-black",
+    name: "VIRAT Classic Sports Cap - Black",
+    category: "Accessories",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Structured athletic baseball cap featuring signature white embroidered VIRAT branding, curved visor, and breathable comfort design. Commercial details pending client confirmation.",
+    features: ["Signature 3D embroidered VIRAT logo", "Structured six-panel crown", "Moisture-absorbing inner sweatband", "Adjustable rear buckle closure"],
+    images: [
+      "/images/products/cap-black-front.webp",
+      "/images/products/cap-black-side.webp",
+    ],
+    badge: "COMING SOON",
   },
   {
-    id: "virat-performance-polo",
-    name: "Virat Performance Polo",
-    category: "Polos",
-    price: 1299,
-    description: "Bring style to your game. The Virat Performance Polo blends classic aesthetics with modern activewear tech for ultimate comfort.",
-    features: ["Breathable knit", "Ribbed collar", "Four-way stretch", "Premium cotton blend"],
-    images: [viratPolo, viratPolo, viratPolo],
-    badge: "POPULAR",
+    id: "virat-classic-cap-red",
+    name: "VIRAT Classic Sports Cap - Red",
+    category: "Accessories",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Bold crimson athletic cap engineered with high-contrast white VIRAT embroidery and premium structured fit. Commercial details pending client confirmation.",
+    features: ["High-visibility crimson colorway", "Pre-curved performance brim", "Embroidered ventilation eyelets", "Durable twill construction"],
+    images: [
+      "/images/products/cap-red-front.webp",
+      "/images/products/cap-red-side.webp",
+    ],
+    badge: "COMING SOON",
   },
   {
-    id: "match-day-shorts",
-    name: "Match Day Shorts",
+    id: "virat-classic-cap-white",
+    name: "VIRAT Classic Sports Cap - White",
+    category: "Accessories",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Clean optic white performance cap with contrasting black embroidered VIRAT emblem. Commercial details pending client confirmation.",
+    features: ["Crisp optic white twill", "Contrasting black VIRAT embroidery", "Comfort inner taping", "Adjustable sizing"],
+    images: [
+      "/images/products/cap-white-front.webp",
+      "/images/products/cap-white-side.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-camo-track-pant",
+    name: "VIRAT Camo Performance Track Pant",
+    category: "Bottoms",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Tapered athletic track pants finished in a subdued grey camo marble pattern with elasticated waistband and ankle cuffs. Commercial details pending client confirmation.",
+    features: ["Tapered athletic silhouette", "Full elastic waistband with internal drawcord", "Zippered secure side pockets", "Subtle allover camo marble print"],
+    images: [
+      "/images/products/camo-track-pant-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-camo-training-shorts",
+    name: "VIRAT Camo Training Shorts",
     category: "Shorts",
-    price: 899,
-    description: "Move freely. Our Match Day Shorts offer unparalleled mobility and ventilation for intense training sessions or casual wear.",
-    features: ["Elastic waistband with drawcord", "Side zip pockets", "Lightweight woven fabric", "7-inch inseam"],
-    images: [matchDayShorts, matchDayShorts, matchDayShorts],
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Performance training shorts in matching grey camo marble texture with branded VIRAT lower-leg accent. Commercial details pending client confirmation.",
+    features: ["Multi-angle athletic cut", "Rear welt pocket & deep hand pockets", "Four-way stretch mobility", "Reflective VIRAT hem insignia"],
+    images: [
+      "/images/products/camo-training-shorts-front.webp",
+      "/images/products/camo-training-shorts-back.webp",
+      "/images/products/camo-training-shorts-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-pro-match-shorts",
+    name: "VIRAT 'Never Give Up' Pro Match Shorts",
+    category: "Shorts",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Intense workout and match shorts featuring lateral contrast side stripe and motivational 'NEVER GIVE UP' typography. Commercial details pending client confirmation.",
+    features: ["'NEVER GIVE UP' side stripe typography", "Elastic waistband with quick-adjust cord", "Ventilated side splits for maximum stride", "Reinforced athletic seams"],
+    images: [
+      "/images/products/pro-match-shorts-front.webp",
+      "/images/products/pro-match-shorts-back.webp",
+      "/images/products/pro-match-shorts-showcase-front.webp",
+      "/images/products/pro-match-shorts-showcase-back.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-navy",
+    name: "VIRAT Geometric Graphic Tee - Navy Blue",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Round neck training t-shirt in deep navy blue featuring modern geometric chest chevron artwork and back print. Commercial details pending client confirmation.",
+    features: ["Modern geometric chest graphics", "Ergonomic round neck collar", "Quick-drying breathable yarn", "Rear shoulder VIRAT logo print"],
+    images: [
+      "/images/products/training-tee-navy-front.webp",
+      "/images/products/training-tee-navy-back.webp",
+      "/images/products/training-tee-navy-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-green",
+    name: "VIRAT Geometric Graphic Tee - Olive Green",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Earth-toned olive green training t-shirt with signature angular chevron print on chest and back. Commercial details pending client confirmation.",
+    features: ["Olive green colorway", "High-density chest print", "Athletic crewneck cut", "Lightweight moisture-wicking material"],
+    images: [
+      "/images/products/training-tee-green-front.webp",
+      "/images/products/training-tee-green-back.webp",
+      "/images/products/training-tee-green-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-grey",
+    name: "VIRAT Geometric Graphic Tee - Heather Grey",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Versatile heather grey performance tee styled with geometric accents for training sessions or lifestyle wear. Commercial details pending client confirmation.",
+    features: ["Heather grey marl base", "Geometric graphic chest overlay", "Soft-touch fabric feel", "Ribbed crewneck"],
+    images: [
+      "/images/products/training-tee-grey-front.webp",
+      "/images/products/training-tee-grey-back.webp",
+      "/images/products/training-tee-grey-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-sleeveless-vest-maroon",
+    name: "VIRAT Geometric Sleeveless Vest - Maroon",
+    category: "Sleeveless",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Deep maroon / wine athletic sleeveless gym tank with angular geometric chest graphics for unrestricted arm mobility. Commercial details pending client confirmation.",
+    features: ["Deep armholes for maximum range of motion", "Bold angular graphic print", "Reinforced neckline and arm bindings", "Breathable gym activewear cut"],
+    images: [
+      "/images/products/sleeveless-vest-maroon-front.webp",
+      "/images/products/sleeveless-vest-maroon-back.webp",
+      "/images/products/sleeveless-vest-maroon-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-sleeveless-vest-green",
+    name: "VIRAT Geometric Sleeveless Vest - Sage Green",
+    category: "Sleeveless",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Light sage green training vest designed for intense gym sessions and warm-weather training. Commercial details pending client confirmation.",
+    features: ["Sage green training colorway", "Sleeveless racer-style mobility", "Lightweight sweat-wicking knit", "Rear athletic logo placement"],
+    images: [
+      "/images/products/sleeveless-vest-green-duo.webp",
+      "/images/products/sleeveless-vest-green-back.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-performance-polo-mint",
+    name: "VIRAT Performance Pique Polo - Mint Green",
+    category: "Polos",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Fresh mint green athletic polo shirt featuring contrasting white collar, dark sleeve cuffs, and 2-button placket. Commercial details pending client confirmation.",
+    features: ["Contrast white structured collar", "Two-button front placket", "Ribbed sleeve cuff trim", "Breathable pique texture"],
+    images: [
+      "/images/products/performance-polo-mint-front.webp",
+      "/images/products/performance-polo-mint-back.webp",
+      "/images/products/performance-polo-mint-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-performance-polo-blue",
+    name: "VIRAT Performance Pique Polo - Sky Blue",
+    category: "Polos",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Sky blue athletic polo shirt accented by navy collar and sleeve band details. Commercial details pending client confirmation.",
+    features: ["Navy contrast collar & cuffs", "Buttoned sport placket", "Structured athletic drape", "Pique cotton-poly blend"],
+    images: [
+      "/images/products/performance-polo-blue-front.webp",
+      "/images/products/performance-polo-blue-back.webp",
+      "/images/products/performance-polo-blue-duo.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-track-jacket-navy-red",
+    name: "VIRAT Athletic Zip-Up Track Jacket - Navy/Red",
+    category: "Jackets",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Full-zip athletic track jacket in navy blue with high-neck stand collar, red interior collar lining, and zippered pockets. Commercial details pending client confirmation.",
+    features: ["Full-length front zipper", "Stand-up collar with red accent lining", "Zippered hand warmer pockets", "Ribbed cuffs and hem"],
+    images: [
+      "/images/products/track-jacket-navy-red-front.webp",
+      "/images/products/track-jacket-navy-red-back.webp",
+    ],
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-track-jacket-navy-gold",
+    name: "VIRAT Athletic Zip-Up Track Jacket - Navy/Gold",
+    category: "Jackets",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Full-zip navy track jacket elevated with custom gold patterned shoulder panels and chest branding. Commercial details pending client confirmation.",
+    features: ["Gold shoulder panel detailing", "Full-zip front closure with chin guard", "Side entry zip pockets", "Athletic comfort fit"],
+    images: [
+      "/images/products/track-jacket-navy-gold-front.webp",
+      "/images/products/track-jacket-navy-gold-back.webp",
+    ],
+    badge: "COMING SOON",
   },
 ];
 
@@ -49,6 +236,7 @@ interface ProductDetail {
   name: string;
   category: string;
   price: number;
+  priceUnconfirmed?: boolean;
   description: string;
   features?: string[];
   images: string[];
@@ -73,15 +261,9 @@ const ProductPage = () => {
       if (fetched) {
         setProductData({
           ...fetched,
-          // If images in API are paths, ensure we have an array
           images: fetched.images && fetched.images.length > 0
-            ? fetched.images.map((img) => {
-                if (img.includes("performance-tee")) return performanceTee;
-                if (img.includes("virat-polo")) return viratPolo;
-                if (img.includes("match-day-shorts")) return matchDayShorts;
-                return img;
-              })
-            : [performanceTee],
+            ? fetched.images
+            : ["/images/products/training-tee-navy-front.webp"],
         });
       }
     });
@@ -179,9 +361,20 @@ const ProductPage = () => {
               {product.name}<span className="text-[#FF0000]">.</span>
             </h1>
 
-            <p className="mb-8 text-2xl font-bold">
-              ₹{product.price.toLocaleString("en-IN")}
-            </p>
+            {product.price > 0 && !product.priceUnconfirmed ? (
+              <p className="mb-8 text-2xl font-bold">
+                ₹{product.price.toLocaleString("en-IN")}
+              </p>
+            ) : (
+              <div className="mb-8">
+                <p className="text-xl font-bold text-[#FF0000]">
+                  Price Unconfirmed / Coming Soon
+                </p>
+                <p className="mt-1 text-xs text-black/60">
+                  Official retail pricing, size runs, and warehouse inventory are currently being finalized by the client. Online ordering will be enabled once confirmed.
+                </p>
+              </div>
+            )}
           </motion.div>
 
           <motion.div
@@ -216,35 +409,46 @@ const ProductPage = () => {
             </div>
           </motion.div>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            onClick={handleAddToCart}
-            disabled={isAdded}
-            className={`
-              group relative flex w-full items-center justify-center overflow-hidden border px-8 py-5
-              transition-all duration-300
-              ${isAdded ? "border-green-500 bg-green-500 text-white" : "border-[#080808] bg-[#080808] text-white hover:bg-transparent hover:text-[#080808]"}
-            `}
-          >
-            {/* Hover fill effect */}
-            <div className="absolute inset-0 -translate-y-full bg-transparent transition-transform duration-500 group-hover:translate-y-0" />
-            
-            <span className="relative z-10 flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em]">
-              {isAdded ? (
-                <>
-                  <Check size={18} strokeWidth={3} />
-                  Added to Bag
-                </>
-              ) : (
-                <>
-                  Add to Bag
-                  <ArrowRight size={18} strokeWidth={2} className="transition-transform group-hover:translate-x-1" />
-                </>
-              )}
-            </span>
-          </motion.button>
+          {product.price === 0 || product.priceUnconfirmed ? (
+            <button
+              disabled
+              className="flex w-full items-center justify-center border border-black/15 bg-black/5 px-8 py-5 text-black/40 cursor-not-allowed"
+            >
+              <span className="text-xs font-black uppercase tracking-[0.2em]">
+                Coming Soon — Price Pending Confirmation
+              </span>
+            </button>
+          ) : (
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              onClick={handleAddToCart}
+              disabled={isAdded}
+              className={`
+                group relative flex w-full items-center justify-center overflow-hidden border px-8 py-5
+                transition-all duration-300
+                ${isAdded ? "border-green-500 bg-green-500 text-white" : "border-[#080808] bg-[#080808] text-white hover:bg-transparent hover:text-[#080808]"}
+              `}
+            >
+              {/* Hover fill effect */}
+              <div className="absolute inset-0 -translate-y-full bg-transparent transition-transform duration-500 group-hover:translate-y-0" />
+
+              <span className="relative z-10 flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em]">
+                {isAdded ? (
+                  <>
+                    <Check size={18} strokeWidth={3} />
+                    Added to Bag
+                  </>
+                ) : (
+                  <>
+                    Add to Bag
+                    <ArrowRight size={18} strokeWidth={2} className="transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
+              </span>
+            </motion.button>
+          )}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

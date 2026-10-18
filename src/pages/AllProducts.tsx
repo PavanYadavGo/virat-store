@@ -226,9 +226,15 @@ export default function AllProducts() {
                     </div>
 
                     <div className="mt-3 flex items-center justify-between border-t border-black/10 pt-3">
-                      <span className="text-sm font-black text-black sm:text-base">
-                        ₹{product.price.toLocaleString("en-IN")}
-                      </span>
+                      {product.price > 0 && !product.priceUnconfirmed ? (
+                        <span className="text-sm font-black text-black sm:text-base">
+                          ₹{product.price.toLocaleString("en-IN")}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF0000]">
+                          Price Unconfirmed
+                        </span>
+                      )}
 
                       <Link
                         to={`/product/${product.id}`}

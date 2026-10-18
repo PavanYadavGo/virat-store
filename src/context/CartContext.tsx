@@ -52,6 +52,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     size: string,
     quantity = 1
   ) => {
+    if (product.price <= 0) {
+      console.warn(`[CART] Cannot add product "${product.name}" with unconfirmed price.`);
+      return;
+    }
+
     const qty = Math.max(1, quantity);
     const chosenSize = size || "M";
 

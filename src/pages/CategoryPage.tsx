@@ -3,63 +3,151 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { motion } from "motion/react";
 
-import performanceTee from "../assets/products/performance-tee.png";
-import viratPolo from "../assets/products/virat-polo.png";
-import matchDayShorts from "../assets/products/match-day-shorts.png";
-
 type Product = {
   id: string;
   name: string;
   category: string;
   price: number;
+  priceUnconfirmed?: boolean;
   image: string;
   badge?: string;
 };
 
 const products: Product[] = [
   {
-    id: "performance-tee",
-    name: "Core Performance Tee",
-    category: "T-Shirts",
-    price: 999,
-    image: performanceTee,
-    badge: "NEW",
+    id: "virat-classic-cap-black",
+    name: "VIRAT Classic Sports Cap - Black",
+    category: "Accessories",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/cap-black-front.webp",
+    badge: "COMING SOON",
   },
   {
-    id: "virat-polo",
-    name: "Virat Performance Polo",
-    category: "Polos",
-    price: 1299,
-    image: viratPolo,
-    badge: "POPULAR",
+    id: "virat-classic-cap-red",
+    name: "VIRAT Classic Sports Cap - Red",
+    category: "Accessories",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/cap-red-front.webp",
+    badge: "COMING SOON",
   },
   {
-    id: "match-day-shorts",
-    name: "Match Day Shorts",
+    id: "virat-classic-cap-white",
+    name: "VIRAT Classic Sports Cap - White",
+    category: "Accessories",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/cap-white-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-camo-track-pant",
+    name: "VIRAT Camo Performance Track Pant",
+    category: "Bottoms",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/camo-track-pant-duo.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-camo-training-shorts",
+    name: "VIRAT Camo Training Shorts",
     category: "Shorts",
-    price: 899,
-    image: matchDayShorts,
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/camo-training-shorts-front.webp",
+    badge: "COMING SOON",
   },
   {
-    id: "essential-tee",
-    name: "Essential Training Tee",
-    category: "T-Shirts",
-    price: 899,
-    image: performanceTee,
-  },
-  {
-    id: "street-polo",
-    name: "Street Polo",
-    category: "Polos",
-    price: 1299,
-    image: viratPolo,
-  },
-  {
-    id: "core-shorts",
-    name: "Core Sports Shorts",
+    id: "virat-pro-match-shorts",
+    name: "VIRAT 'Never Give Up' Pro Match Shorts",
     category: "Shorts",
-    price: 799,
-    image: matchDayShorts,
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/pro-match-shorts-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-navy",
+    name: "VIRAT Geometric Graphic Tee - Navy Blue",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/training-tee-navy-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-green",
+    name: "VIRAT Geometric Graphic Tee - Olive Green",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/training-tee-green-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-grey",
+    name: "VIRAT Geometric Graphic Tee - Heather Grey",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/training-tee-grey-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-sleeveless-vest-maroon",
+    name: "VIRAT Geometric Sleeveless Vest - Maroon",
+    category: "Sleeveless",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/sleeveless-vest-maroon-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-sleeveless-vest-green",
+    name: "VIRAT Geometric Sleeveless Vest - Sage Green",
+    category: "Sleeveless",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/sleeveless-vest-green-duo.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-performance-polo-mint",
+    name: "VIRAT Performance Pique Polo - Mint Green",
+    category: "Polos",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/performance-polo-mint-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-performance-polo-blue",
+    name: "VIRAT Performance Pique Polo - Sky Blue",
+    category: "Polos",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/performance-polo-blue-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-track-jacket-navy-red",
+    name: "VIRAT Athletic Zip-Up Track Jacket - Navy/Red",
+    category: "Jackets",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/track-jacket-navy-red-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-track-jacket-navy-gold",
+    name: "VIRAT Athletic Zip-Up Track Jacket - Navy/Gold",
+    category: "Jackets",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/track-jacket-navy-gold-front.webp",
+    badge: "COMING SOON",
   },
 ];
 
@@ -403,9 +491,15 @@ const CategoryPage = () => {
                     {product.name}
                   </Link>
 
-                  <span className="shrink-0 text-sm font-bold">
-                    ₹{product.price.toLocaleString("en-IN")}
-                  </span>
+                  {product.price > 0 && !product.priceUnconfirmed ? (
+                    <span className="shrink-0 text-sm font-bold">
+                      ₹{product.price.toLocaleString("en-IN")}
+                    </span>
+                  ) : (
+                    <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-[#FF0000]">
+                      Price Unconfirmed
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.article>
