@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, Check } from "lucide-react";
+import { useCart } from "../context/CartContext";
+import { api } from "../services/api";
+import performanceTee from "../assets/products/performance-tee.png";
 
 export interface ProductItem {
   id: string;
   name: string;
   category: string;
+  subcategory?: string;
   price: number;
   priceUnconfirmed?: boolean;
   description: string;
@@ -316,15 +320,59 @@ const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
-  
-  // Find product or fallback to a default one
-  const product: ProductItem = productsDatabase.find((p) => p.id === id) || productsDatabase[0];
+  const { addToCart } = useCart();
+
+  const [productData, setProductData] = useState<ProductItem>(() => {
+    return productsDatabase.find((p) => p.id === id) || productsDatabase[0];
+  });
 
   const [selectedSize, setSelectedSize] = useState<string>("M");
   const [activeImage, setActiveImage] = useState<number>(0);
   const [isAdded, setIsAdded] = useState(false);
 
+  useEffect(() => {
+    if (!id) return;
+    let isMounted = true;
+    api
+      .getProductById(id)
+      .then((fetched) => {
+        if (isMounted && fetched) {
+          setProductData({
+            ...fetched,
+            features: fetched.features || [],
+            images:
+              fetched.images && fetched.images.length > 0
+                ? fetched.images
+                : ["/images/products/training-tee-navy-front.webp"],
+          });
+        }
+      })
+      .catch(() => {
+        // Fallback remains initial static productData
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
+
+  const product = productData;
+
   const handleAddToCart = () => {
+    addToCart(
+      {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image:
+          Array.isArray(product.images) && product.images.length > 0
+            ? product.images[0]
+            : performanceTee,
+        category: product.category,
+      },
+      selectedSize,
+      1
+    );
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
   };
@@ -338,7 +386,14 @@ const ProductPage = () => {
             Home
           </Link>
           <span>/</span>
-          <Link to={product.category.toLowerCase() === "accessories" ? "/accessories" : "/men"} className="transition-colors hover:text-[#FF0000]">
+          <Link
+            to={
+              product.category.toLowerCase() === "accessories"
+                ? "/accessories"
+                : "/men"
+            }
+            className="transition-colors hover:text-[#FF0000]"
+          >
             {product.category}
           </Link>
           <span>/</span>
@@ -348,22 +403,29 @@ const ProductPage = () => {
 
       {/* PRODUCT LAYOUT */}
       <section className="mx-auto grid max-w-7xl gap-10 px-6 pb-20 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:px-10 lg:pb-36">
-        
         {/* LEFT: IMAGES */}
         <div className="flex flex-col-reverse gap-4 md:flex-row lg:h-[700px]">
           {/* Thumbnails */}
           <div className="flex gap-3 md:flex-col md:w-20 lg:w-24 shrink-0">
-            {product.images.map((img, idx) => (
+            {product.images.map((img: string, idx: number) => (
               <button
                 key={idx}
                 onClick={() => setActiveImage(idx)}
                 className={`
                   relative aspect-[4/5] w-20 overflow-hidden bg-[#E8E8E5] transition-all
                   md:w-full
-                  ${activeImage === idx ? "border-2 border-[#FF0000]" : "border border-transparent hover:border-black/20"}
+                  ${
+                    activeImage === idx
+                      ? "border-2 border-[#FF0000]"
+                      : "border border-transparent hover:border-black/20"
+                  }
                 `}
               >
-                <img src={img} alt={`${product.name} view ${idx + 1}`} className="h-full w-full object-contain p-2" />
+                <img
+                  src={img}
+                  alt={`${product.name} view ${idx + 1}`}
+                  className="h-full w-full object-contain p-2"
+                />
               </button>
             ))}
           </div>
@@ -375,7 +437,7 @@ const ProductPage = () => {
                 {product.badge}
               </span>
             )}
-            
+
             <motion.img
               key={activeImage}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -398,9 +460,10 @@ const ProductPage = () => {
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.25em] text-[#FF0000]">
               Virat Sportswear
             </p>
-            
+
             <h1 className="mb-4 text-[clamp(2.5rem,5vw,4rem)] font-black uppercase leading-[0.85] tracking-[-0.05em]">
-              {product.name}<span className="text-[#FF0000]">.</span>
+              {product.name}
+              <span className="text-[#FF0000]">.</span>
             </h1>
 
             {product.price > 0 && !product.priceUnconfirmed ? (
@@ -409,9 +472,13 @@ const ProductPage = () => {
               </p>
             ) : (
               <div className="mb-8">
-                <p className="text-xl font-bold text-[#FF0000]">Price Unconfirmed / Coming Soon</p>
+                <p className="text-xl font-bold text-[#FF0000]">
+                  Price Unconfirmed / Coming Soon
+                </p>
                 <p className="mt-1 text-xs text-black/60">
-                  Official retail pricing, size runs, and warehouse inventory are currently being finalized by the client. Online ordering is currently disabled.
+                  Official retail pricing, size runs, and warehouse inventory
+                  are currently being finalized by the client. Online ordering
+                  is currently disabled.
                 </p>
               </div>
             )}
@@ -424,12 +491,14 @@ const ProductPage = () => {
             className="mb-10"
           >
             <div className="mb-4 flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase tracking-[0.15em]">Select Size</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.15em]">
+                Select Size
+              </span>
               <button className="text-[10px] font-bold uppercase tracking-[0.1em] text-black/50 underline transition-colors hover:text-black">
                 Size Guide
               </button>
             </div>
-            
+
             <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
               {SIZES.map((size) => (
                 <button
@@ -437,9 +506,10 @@ const ProductPage = () => {
                   onClick={() => setSelectedSize(size)}
                   className={`
                     flex h-12 items-center justify-center border text-[11px] font-bold uppercase tracking-[0.1em] transition-all
-                    ${selectedSize === size 
-                      ? "border-[#FF0000] bg-[#FF0000] text-white" 
-                      : "border-black/10 bg-white/50 hover:border-black/40"
+                    ${
+                      selectedSize === size
+                        ? "border-[#FF0000] bg-[#FF0000] text-white"
+                        : "border-black/10 bg-white/50 hover:border-black/40"
                     }
                   `}
                 >
@@ -465,7 +535,11 @@ const ProductPage = () => {
               className={`
                 group relative flex w-full items-center justify-center overflow-hidden border px-8 py-5
                 transition-all duration-300
-                ${isAdded ? "border-green-500 bg-green-500 text-white" : "border-[#080808] bg-[#080808] text-white hover:bg-transparent hover:text-[#080808]"}
+                ${
+                  isAdded
+                    ? "border-green-500 bg-green-500 text-white"
+                    : "border-[#080808] bg-[#080808] text-white hover:bg-transparent hover:text-[#080808]"
+                }
               `}
             >
               {/* Hover fill effect */}
@@ -480,7 +554,11 @@ const ProductPage = () => {
                 ) : (
                   <>
                     Add to Bag
-                    <ArrowRight size={18} strokeWidth={2} className="transition-transform group-hover:translate-x-1" />
+                    <ArrowRight
+                      size={18}
+                      strokeWidth={2}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
                   </>
                 )}
               </span>
@@ -504,8 +582,11 @@ const ProductPage = () => {
               Features
             </h3>
             <ul className="flex flex-col gap-2">
-              {product.features.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-sm text-black/70">
+              {product.features?.map((feature: string, idx: number) => (
+                <li
+                  key={idx}
+                  className="flex items-start gap-3 text-sm text-black/70"
+                >
                   <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF0000]" />
                   {feature}
                 </li>
@@ -519,4 +600,3 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
-

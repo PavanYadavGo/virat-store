@@ -1,23 +1,43 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
-import { productsDatabase } from "./ProductPage";
+import { productsDatabase, type ProductItem } from "./ProductPage";
+import { api } from "../services/api";
 
 export default function AllProducts() {
+  const [products, setProducts] = useState<ProductItem[]>(productsDatabase);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sort, setSort] = useState("featured");
 
+  useEffect(() => {
+    let isMounted = true;
+    api
+      .getProducts()
+      .then((items) => {
+        if (isMounted && items && items.length > 0) {
+          setProducts(items as ProductItem[]);
+        }
+      })
+      .catch(() => {
+        // Retain static productsDatabase if backend is offline or gated
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const categories = useMemo(() => {
     const set = new Set<string>();
-    productsDatabase.forEach((p) => {
+    products.forEach((p) => {
       if (p.category) set.add(p.category);
     });
     return ["all", ...Array.from(set)];
-  }, []);
+  }, [products]);
 
   const filteredAndSortedProducts = useMemo(() => {
-    let list = [...productsDatabase];
+    let list = [...products];
 
     if (selectedCategory !== "all") {
       list = list.filter(
@@ -41,7 +61,7 @@ export default function AllProducts() {
     }
 
     return list;
-  }, [selectedCategory, sort]);
+  }, [products, selectedCategory, sort]);
 
   return (
     <main className="min-h-screen bg-[#F5F5F2] text-[#080808]">
@@ -141,7 +161,7 @@ export default function AllProducts() {
               const imageSrc =
                 Array.isArray(product.images) && product.images.length > 0
                   ? product.images[0]
-                  : "";
+                  : "/images/products/training-tee-navy-front.webp";
 
               return (
                 <motion.article
@@ -178,6 +198,7 @@ export default function AllProducts() {
                     <div>
                       <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.15em] text-black/45">
                         <span>{product.category || "Apparel"}</span>
+                        {product.subcategory && <span>{product.subcategory}</span>}
                       </div>
 
                       <h3 className="mt-1 text-sm font-black uppercase tracking-tight text-black sm:text-base">

@@ -489,7 +489,7 @@ const FeaturedProducts = () => {
           {/* Desktop / tablet view all */}
 
           <motion.a
-            href="#"
+            href="/products"
             initial={{
               opacity: 0,
             }}
@@ -1113,7 +1113,7 @@ const FeaturedProducts = () => {
         ====================================================== */}
 
         <a
-          href="#"
+          href="/products"
           className="
             mt-10
             flex

@@ -8,9 +8,9 @@ type Product = {
   name: string;
   category: string;
   price: number;
+  priceUnconfirmed?: boolean;
   image: string;
   badge?: string;
-  priceUnconfirmed?: boolean;
 };
 
 // Verified client products catalog (15 products across 8 families)
