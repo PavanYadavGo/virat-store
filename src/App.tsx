@@ -12,6 +12,7 @@ import Accessories from "./pages/Accessories";
 import DesignYourOwn from "./pages/DesignYourOwn";
 import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
+import AllProducts from "./pages/AllProducts";
 import About from "./pages/About";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/products" element={<AllProducts />} />
         <Route path="/new-arrivals" element={<NewArrivals />} />
         <Route path="/cricket" element={<Cricket />} />
         <Route path="/accessories" element={<Accessories />} />

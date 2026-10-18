@@ -38,6 +38,10 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   {
+    label: "ALL PRODUCTS",
+    href: "/products",
+  },
+  {
     label: "NEW ARRIVALS",
     href: "/new-arrivals",
   },
