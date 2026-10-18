@@ -287,7 +287,13 @@ const AdminProducts = () => {
                 </td>
 
                 <td className="px-6 py-4 font-bold text-black">
-                  ₹{p.price.toLocaleString("en-IN")}
+                  {p.price > 0 && !p.priceUnconfirmed ? (
+                    `₹${p.price.toLocaleString("en-IN")}`
+                  ) : (
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF0000]">
+                      Unconfirmed
+                    </span>
+                  )}
                 </td>
 
                 <td className="px-6 py-4 font-medium text-black/70">

@@ -13,6 +13,7 @@ export interface ApiProduct {
   sizes: string[];
   stock: number;
   isActive: boolean;
+  priceUnconfirmed?: boolean;
 }
 
 export interface ApiOrder {
