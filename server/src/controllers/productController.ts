@@ -1,7 +1,32 @@
 import { Request, Response } from "express";
+import crypto from "crypto";
 import { ProductModel } from "../models/Product.js";
-import { getIsConnected } from "../config/db.js";
-import { memoryStore } from "../config/memoryStore.js";
+import {
+  isPersistenceAvailable,
+  isOperatingInMemory,
+} from "../config/db.js";
+import { memoryStore, StoreProduct } from "../config/memoryStore.js";
+
+// Helper: check if a string is a valid 24-character hexadecimal MongoDB ObjectId
+export const is24HexObjectId = (val: string): boolean => {
+  return typeof val === "string" && /^[0-9a-fA-F]{24}$/.test(val);
+};
+
+// Helper: build query matching by slug id or MongoDB _id if 24-hex
+export const buildProductLookupQuery = (identifier: string) => {
+  if (is24HexObjectId(identifier)) {
+    return { $or: [{ id: identifier }, { _id: identifier }] };
+  }
+  return { id: identifier };
+};
+
+// Helper: find in memoryStore by slug id or _id
+export const findInMemoryProduct = (identifier: string): StoreProduct | undefined => {
+  const isHex = is24HexObjectId(identifier);
+  return memoryStore.products.find(
+    (p) => p.id === identifier || (isHex && p._id === identifier)
+  );
+};
 
 // GET /api/products
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
@@ -9,7 +34,7 @@ export const getProducts = async (req: Request, res: Response): Promise<void> =>
     const { category, subcategory, activeOnly } = req.query;
     const shouldFilterActive = activeOnly !== "false";
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const query: any = {};
       if (shouldFilterActive) query.isActive = true;
       if (category) query.category = new RegExp(`^${category}$`, "i");
@@ -20,23 +45,31 @@ export const getProducts = async (req: Request, res: Response): Promise<void> =>
       return;
     }
 
-    // Fallback memory store
-    let items = memoryStore.products;
-    if (shouldFilterActive) {
-      items = items.filter((p) => p.isActive);
-    }
-    if (category) {
-      items = items.filter(
-        (p) => p.category.toLowerCase() === String(category).toLowerCase()
-      );
-    }
-    if (subcategory) {
-      items = items.filter(
-        (p) => p.subcategory?.toLowerCase() === String(subcategory).toLowerCase()
-      );
+    if (isOperatingInMemory()) {
+      let items = memoryStore.products;
+      if (shouldFilterActive) {
+        items = items.filter((p) => p.isActive);
+      }
+      if (category) {
+        items = items.filter(
+          (p) => p.category.toLowerCase() === String(category).toLowerCase()
+        );
+      }
+      if (subcategory) {
+        items = items.filter(
+          (p) => p.subcategory?.toLowerCase() === String(subcategory).toLowerCase()
+        );
+      }
+
+      res.json({ success: true, count: items.length, data: items });
+      return;
     }
 
-    res.json({ success: true, count: items.length, data: items });
+    res.status(503).json({
+      success: false,
+      error: "Service temporarily unavailable. Database connection is down.",
+      code: "DATABASE_UNAVAILABLE",
+    });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -46,11 +79,13 @@ export const getProducts = async (req: Request, res: Response): Promise<void> =>
 export const getProductById = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
+    if (!id || typeof id !== "string") {
+      res.status(400).json({ success: false, error: "Invalid product identifier" });
+      return;
+    }
 
-    if (getIsConnected()) {
-      const product = await ProductModel.findOne({
-        $or: [{ id: id }, { _id: id.match(/^[0-9a-fA-F]{24}$/) ? id : null }],
-      });
+    if (isPersistenceAvailable()) {
+      const product = await ProductModel.findOne(buildProductLookupQuery(id));
 
       if (!product) {
         res.status(404).json({ success: false, error: "Product not found" });
@@ -61,14 +96,22 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
       return;
     }
 
-    // Fallback memory store
-    const item = memoryStore.products.find((p) => p.id === id);
-    if (!item) {
-      res.status(404).json({ success: false, error: "Product not found" });
+    if (isOperatingInMemory()) {
+      const item = findInMemoryProduct(id);
+      if (!item) {
+        res.status(404).json({ success: false, error: "Product not found" });
+        return;
+      }
+
+      res.json({ success: true, data: item });
       return;
     }
 
-    res.json({ success: true, data: item });
+    res.status(503).json({
+      success: false,
+      error: "Service temporarily unavailable. Database connection is down.",
+      code: "DATABASE_UNAVAILABLE",
+    });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -77,6 +120,15 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
 // POST /api/admin/products
 export const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
+    if (!isPersistenceAvailable() && !isOperatingInMemory()) {
+      res.status(503).json({
+        success: false,
+        error: "Service temporarily unavailable. Product modifications require database persistence.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
+    }
+
     const {
       name,
       category,
@@ -106,8 +158,10 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
       .replace(/^-|-$/g, "");
 
     const uniqueId = `${slug}-${Date.now().toString().slice(-4)}`;
+    const randomHexId = crypto.randomBytes(12).toString("hex");
 
     const newProductData = {
+      _id: randomHexId,
       id: uniqueId,
       name,
       category,
@@ -124,12 +178,13 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
       updatedAt: new Date(),
     };
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const created = await ProductModel.create(newProductData);
       res.status(201).json({ success: true, data: created });
       return;
     }
 
+    // In-memory fallback
     memoryStore.products.unshift(newProductData);
     res.status(201).json({ success: true, data: newProductData });
   } catch (error: any) {
@@ -140,12 +195,21 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
 // PUT /api/admin/products/:id
 export const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
+    if (!isPersistenceAvailable() && !isOperatingInMemory()) {
+      res.status(503).json({
+        success: false,
+        error: "Service temporarily unavailable. Product modifications require database persistence.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
+    }
+
     const { id } = req.params;
     const updates = { ...req.body, updatedAt: new Date() };
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const updated = await ProductModel.findOneAndUpdate(
-        { $or: [{ id: id }, { _id: id.match(/^[0-9a-fA-F]{24}$/) ? id : null }] },
+        buildProductLookupQuery(id),
         updates,
         { new: true }
       );
@@ -160,7 +224,10 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
     }
 
     // Fallback memory store
-    const index = memoryStore.products.findIndex((p) => p.id === id);
+    const isHex = is24HexObjectId(id);
+    const index = memoryStore.products.findIndex(
+      (p) => p.id === id || (isHex && p._id === id)
+    );
     if (index === -1) {
       res.status(404).json({ success: false, error: "Product not found" });
       return;
@@ -170,6 +237,7 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
       ...memoryStore.products[index],
       ...updates,
       id: memoryStore.products[index].id, // preserve id
+      _id: memoryStore.products[index]._id, // preserve _id
     };
 
     res.json({ success: true, data: memoryStore.products[index] });
@@ -181,12 +249,19 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
 // DELETE /api/admin/products/:id
 export const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
+    if (!isPersistenceAvailable() && !isOperatingInMemory()) {
+      res.status(503).json({
+        success: false,
+        error: "Service temporarily unavailable. Product modifications require database persistence.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
+    }
+
     const { id } = req.params;
 
-    if (getIsConnected()) {
-      const deleted = await ProductModel.findOneAndDelete({
-        $or: [{ id: id }, { _id: id.match(/^[0-9a-fA-F]{24}$/) ? id : null }],
-      });
+    if (isPersistenceAvailable()) {
+      const deleted = await ProductModel.findOneAndDelete(buildProductLookupQuery(id));
 
       if (!deleted) {
         res.status(404).json({ success: false, error: "Product not found" });
@@ -197,7 +272,10 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
       return;
     }
 
-    const index = memoryStore.products.findIndex((p) => p.id === id);
+    const isHex = is24HexObjectId(id);
+    const index = memoryStore.products.findIndex(
+      (p) => p.id === id || (isHex && p._id === id)
+    );
     if (index === -1) {
       res.status(404).json({ success: false, error: "Product not found" });
       return;
@@ -209,4 +287,3 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
     res.status(500).json({ success: false, error: error.message });
   }
 };
-

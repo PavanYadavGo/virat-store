@@ -1,8 +1,15 @@
 import { Request, Response } from "express";
 import { OrderModel, IOrderItem } from "../models/Order.js";
 import { ProductModel } from "../models/Product.js";
-import { getIsConnected } from "../config/db.js";
+import {
+  isPersistenceAvailable,
+  isOperatingInMemory,
+} from "../config/db.js";
 import { memoryStore, StoreOrder } from "../config/memoryStore.js";
+import {
+  buildProductLookupQuery,
+  findInMemoryProduct,
+} from "./productController.js";
 
 // Helper to generate readable Order ID
 const generateOrderId = (): string => {
@@ -14,6 +21,16 @@ const generateOrderId = (): string => {
 // POST /api/orders
 export const createOrder = async (req: Request, res: Response): Promise<void> => {
   try {
+    // Check storage availability: if persistence is down and not running in permitted local dev memory fallback, fail fast with 503
+    if (!isPersistenceAvailable() && !isOperatingInMemory()) {
+      res.status(503).json({
+        success: false,
+        error: "Service temporarily unavailable. Orders cannot be accepted while database persistence is offline.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
+    }
+
     const { customer, shippingAddress, items } = req.body;
 
     // Validate customer
@@ -59,12 +76,10 @@ export const createOrder = async (req: Request, res: Response): Promise<void> =>
 
       let matchedProduct: any = null;
 
-      if (getIsConnected()) {
-        matchedProduct = await ProductModel.findOne({
-          $or: [{ id: productId }, { _id: productId.match(/^[0-9a-fA-F]{24}$/) ? productId : null }],
-        });
-      } else {
-        matchedProduct = memoryStore.products.find((p) => p.id === productId);
+      if (isPersistenceAvailable()) {
+        matchedProduct = await ProductModel.findOne(buildProductLookupQuery(productId));
+      } else if (isOperatingInMemory()) {
+        matchedProduct = findInMemoryProduct(productId);
       }
 
       if (!matchedProduct) {
@@ -134,7 +149,7 @@ export const createOrder = async (req: Request, res: Response): Promise<void> =>
       updatedAt: new Date(),
     };
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const createdOrder = await OrderModel.create(orderData);
       res.status(201).json({
         success: true,
@@ -144,12 +159,20 @@ export const createOrder = async (req: Request, res: Response): Promise<void> =>
       return;
     }
 
-    // In-memory fallback
-    memoryStore.orders.unshift(orderData);
-    res.status(201).json({
-      success: true,
-      message: "Order placed successfully (Payment Pending)",
-      data: orderData,
+    if (isOperatingInMemory()) {
+      memoryStore.orders.unshift(orderData);
+      res.status(201).json({
+        success: true,
+        message: "Order placed successfully (Payment Pending)",
+        data: orderData,
+      });
+      return;
+    }
+
+    res.status(503).json({
+      success: false,
+      error: "Service temporarily unavailable. Orders cannot be accepted while database persistence is offline.",
+      code: "DATABASE_UNAVAILABLE",
     });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
@@ -161,7 +184,7 @@ export const getOrderById = async (req: Request, res: Response): Promise<void> =
   try {
     const { orderId } = req.params;
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const order = await OrderModel.findOne({ orderId });
       if (!order) {
         res.status(404).json({ success: false, error: "Order not found" });
@@ -171,13 +194,21 @@ export const getOrderById = async (req: Request, res: Response): Promise<void> =
       return;
     }
 
-    const order = memoryStore.orders.find((o) => o.orderId === orderId);
-    if (!order) {
-      res.status(404).json({ success: false, error: "Order not found" });
+    if (isOperatingInMemory()) {
+      const order = memoryStore.orders.find((o) => o.orderId === orderId);
+      if (!order) {
+        res.status(404).json({ success: false, error: "Order not found" });
+        return;
+      }
+      res.json({ success: true, data: order });
       return;
     }
 
-    res.json({ success: true, data: order });
+    res.status(503).json({
+      success: false,
+      error: "Service temporarily unavailable. Database connection is down.",
+      code: "DATABASE_UNAVAILABLE",
+    });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -186,16 +217,25 @@ export const getOrderById = async (req: Request, res: Response): Promise<void> =
 // GET /api/admin/orders (Admin Only)
 export const getAdminOrders = async (_req: Request, res: Response): Promise<void> => {
   try {
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const orders = await OrderModel.find().sort({ createdAt: -1 });
       res.json({ success: true, count: orders.length, data: orders });
       return;
     }
 
-    res.json({
-      success: true,
-      count: memoryStore.orders.length,
-      data: memoryStore.orders,
+    if (isOperatingInMemory()) {
+      res.json({
+        success: true,
+        count: memoryStore.orders.length,
+        data: memoryStore.orders,
+      });
+      return;
+    }
+
+    res.status(503).json({
+      success: false,
+      error: "Service temporarily unavailable. Database connection is down.",
+      code: "DATABASE_UNAVAILABLE",
     });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
@@ -205,6 +245,15 @@ export const getAdminOrders = async (_req: Request, res: Response): Promise<void
 // PUT /api/admin/orders/:orderId/status (Admin Only)
 export const updateOrderStatus = async (req: Request, res: Response): Promise<void> => {
   try {
+    if (!isPersistenceAvailable() && !isOperatingInMemory()) {
+      res.status(503).json({
+        success: false,
+        error: "Service temporarily unavailable. Order status updates require database persistence.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
+    }
+
     const { orderId } = req.params;
     const { orderStatus, paymentStatus } = req.body;
 
@@ -226,7 +275,7 @@ export const updateOrderStatus = async (req: Request, res: Response): Promise<vo
       return;
     }
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const updated = await OrderModel.findOneAndUpdate(
         { orderId },
         { orderStatus, updatedAt: new Date() },
@@ -260,4 +309,3 @@ export const updateOrderStatus = async (req: Request, res: Response): Promise<vo
     res.status(500).json({ success: false, error: error.message });
   }
 };
-

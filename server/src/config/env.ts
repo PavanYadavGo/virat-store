@@ -11,6 +11,10 @@ dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 export const config = {
   PORT: parseInt(process.env.PORT || "5000", 10),
   NODE_ENV: process.env.NODE_ENV || "development",
+  ALLOW_IN_MEMORY_FALLBACK:
+    process.env.NODE_ENV === "production"
+      ? false
+      : process.env.ALLOW_IN_MEMORY_FALLBACK !== "false",
   CLIENT_URL: process.env.CLIENT_URL || "http://localhost:5173",
   MONGODB_URI: process.env.MONGODB_URI || "mongodb://localhost:27017/virat_store",
   JWT_SECRET: process.env.JWT_SECRET || "default_dev_secret_change_in_production",

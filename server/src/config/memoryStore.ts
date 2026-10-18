@@ -1,8 +1,14 @@
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import { config } from "./env.js";
+
+export const generateDeterministicObjectId = (seed: string): string => {
+  return crypto.createHash("md5").update(seed).digest("hex").substring(0, 24);
+};
 
 export interface StoreProduct {
   id: string;
+  _id?: string;
   name: string;
   category: string;
   subcategory?: string;
@@ -458,12 +464,26 @@ export const initialProducts: StoreProduct[] = [
   },
 ];
 
+// Populate deterministic 24-character hexadecimal _id for each product
+initialProducts.forEach((product) => {
+  if (!product._id) {
+    product._id = generateDeterministicObjectId(product.id);
+  }
+});
+
 // In-Memory state for graceful fallback
 export const memoryStore = {
-  products: [...initialProducts],
+  products: initialProducts.map((p) => ({ ...p })),
   orders: [] as StoreOrder[],
   admins: [] as StoreAdmin[],
   contacts: [] as StoreContact[],
+};
+
+// Reset helper for test suites
+export const resetMemoryStoreForTesting = () => {
+  memoryStore.products = initialProducts.map((p) => ({ ...p }));
+  memoryStore.orders = [];
+  memoryStore.contacts = [];
 };
 
 // Initialize default admin in memory store

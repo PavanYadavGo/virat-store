@@ -6,12 +6,21 @@ import { AdminModel } from "../models/Admin.js";
 import { ProductModel } from "../models/Product.js";
 import { OrderModel } from "../models/Order.js";
 import { ContactMessageModel } from "../models/ContactMessage.js";
-import { getIsConnected } from "../config/db.js";
+import { isPersistenceAvailable, isOperatingInMemory } from "../config/db.js";
 import { memoryStore } from "../config/memoryStore.js";
 
 // POST /api/admin/login
 export const adminLogin = async (req: Request, res: Response): Promise<void> => {
   try {
+    if (!isPersistenceAvailable() && !isOperatingInMemory()) {
+      res.status(503).json({
+        success: false,
+        error: "Admin authentication is temporarily unavailable while database connection is down.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
+    }
+
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -25,9 +34,9 @@ export const adminLogin = async (req: Request, res: Response): Promise<void> => 
     const cleanEmail = email.trim().toLowerCase();
     let adminRecord: any = null;
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       adminRecord = await AdminModel.findOne({ email: cleanEmail });
-    } else {
+    } else if (isOperatingInMemory()) {
       adminRecord = memoryStore.admins.find((a) => a.email.toLowerCase() === cleanEmail);
     }
 
@@ -82,13 +91,13 @@ export const getAdminStats = async (_req: Request, res: Response): Promise<void>
     let pendingPaymentOrders = 0;
     let totalContacts = 0;
 
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       totalProducts = await ProductModel.countDocuments();
       activeProducts = await ProductModel.countDocuments({ isActive: true });
       totalOrders = await OrderModel.countDocuments();
       pendingPaymentOrders = await OrderModel.countDocuments({ paymentStatus: "pending_payment" });
       totalContacts = await ContactMessageModel.countDocuments();
-    } else {
+    } else if (isOperatingInMemory()) {
       totalProducts = memoryStore.products.length;
       activeProducts = memoryStore.products.filter((p) => p.isActive).length;
       totalOrders = memoryStore.orders.length;
@@ -96,6 +105,13 @@ export const getAdminStats = async (_req: Request, res: Response): Promise<void>
         (o) => o.paymentStatus === "pending_payment"
       ).length;
       totalContacts = memoryStore.contacts.length;
+    } else {
+      res.status(503).json({
+        success: false,
+        error: "Service temporarily unavailable. Database connection is down.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
     }
 
     res.json({

@@ -2,12 +2,22 @@ import { Request, Response } from "express";
 import nodemailer from "nodemailer";
 import { config } from "../config/env.js";
 import { ContactMessageModel } from "../models/ContactMessage.js";
-import { getIsConnected } from "../config/db.js";
+import { isPersistenceAvailable, isOperatingInMemory } from "../config/db.js";
 import { memoryStore } from "../config/memoryStore.js";
 
 // POST /api/contact
 export const submitContactForm = async (req: Request, res: Response): Promise<void> => {
   try {
+    // Check storage availability: if persistence is down and not running in permitted local dev memory fallback, fail fast with 503
+    if (!isPersistenceAvailable() && !isOperatingInMemory()) {
+      res.status(503).json({
+        success: false,
+        error: "Service temporarily unavailable. Your message could not be saved because database persistence is offline.",
+        code: "DATABASE_UNAVAILABLE",
+      });
+      return;
+    }
+
     const { name, email, phone, subject, message } = req.body;
 
     // Validation
@@ -111,13 +121,13 @@ ${trimmedData.message}
     }
 
     // Persist to Database or Memory Store
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       await ContactMessageModel.create({
         ...trimmedData,
         deliveryStatus,
         errorDetails,
       });
-    } else {
+    } else if (isOperatingInMemory()) {
       memoryStore.contacts.push({
         id: `MSG-${Date.now()}`,
         ...trimmedData,
@@ -143,19 +153,27 @@ ${trimmedData.message}
 // GET /api/admin/contacts (Admin Only)
 export const getAdminContacts = async (_req: Request, res: Response): Promise<void> => {
   try {
-    if (getIsConnected()) {
+    if (isPersistenceAvailable()) {
       const messages = await ContactMessageModel.find().sort({ createdAt: -1 });
       res.json({ success: true, count: messages.length, data: messages });
       return;
     }
 
-    res.json({
-      success: true,
-      count: memoryStore.contacts.length,
-      data: memoryStore.contacts,
+    if (isOperatingInMemory()) {
+      res.json({
+        success: true,
+        count: memoryStore.contacts.length,
+        data: memoryStore.contacts,
+      });
+      return;
+    }
+
+    res.status(503).json({
+      success: false,
+      error: "Service temporarily unavailable. Database connection is down.",
+      code: "DATABASE_UNAVAILABLE",
     });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
 };
-
