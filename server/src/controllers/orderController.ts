@@ -83,6 +83,14 @@ export const createOrder = async (req: Request, res: Response): Promise<void> =>
         return;
       }
 
+      if (matchedProduct.price <= 0 || matchedProduct.priceUnconfirmed) {
+        res.status(400).json({
+          success: false,
+          error: `Product "${matchedProduct.name}" has unconfirmed commercial pricing and cannot be ordered online yet.`,
+        });
+        return;
+      }
+
       // Security Invariant: Always use authoritative server price, ignore client-sent price
       const unitPrice = matchedProduct.price;
       calculatedSubtotal += unitPrice * quantity;

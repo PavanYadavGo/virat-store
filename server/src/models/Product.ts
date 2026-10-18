@@ -13,6 +13,7 @@ export interface IProduct extends Document {
   sizes: string[];
   stock: number;
   isActive: boolean;
+  priceUnconfirmed?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,6 +32,7 @@ const ProductSchema: Schema = new Schema(
     sizes: { type: [String], default: ["XS", "S", "M", "L", "XL", "XXL"] },
     stock: { type: Number, default: 50, min: 0 },
     isActive: { type: Boolean, default: true, index: true },
+    priceUnconfirmed: { type: Boolean, default: false },
   },
   {
     timestamps: true,

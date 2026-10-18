@@ -40,12 +40,13 @@ export const seedDatabase = async (): Promise<void> => {
       await ProductModel.findOneAndUpdate(
         { id: item.id },
         {
-          $setOnInsert: {
+          $set: {
             id: item.id,
             name: item.name,
             category: item.category,
             subcategory: item.subcategory,
             price: item.price,
+            priceUnconfirmed: item.priceUnconfirmed,
             description: item.description,
             features: item.features,
             images: item.images,
@@ -61,6 +62,14 @@ export const seedDatabase = async (): Promise<void> => {
     }
 
     console.log(`[SEED] Processed ${seededCount} products idempotently.`);
+
+    // Remove deprecated mock products so only approved client catalog exists
+    const validIds = initialProducts.map((p) => p.id);
+    const deleteResult = await ProductModel.deleteMany({ id: { $nin: validIds } });
+    if (deleteResult.deletedCount > 0) {
+      console.log(`[SEED] Cleaned up ${deleteResult.deletedCount} obsolete mock products.`);
+    }
+
     console.log("[SEED] Database seed complete.");
   } catch (error: any) {
     console.error("[SEED ERROR]", error.message);
