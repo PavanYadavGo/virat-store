@@ -151,6 +151,27 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
       return;
     }
 
+    if (
+      price === null ||
+      price === "" ||
+      (typeof price === "string" && price.trim() === "")
+    ) {
+      res.status(400).json({
+        success: false,
+        error: "Invalid price: price cannot be empty or null",
+      });
+      return;
+    }
+
+    const parsedPrice = Number(price);
+    if (isNaN(parsedPrice) || parsedPrice < 0) {
+      res.status(400).json({
+        success: false,
+        error: "Invalid price: price must be a valid non-negative number",
+      });
+      return;
+    }
+
     const slug = name
       .toLowerCase()
       .trim()
@@ -160,13 +181,19 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
     const uniqueId = `${slug}-${Date.now().toString().slice(-4)}`;
     const randomHexId = crypto.randomBytes(12).toString("hex");
 
+    const priceUnconfirmed =
+      req.body.priceUnconfirmed !== undefined
+        ? Boolean(req.body.priceUnconfirmed) || parsedPrice <= 0
+        : parsedPrice <= 0;
+
     const newProductData = {
       _id: randomHexId,
       id: uniqueId,
       name,
       category,
       subcategory,
-      price: Number(price),
+      price: parsedPrice,
+      priceUnconfirmed,
       description,
       features: Array.isArray(features) ? features : [],
       images: Array.isArray(images) && images.length > 0 ? images : ["/src/assets/products/performance-tee.png"],
@@ -205,13 +232,88 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
     }
 
     const { id } = req.params;
-    const updates = { ...req.body, updatedAt: new Date() };
+    if (!id || typeof id !== "string") {
+      res.status(400).json({ success: false, error: "Invalid product identifier" });
+      return;
+    }
+
+    // Verify product exists
+    let existingProduct: any = null;
+    if (isPersistenceAvailable()) {
+      existingProduct = await ProductModel.findOne(buildProductLookupQuery(id));
+    } else if (isOperatingInMemory()) {
+      existingProduct = findInMemoryProduct(id);
+    }
+
+    if (!existingProduct) {
+      res.status(404).json({ success: false, error: "Product not found" });
+      return;
+    }
+
+    const updates: any = { ...req.body, updatedAt: new Date() };
+
+    // Deliberate price validation & price confirmation handling
+    if ("price" in req.body) {
+      const rawPrice = req.body.price;
+      if (
+        rawPrice === null ||
+        rawPrice === "" ||
+        (typeof rawPrice === "string" && rawPrice.trim() === "")
+      ) {
+        res.status(400).json({
+          success: false,
+          error: "Invalid price: price cannot be empty or null",
+        });
+        return;
+      }
+
+      const parsedPrice = Number(rawPrice);
+      if (isNaN(parsedPrice) || parsedPrice < 0) {
+        res.status(400).json({
+          success: false,
+          error: "Invalid price: price must be a valid non-negative number",
+        });
+        return;
+      }
+
+      updates.price = parsedPrice;
+
+      if (parsedPrice === 0) {
+        // Numeric zero is strictly unconfirmed according to pricing rules
+        updates.priceUnconfirmed = true;
+      } else {
+        // Positive valid price (> 0)
+        // If priceUnconfirmed was explicitly passed, honor it; otherwise mark as confirmed
+        updates.priceUnconfirmed =
+          req.body.priceUnconfirmed !== undefined
+            ? Boolean(req.body.priceUnconfirmed)
+            : false;
+      }
+    } else if ("priceUnconfirmed" in req.body) {
+      const desiredUnconfirmed = Boolean(req.body.priceUnconfirmed);
+      if (!desiredUnconfirmed && existingProduct.price <= 0) {
+        res.status(400).json({
+          success: false,
+          error: "Cannot confirm price: product price is zero or unconfirmed",
+        });
+        return;
+      }
+      updates.priceUnconfirmed = desiredUnconfirmed;
+    }
+
+    // Ensure stock is numeric if provided
+    if ("stock" in req.body && req.body.stock !== undefined) {
+      const parsedStock = Number(req.body.stock);
+      if (!isNaN(parsedStock) && parsedStock >= 0) {
+        updates.stock = parsedStock;
+      }
+    }
 
     if (isPersistenceAvailable()) {
       const updated = await ProductModel.findOneAndUpdate(
         buildProductLookupQuery(id),
         updates,
-        { new: true }
+        { new: true, runValidators: true }
       );
 
       if (!updated) {
