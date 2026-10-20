@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ArrowRight, Check } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { api } from "../services/api";
+import { getImagePresentation } from "../utils/imagePresentation";
 import performanceTee from "../assets/products/performance-tee.png";
 
 export interface ProductItem {
@@ -17,6 +18,8 @@ export interface ProductItem {
   features: string[];
   images: string[];
   badge?: string;
+  sizes?: string[];
+  hasBackground?: boolean;
 }
 
 // Verified client products catalog (15 products across 8 families)
@@ -314,6 +317,51 @@ export const productsDatabase: ProductItem[] = [
     ],
     badge: "COMING SOON",
   },
+  {
+    id: "virat-geometric-tee-white",
+    name: "VIRAT Geometric Graphic Tee - White",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "High-performance athletic training t-shirt in crisp white, featuring technical geometric graphic elements, breathable moisture-wicking fabrication, and athletic cut. Commercial details pending client confirmation.",
+    features: [
+      "Advanced moisture-wicking technical fabric",
+      "Signature geometric graphic print",
+      "Ergonomic athletic silhouette",
+      "Reinforced crew collar and durable flatlock seams",
+    ],
+    images: [
+      "/images/products/training-tee-white-front.webp",
+      "/images/products/training-tee-white-back.webp",
+    ],
+    badge: "COMING SOON",
+    sizes: [],
+    hasBackground: true,
+  },
+  {
+    id: "virat-track-pant-white",
+    name: "VIRAT Performance Track Pant - White",
+    category: "Bottoms",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Engineered white athletic track pant with streamlined tapered fit, ribbed ankle cuffs, zippered secure pockets, and athletic performance stretch. Commercial details pending client confirmation.",
+    features: [
+      "Breathable four-way stretch technical fabric",
+      "Elasticated waistband with adjustable internal drawcord",
+      "Concealed zippered side storage pockets",
+      "Tapered leg profile with ribbed cuffs",
+    ],
+    images: [
+      "/images/products/track-pant-white-front.webp",
+      "/images/products/track-pant-white-back.webp",
+      "/images/products/track-pant-white-duo.webp",
+      "/images/products/track-pant-white-showcase-front.webp",
+      "/images/products/track-pant-white-showcase-back.webp",
+    ],
+    badge: "COMING SOON",
+    sizes: [],
+    hasBackground: true,
+  },
 ];
 
 const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -407,47 +455,73 @@ const ProductPage = () => {
         <div className="flex flex-col-reverse gap-4 md:flex-row lg:h-[700px]">
           {/* Thumbnails */}
           <div className="flex gap-3 md:flex-col md:w-20 lg:w-24 shrink-0">
-            {product.images.map((img: string, idx: number) => (
-              <button
-                key={idx}
-                onClick={() => setActiveImage(idx)}
-                className={`
-                  relative aspect-[4/5] w-20 overflow-hidden bg-[#E8E8E5] transition-all
-                  md:w-full
-                  ${
-                    activeImage === idx
-                      ? "border-2 border-[#FF0000]"
-                      : "border border-transparent hover:border-black/20"
-                  }
-                `}
-              >
-                <img
-                  src={img}
-                  alt={`${product.name} view ${idx + 1}`}
-                  className="h-full w-full object-contain p-2"
-                />
-              </button>
-            ))}
+            {product.images.map((img: string, idx: number) => {
+              const thumbPres = getImagePresentation(img, {
+                context: "thumbnail",
+                explicitMode: product.hasBackground ? "photographic" : undefined,
+              });
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActiveImage(idx)}
+                  style={thumbPres.containerStyle}
+                  className={`
+                    relative aspect-[4/5] w-20 overflow-hidden ${thumbPres.containerClass} transition-all
+                    md:w-full
+                    ${
+                      activeImage === idx
+                        ? "border-2 border-[#FF0000]"
+                        : "border border-transparent hover:border-black/20"
+                    }
+                  `}
+                >
+                  <img
+                    src={img}
+                    alt={`${product.name} view ${idx + 1}`}
+                    className={thumbPres.imageClass}
+                  />
+                </button>
+              );
+            })}
           </div>
 
           {/* Main Image */}
-          <div className="relative flex-1 bg-[#E8E8E5] overflow-hidden group">
-            {product.badge && (
-              <span className="absolute left-5 top-5 z-10 bg-[#FF0000] px-3 py-2 text-[10px] font-black uppercase tracking-[0.15em] text-white">
-                {product.badge}
-              </span>
-            )}
+          {(() => {
+            const currentImages =
+              product.images && product.images.length > 0
+                ? product.images
+                : ["/images/products/training-tee-white-front.webp"];
+            const currentIdx =
+              activeImage < currentImages.length ? activeImage : 0;
+            const currentSrc = currentImages[currentIdx];
+            const mainPres = getImagePresentation(currentSrc, {
+              context: "detail",
+              explicitMode: product.hasBackground ? "photographic" : undefined,
+            });
 
-            <motion.img
-              key={activeImage}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              src={product.images[activeImage]}
-              alt={product.name}
-              className="h-full w-full object-contain p-10 lg:p-16"
-            />
-          </div>
+            return (
+              <div
+                style={mainPres.containerStyle}
+                className={`relative flex-1 ${mainPres.containerClass} overflow-hidden group flex items-center justify-center`}
+              >
+                {product.badge && (
+                  <span className="absolute left-5 top-5 z-10 bg-[#FF0000] px-3 py-2 text-[10px] font-black uppercase tracking-[0.15em] text-white">
+                    {product.badge}
+                  </span>
+                )}
+
+                <motion.img
+                  key={currentIdx}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  src={currentSrc}
+                  alt={product.name}
+                  className={mainPres.imageClass}
+                />
+              </div>
+            );
+          })()}
         </div>
 
         {/* RIGHT: DETAILS */}
@@ -500,22 +574,49 @@ const ProductPage = () => {
             </div>
 
             <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-              {SIZES.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
-                  className={`
-                    flex h-12 items-center justify-center border text-[11px] font-bold uppercase tracking-[0.1em] transition-all
-                    ${
-                      selectedSize === size
-                        ? "border-[#FF0000] bg-[#FF0000] text-white"
-                        : "border-black/10 bg-white/50 hover:border-black/40"
-                    }
-                  `}
-                >
-                  {size}
-                </button>
-              ))}
+              {product.sizes && product.sizes.length > 0 ? (
+                product.sizes.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`
+                      flex h-12 items-center justify-center border text-[11px] font-bold uppercase tracking-[0.1em] transition-all
+                      ${
+                        selectedSize === size
+                          ? "border-[#FF0000] bg-[#FF0000] text-white"
+                          : "border-black/10 bg-white/50 hover:border-black/40"
+                      }
+                    `}
+                  >
+                    {size}
+                  </button>
+                ))
+              ) : product.sizes && product.sizes.length === 0 ? (
+                <div className="col-span-3 sm:col-span-6 border border-black/10 bg-black/5 px-4 py-3 text-xs text-black/60">
+                  Official size run awaiting client confirmation.
+                </div>
+              ) : product.category.toLowerCase() === "accessories" ? (
+                <div className="col-span-3 sm:col-span-6 border border-black/10 bg-white/50 px-4 py-3 text-xs font-bold uppercase tracking-[0.1em] text-black/70">
+                  Standard Adjustable Fit (One Size)
+                </div>
+              ) : (
+                SIZES.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`
+                      flex h-12 items-center justify-center border text-[11px] font-bold uppercase tracking-[0.1em] transition-all
+                      ${
+                        selectedSize === size
+                          ? "border-[#FF0000] bg-[#FF0000] text-white"
+                          : "border-black/10 bg-white/50 hover:border-black/40"
+                      }
+                    `}
+                  >
+                    {size}
+                  </button>
+                ))
+              )}
             </div>
           </motion.div>
 

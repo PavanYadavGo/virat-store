@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { motion } from "motion/react";
+import { getImagePresentation } from "../utils/imagePresentation";
 
 type Product = {
   id: string;
@@ -148,6 +149,24 @@ const products: Product[] = [
     price: 0,
     priceUnconfirmed: true,
     image: "/images/products/track-jacket-navy-gold-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-white",
+    name: "VIRAT Geometric Graphic Tee - White",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/training-tee-white-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-track-pant-white",
+    name: "VIRAT Performance Track Pant - White",
+    category: "Bottoms",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/track-pant-white-front.webp",
     badge: "COMING SOON",
   },
 ];
@@ -390,49 +409,43 @@ const CategoryPage = () => {
               className="group"
             >
               {/* IMAGE */}
-              <Link
-                to={`/product/${product.id}`}
-                className="
-                  relative
-                  block
-                  aspect-[4/5]
-                  overflow-hidden
-                  bg-[#E8E8E5]
-                "
-              >
-                {product.badge && (
-                  <span
-                    className="
-                      absolute left-3 top-3
-                      z-10
-                      bg-[#FF0000]
-                      px-2.5 py-1.5
-                      text-[8px]
-                      font-black
-                      uppercase
-                      tracking-[0.15em]
-                      text-white
-                    "
+              {(() => {
+                const pres = getImagePresentation(product.image, { context: "card" });
+                return (
+                  <Link
+                    to={`/product/${product.id}`}
+                    style={pres.containerStyle}
+                    className={`
+                      relative
+                      block
+                      aspect-[4/5]
+                      overflow-hidden
+                      ${pres.containerClass}
+                    `}
                   >
-                    {product.badge}
-                  </span>
-                )}
+                    {product.badge && (
+                      <span
+                        className="
+                          absolute left-3 top-3
+                          z-10
+                          bg-[#FF0000]
+                          px-2.5 py-1.5
+                          text-[8px]
+                          font-black
+                          uppercase
+                          tracking-[0.15em]
+                          text-white
+                        "
+                      >
+                        {product.badge}
+                      </span>
+                    )}
 
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="
-                    h-full
-                    w-full
-                    object-contain
-                    p-8
-                    transition-transform
-                    duration-700
-                    ease-out
-                    group-hover:scale-105
-                    sm:p-12
-                  "
-                />
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className={pres.imageClass}
+                    />
 
                 <div
                   className="
@@ -469,6 +482,8 @@ const CategoryPage = () => {
                   <ArrowRight size={17} />
                 </div>
               </Link>
+            );
+          })()}
 
               {/* INFO */}
               <div className="pt-4">

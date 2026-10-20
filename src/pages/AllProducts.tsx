@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
 import { productsDatabase, type ProductItem } from "./ProductPage";
+import { getImagePresentation } from "../utils/imagePresentation";
 import { api } from "../services/api";
 
 export default function AllProducts() {
@@ -173,25 +174,31 @@ export default function AllProducts() {
                   className="group flex flex-col"
                 >
                   {/* CARD IMAGE */}
-                  <Link
-                    to={`/product/${product.id}`}
-                    className="relative block aspect-[4/5] overflow-hidden border border-black/5 bg-[#E8E8E5]"
-                  >
-                    {product.badge && (
-                      <span className="absolute left-3 top-3 z-10 bg-[#FF0000] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.15em] text-white shadow-sm">
-                        {product.badge}
-                      </span>
-                    )}
+                  {(() => {
+                    const pres = getImagePresentation(imageSrc, { context: "card" });
+                    return (
+                      <Link
+                        to={`/product/${product.id}`}
+                        style={pres.containerStyle}
+                        className={`relative block aspect-[4/5] overflow-hidden border border-black/5 ${pres.containerClass}`}
+                      >
+                        {product.badge && (
+                          <span className="absolute left-3 top-3 z-10 bg-[#FF0000] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.15em] text-white shadow-sm">
+                            {product.badge}
+                          </span>
+                        )}
 
-                    <img
-                      src={imageSrc}
-                      alt={product.name}
-                      className="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
+                        <img
+                          src={imageSrc}
+                          alt={product.name}
+                          className={pres.imageClass}
+                          loading="lazy"
+                        />
 
-                    <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/[0.03]" />
-                  </Link>
+                        <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/[0.03]" />
+                      </Link>
+                    );
+                  })()}
 
                   {/* DETAILS */}
                   <div className="mt-4 flex flex-1 flex-col justify-between">
