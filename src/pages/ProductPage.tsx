@@ -362,6 +362,50 @@ export const productsDatabase: ProductItem[] = [
     sizes: [],
     hasBackground: true,
   },
+  {
+    id: "virat-geometric-tee-pink",
+    name: "VIRAT Geometric Graphic Tee - Coral Pink",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Athletic performance training t-shirt in energetic coral pink, featuring technical angular geometric graphics, breathable moisture-wicking fabrication, and athletic cut. Commercial details pending client confirmation.",
+    features: [
+      "Breathable moisture-wicking technical fabric",
+      "Signature angular geometric graphic print",
+      "Ergonomic athletic silhouette",
+      "Reinforced crew collar and durable flatlock seams",
+    ],
+    images: [
+      "/images/products/training-tee-pink-front.webp",
+      "/images/products/training-tee-pink-back.webp",
+      "/images/products/training-tee-pink-duo.webp",
+    ],
+    badge: "COMING SOON",
+    sizes: [],
+    hasBackground: true,
+  },
+  {
+    id: "virat-geometric-tee-purple",
+    name: "VIRAT Geometric Graphic Tee - Lavender Purple",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    description: "Athletic performance training t-shirt in lavender purple, engineered with technical geometric graphics, sweat-wicking knit structure, and freedom-of-movement tailoring. Commercial details pending client confirmation.",
+    features: [
+      "Lightweight sweat-wicking performance knit",
+      "Signature geometric chest and shoulder print",
+      "Athletic comfort fit with ergonomic seams",
+      "Shape-retention ribbed collar",
+    ],
+    images: [
+      "/images/products/training-tee-purple-front.webp",
+      "/images/products/training-tee-purple-back.webp",
+      "/images/products/training-tee-purple-duo.webp",
+    ],
+    badge: "COMING SOON",
+    sizes: [],
+    hasBackground: true,
+  },
 ];
 
 const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];

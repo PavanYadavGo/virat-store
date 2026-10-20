@@ -28,3 +28,9 @@ server/.env
 *.sln
 *.sw?
 asset-audit/
+
+# Large promotional video (exceeds GitHub 100MB limit)
+client-product-drop/promo video.MP4
+client-product-drop/promo video.mp4
+src/assets/promo video.mp4
+

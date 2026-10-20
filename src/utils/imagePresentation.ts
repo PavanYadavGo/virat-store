@@ -37,6 +37,14 @@ export const ASSET_REGISTRY: Record<string, AssetDisplayConfig> = {
   "training-tee-white-front.webp": { mode: "photographic", edgeColor: "#78797E" },
   "training-tee-white-back.webp": { mode: "photographic", edgeColor: "#76777C" },
 
+  // --- NEW CLIENT DROP: CORAL PINK & LAVENDER PURPLE TEES (Opaque RGB Studio Background) ---
+  "training-tee-pink-front.webp": { mode: "photographic", edgeColor: "#BBBBBF" },
+  "training-tee-pink-back.webp": { mode: "photographic", edgeColor: "#BBBBBF" },
+  "training-tee-pink-duo.webp": { mode: "photographic", edgeColor: "#A3A3A7" },
+  "training-tee-purple-front.webp": { mode: "photographic", edgeColor: "#B7B4BA" },
+  "training-tee-purple-back.webp": { mode: "photographic", edgeColor: "#B7B4BA" },
+  "training-tee-purple-duo.webp": { mode: "photographic", edgeColor: "#A09DA1" },
+
   // --- NEW CLIENT DROP: WHITE TRACK PANT (Opaque RGB Studio Background) ---
   "track-pant-white-front.webp": { mode: "photographic", edgeColor: "#77777B" },
   "track-pant-white-back.webp": { mode: "photographic", edgeColor: "#737477" },

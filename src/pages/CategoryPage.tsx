@@ -169,6 +169,24 @@ const products: Product[] = [
     image: "/images/products/track-pant-white-front.webp",
     badge: "COMING SOON",
   },
+  {
+    id: "virat-geometric-tee-pink",
+    name: "VIRAT Geometric Graphic Tee - Coral Pink",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/training-tee-pink-front.webp",
+    badge: "COMING SOON",
+  },
+  {
+    id: "virat-geometric-tee-purple",
+    name: "VIRAT Geometric Graphic Tee - Lavender Purple",
+    category: "T-Shirts",
+    price: 0,
+    priceUnconfirmed: true,
+    image: "/images/products/training-tee-purple-front.webp",
+    badge: "COMING SOON",
+  },
 ];
 
 const getCategoryName = (pathname: string) => {

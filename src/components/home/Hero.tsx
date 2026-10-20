@@ -2,6 +2,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
+import banner0 from "../../assets/hero/banner-0.webp";
+import banner1 from "../../assets/hero/banner-1.webp";
+import banner2 from "../../assets/hero/banner-2.webp";
+import banner3 from "../../assets/hero/banner-3.webp";
+import banner4 from "../../assets/hero/banner-4.webp";
 import header01 from "../../assets/hero/header-1.png";
 import header02 from "../../assets/hero/header-2.png";
 import header03 from "../../assets/hero/header-3.png";
@@ -9,6 +14,11 @@ import header04 from "../../assets/hero/header-4.png";
 import header05 from "../../assets/hero/header-5.png";
 
 const slides = [
+  banner0,
+  banner1,
+  banner2,
+  banner3,
+  banner4,
   header01,
   header02,
   header03,
@@ -46,11 +56,11 @@ const Hero = () => {
   className="
     relative
     mt-[68px]
-    min-h-[calc(100svh-68px)]
+    w-full
+    aspect-[1600/666]
     overflow-hidden
     bg-black
     sm:mt-20
-    sm:min-h-[calc(100svh-80px)]
   "
 >
       {/* =====================================================
@@ -64,37 +74,30 @@ const Hero = () => {
             custom={direction}
             initial={{
               opacity: 0,
-              scale: 1.08,
             }}
             animate={{
               opacity: 1,
-              scale: 1,
             }}
             exit={{
               opacity: 0,
-              scale: 1.03,
             }}
             transition={{
               opacity: {
-                duration: 1.2,
+                duration: 0.8,
                 ease: "easeInOut",
               },
-              scale: {
-                duration: 7,
-                ease: [0.16, 1, 0.3, 1],
-              },
             }}
-            className="absolute inset-0"
+            className="absolute inset-0 flex items-center justify-center bg-black"
           >
             <img
               src={slide}
-              alt=""
+              alt={`Virat Sportswear Campaign Banner ${current + 1}`}
               draggable={false}
               className="
                 h-full
                 w-full
                 select-none
-                object-cover
+                object-contain
               "
             />
           </motion.div>
@@ -161,13 +164,15 @@ const Hero = () => {
       <div
         className="
           absolute
-          bottom-7
-          right-5
+          bottom-2.5
+          right-3
           z-30
           flex
           items-center
-          gap-5
+          gap-2.5
+          sm:bottom-6
           sm:right-8
+          sm:gap-5
           lg:right-10
         "
       >
@@ -177,9 +182,11 @@ const Hero = () => {
           className="
             flex
             items-baseline
-            gap-1.5
+            gap-1
             font-mono
-            text-xs
+            text-[10px]
+            sm:gap-1.5
+            sm:text-xs
           "
         >
           <span className="font-bold text-white">
@@ -206,9 +213,11 @@ const Hero = () => {
               aria-label={`Go to slide ${index + 1}`}
               className="
                 relative
-                h-8
-                w-10
+                h-6
+                w-7
                 overflow-hidden
+                md:h-8
+                md:w-10
               "
             >
               <span
@@ -253,8 +262,8 @@ const Hero = () => {
             aria-label="Previous slide"
             className="
               flex
-              h-9
-              w-9
+              h-7
+              w-7
               items-center
               justify-center
               border
@@ -264,9 +273,13 @@ const Hero = () => {
               hover:border-white
               hover:bg-white
               hover:text-black
+              sm:h-8
+              sm:w-8
+              lg:h-9
+              lg:w-9
             "
           >
-            <ChevronLeft size={17} />
+            <ChevronLeft size={15} />
           </button>
 
           <button
@@ -274,8 +287,8 @@ const Hero = () => {
             aria-label="Next slide"
             className="
               flex
-              h-9
-              w-9
+              h-7
+              w-7
               items-center
               justify-center
               border
@@ -285,9 +298,13 @@ const Hero = () => {
               hover:border-white
               hover:bg-white
               hover:text-black
+              sm:h-8
+              sm:w-8
+              lg:h-9
+              lg:w-9
             "
           >
-            <ChevronRight size={17} />
+            <ChevronRight size={15} />
           </button>
         </div>
       </div>
@@ -299,7 +316,7 @@ const Hero = () => {
       <div
         className="
           absolute
-          bottom-8
+          bottom-6
           left-5
           z-30
           hidden

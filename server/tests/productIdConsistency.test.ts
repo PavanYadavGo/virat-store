@@ -38,9 +38,9 @@ describe("Product Identifier Consistency (MongoDB vs In-Memory)", () => {
     });
   });
 
-  it("ensures all 17 catalog products possess both a slug ID and a deterministic 24-hex _id", () => {
-    assert.equal(initialProducts.length, 17, "Catalog must contain exactly 17 approved client products");
-    assert.equal(memoryStore.products.length, 17);
+  it("ensures all 19 catalog products possess both a slug ID and a deterministic 24-hex _id", () => {
+    assert.equal(initialProducts.length, 19, "Catalog must contain exactly 19 approved client products");
+    assert.equal(memoryStore.products.length, 19);
 
     for (const product of memoryStore.products) {
       assert(typeof product.id === "string" && product.id.length > 0, `Product ${product.name} must have a valid string id`);

@@ -2,7 +2,8 @@ import { ArrowUpRight, MoveRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
-import performanceVideo from "../../assets/cricket-collection.mp4";
+import performanceVideo from "../../assets/promo video.mp4";
+import posterImage from "../../assets/cricket-collection.jpg";
 
 const CricketCollection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -272,6 +273,7 @@ const CricketCollection = () => {
           <motion.video
             style={{ y: imageY }}
             src={performanceVideo}
+            poster={posterImage}
             autoPlay
             muted
             loop
