@@ -4,6 +4,7 @@ import { Plus, Edit2, Trash2, X, AlertCircle, Loader2, UploadCloud } from "lucid
 import { AdminLayout } from "../../components/admin/AdminLayout";
 import { useAdminAuth } from "../../context/AdminAuthContext";
 import { api, type ApiProduct } from "../../services/api";
+import { getImagePresentation } from "../../utils/imagePresentation";
 
 const AdminProducts = () => {
   const { token, isAuthenticated } = useAdminAuth();
@@ -268,13 +269,22 @@ const AdminProducts = () => {
               <tr key={p.id} className="hover:bg-black/[0.02]">
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 shrink-0 border border-black/10 bg-[#E8E8E5] p-1">
-                      <img
-                        src={p.images?.[0] || "/src/assets/products/performance-tee.png"}
-                        alt={p.name}
-                        className="h-full w-full object-contain"
-                      />
-                    </div>
+                    {(() => {
+                      const imgSrc = p.images?.[0] || "/src/assets/products/performance-tee.png";
+                      const pres = getImagePresentation(imgSrc, { context: "thumbnail" });
+                      return (
+                        <div
+                          style={pres.containerStyle}
+                          className={`h-10 w-10 shrink-0 overflow-hidden border border-black/10 ${pres.containerClass}`}
+                        >
+                          <img
+                            src={imgSrc}
+                            alt={p.name}
+                            className={pres.imageClass}
+                          />
+                        </div>
+                      );
+                    })()}
                     <div>
                       <p className="font-bold text-[#080808]">{p.name}</p>
                       <p className="text-[10px] text-black/40 font-mono">{p.id}</p>

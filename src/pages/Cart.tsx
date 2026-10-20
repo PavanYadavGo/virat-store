@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import { Trash2, Plus, Minus, ArrowRight, ArrowLeft, ShoppingBag } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { getImagePresentation } from "../utils/imagePresentation";
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, subtotal, itemCount } = useCart();
@@ -110,13 +111,21 @@ const Cart = () => {
               >
                 {/* Product Image & Details */}
                 <div className="flex items-center gap-5">
-                  <div className="h-24 w-24 shrink-0 overflow-hidden border border-black/10 bg-[#E8E8E5] p-2">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
+                  {(() => {
+                    const pres = getImagePresentation(item.image, { context: "thumbnail" });
+                    return (
+                      <div
+                        style={pres.containerStyle}
+                        className={`h-24 w-24 shrink-0 overflow-hidden border border-black/10 ${pres.containerClass}`}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className={pres.imageClass}
+                        />
+                      </div>
+                    );
+                  })()}
 
                   <div>
                     {item.category && (

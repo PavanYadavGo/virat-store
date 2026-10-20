@@ -34,45 +34,45 @@ export const ASSET_REGISTRY: Record<string, AssetDisplayConfig> = {
   "cap-white-side.webp": { mode: "cutout" },
 
   // --- NEW CLIENT DROP: WHITE GEOMETRIC TEE (Opaque RGB Studio Background) ---
-  "training-tee-white-front.webp": { mode: "photographic", edgeColor: "#78797F" },
-  "training-tee-white-back.webp": { mode: "photographic", edgeColor: "#78797F" },
+  "training-tee-white-front.webp": { mode: "photographic", edgeColor: "#78797E" },
+  "training-tee-white-back.webp": { mode: "photographic", edgeColor: "#76777C" },
 
   // --- NEW CLIENT DROP: WHITE TRACK PANT (Opaque RGB Studio Background) ---
-  "track-pant-white-front.webp": { mode: "photographic", edgeColor: "#76767A" },
-  "track-pant-white-back.webp": { mode: "photographic", edgeColor: "#76767A" },
-  "track-pant-white-duo.webp": { mode: "photographic", edgeColor: "#7D7D82" },
-  "track-pant-white-showcase-front.webp": { mode: "photographic", edgeColor: "#A2A4AA" },
-  "track-pant-white-showcase-back.webp": { mode: "photographic", edgeColor: "#C0C0C0" },
+  "track-pant-white-front.webp": { mode: "photographic", edgeColor: "#77777B" },
+  "track-pant-white-back.webp": { mode: "photographic", edgeColor: "#737477" },
+  "track-pant-white-duo.webp": { mode: "photographic", edgeColor: "#77777B" },
+  "track-pant-white-showcase-front.webp": { mode: "photographic", edgeColor: "#9B9EA4" },
+  "track-pant-white-showcase-back.webp": { mode: "photographic", edgeColor: "#BCBCBC" },
 
   // --- EXISTING APPAREL (Opaque RGB Studio Background) ---
-  "camo-track-pant-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
+  "camo-track-pant-duo.webp": { mode: "photographic", edgeColor: "#C1C1C3" },
   "camo-training-shorts-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "camo-training-shorts-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "camo-training-shorts-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
+  "camo-training-shorts-duo.webp": { mode: "photographic", edgeColor: "#C1C1C3" },
   "pro-match-shorts-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "pro-match-shorts-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "pro-match-shorts-showcase-front.webp": { mode: "photographic", edgeColor: "#D1D1D4" },
-  "pro-match-shorts-showcase-back.webp": { mode: "photographic", edgeColor: "#D5D5D7" },
+  "pro-match-shorts-showcase-front.webp": { mode: "photographic", edgeColor: "#D5D4D7" },
+  "pro-match-shorts-showcase-back.webp": { mode: "photographic", edgeColor: "#D9D9DB" },
   "training-tee-navy-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "training-tee-navy-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "training-tee-navy-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "training-tee-green-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "training-tee-green-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "training-tee-green-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "training-tee-grey-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "training-tee-grey-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "training-tee-grey-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
+  "training-tee-navy-duo.webp": { mode: "photographic", edgeColor: "#CBCBCB" },
+  "training-tee-green-front.webp": { mode: "photographic", edgeColor: "#D0D0D1" },
+  "training-tee-green-back.webp": { mode: "photographic", edgeColor: "#CFCFD0" },
+  "training-tee-green-duo.webp": { mode: "photographic", edgeColor: "#CFCFD0" },
+  "training-tee-grey-front.webp": { mode: "photographic", edgeColor: "#CDCACB" },
+  "training-tee-grey-back.webp": { mode: "photographic", edgeColor: "#CCCACB" },
+  "training-tee-grey-duo.webp": { mode: "photographic", edgeColor: "#CECECE" },
   "sleeveless-vest-maroon-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "sleeveless-vest-maroon-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "sleeveless-vest-maroon-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "sleeveless-vest-green-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
+  "sleeveless-vest-maroon-duo.webp": { mode: "photographic", edgeColor: "#CCCDCD" },
+  "sleeveless-vest-green-duo.webp": { mode: "photographic", edgeColor: "#CFCFCF" },
   "sleeveless-vest-green-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "performance-polo-mint-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "performance-polo-mint-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "performance-polo-mint-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
+  "performance-polo-mint-duo.webp": { mode: "photographic", edgeColor: "#D4D4D4" },
   "performance-polo-blue-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "performance-polo-blue-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
-  "performance-polo-blue-duo.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
+  "performance-polo-blue-duo.webp": { mode: "photographic", edgeColor: "#D5D5D6" },
   "track-jacket-navy-red-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "track-jacket-navy-red-back.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
   "track-jacket-navy-gold-front.webp": { mode: "photographic", edgeColor: "#CAC7C8" },
@@ -149,30 +149,32 @@ export const getImagePresentation = (
   }
 
   // Opaque photographic asset with its own studio backdrop
+  const resolvedBg = edgeColor || "#CAC7C8";
+
   if (context === "thumbnail") {
     return {
       isCutout: false,
-      containerClass: "bg-[#E8E8E5] dark:bg-neutral-900",
+      containerClass: "bg-transparent",
       imageClass: "h-full w-full object-cover p-0",
-      containerStyle: edgeColor ? { backgroundColor: edgeColor } : undefined,
+      containerStyle: { backgroundColor: resolvedBg },
     };
   }
 
   if (context === "card") {
     return {
       isCutout: false,
-      containerClass: "bg-[#E8E8E5] dark:bg-neutral-900",
+      containerClass: "bg-transparent",
       imageClass: "h-full w-full object-contain p-0 transition-transform duration-700 ease-out group-hover:scale-105",
-      containerStyle: edgeColor ? { backgroundColor: edgeColor } : undefined,
+      containerStyle: { backgroundColor: resolvedBg },
     };
   }
 
   // Detail main view
   return {
     isCutout: false,
-    containerClass: "bg-[#E8E8E5] dark:bg-neutral-900",
+    containerClass: "bg-transparent",
     imageClass: "h-full w-full object-contain p-0",
-    containerStyle: edgeColor ? { backgroundColor: edgeColor } : undefined,
+    containerStyle: { backgroundColor: resolvedBg },
   };
 };
 

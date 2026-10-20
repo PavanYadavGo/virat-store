@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, ArrowLeft, ShieldCheck, AlertCircle } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { getImagePresentation } from "../utils/imagePresentation";
 import { api } from "../services/api";
 
 const Checkout = () => {
@@ -283,9 +284,17 @@ const Checkout = () => {
                 {items.map((item) => (
                   <div key={`${item.productId}-${item.size}`} className="flex items-center justify-between text-xs">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 shrink-0 border border-black/10 bg-[#E8E8E5] p-1">
-                        <img src={item.image} alt={item.name} className="h-full w-full object-contain" />
-                      </div>
+                      {(() => {
+                        const pres = getImagePresentation(item.image, { context: "thumbnail" });
+                        return (
+                          <div
+                            style={pres.containerStyle}
+                            className={`h-12 w-12 shrink-0 overflow-hidden border border-black/10 ${pres.containerClass}`}
+                          >
+                            <img src={item.image} alt={item.name} className={pres.imageClass} />
+                          </div>
+                        );
+                      })()}
                       <div>
                         <p className="font-bold uppercase text-[#080808]">{item.name}</p>
                         <p className="text-black/50">Size: {item.size} × {item.quantity}</p>
