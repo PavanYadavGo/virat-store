@@ -1,12 +1,16 @@
 import { ArrowUpRight, MoveRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
-import performanceVideo from "../../assets/promo video.mp4";
 import posterImage from "../../assets/cricket-collection.jpg";
+
+// Configurable promotional video: defaults to local web-optimized asset, supports remote override via env
+const defaultPromoVideo = "/videos/promo-video.mp4";
+const performanceVideo = import.meta.env.VITE_PROMO_VIDEO_URL || defaultPromoVideo;
 
 const CricketCollection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [videoError, setVideoError] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -268,26 +272,43 @@ const CricketCollection = () => {
             />
           </div>
 
-          {/* VIDEO */}
+          {/* VIDEO / HERO MEDIA */}
 
-          <motion.video
-            style={{ y: imageY }}
-            src={performanceVideo}
-            poster={posterImage}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="
-              absolute
-              inset-0
-              h-[110%]
-              w-full
-              scale-[1.02]
-              object-cover
-            "
-          />
+          {performanceVideo && !videoError ? (
+            <motion.video
+              style={{ y: imageY }}
+              src={performanceVideo}
+              poster={posterImage}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              onError={() => setVideoError(true)}
+              className="
+                absolute
+                inset-0
+                h-[110%]
+                w-full
+                scale-[1.02]
+                object-cover
+              "
+            />
+          ) : (
+            <motion.img
+              style={{ y: imageY }}
+              src={posterImage}
+              alt="Cricket Collection Performance"
+              className="
+                absolute
+                inset-0
+                h-[110%]
+                w-full
+                scale-[1.02]
+                object-cover
+              "
+            />
+          )}
 
           {/* CINEMATIC OVERLAY */}
 
