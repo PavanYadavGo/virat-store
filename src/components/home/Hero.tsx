@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 // import banner1 from "../../assets/hero/banner-1.webp";
 // import banner2 from "../../assets/hero/banner-2.webp";
 // import banner3 from "../../assets/hero/banner-3.webp";
-import banner4 from "../../assets/hero/banner-4.webp";
-// import header01 from "../../assets/hero/header-1.png";
+// import banner4 from "../../assets/hero/banner-4.webp";
+import header01 from "../../assets/hero/header-1.png";
 import header02 from "../../assets/hero/header-2.png";
 import header03 from "../../assets/hero/header-3.png";
 import header04 from "../../assets/hero/header-4.png";
@@ -18,8 +18,8 @@ const slides = [
   // banner1,
   // banner2,
   // banner3,
-  banner4,
-  // header01,
+  // banner4,
+  header01,
   header02,
   header03,
   header04,
