@@ -61,8 +61,14 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const togglePlay = () => {
+    if (!hasInteracted) {
+      setHasInteracted(true);
+      setIsPlaying(true);
+      return;
+    }
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
@@ -96,18 +102,31 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
         onClick={togglePlay}
         className="relative aspect-[9/14] w-full cursor-pointer overflow-hidden bg-black"
       >
-        <video
-          ref={videoRef}
-          src={video.videoUrl}
-          poster={video.posterUrl}
-          playsInline
-          loop
-          muted={isMuted}
-          preload="metadata"
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-        />
+        {hasInteracted ? (
+          <video
+            ref={videoRef}
+            src={video.videoUrl}
+            poster={video.posterUrl}
+            playsInline
+            loop
+            muted={isMuted}
+            autoPlay
+            preload="auto"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+          />
+        ) : (
+          <img
+            src={video.posterUrl}
+            alt={video.title}
+            width={450}
+            height={700}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+          />
+        )}
 
         {/* Ambient subtle vignette */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
@@ -259,7 +278,7 @@ const SeeItInAction = () => {
               className="
                 mt-5 flex items-center gap-3
                 text-[10px] font-bold uppercase
-                tracking-[0.25em] text-black/40
+                tracking-[0.25em] text-black/70
               "
             >
               <span className="h-px w-8 bg-current" />
@@ -300,7 +319,7 @@ const SeeItInAction = () => {
             <span
               className="
                 text-[10px] font-bold uppercase
-                tracking-[0.25em] text-black/50
+                tracking-[0.25em] text-black/70
                 transition-colors duration-300
                 group-hover:text-[#FF0000]
               "
@@ -313,7 +332,7 @@ const SeeItInAction = () => {
             size={18}
             strokeWidth={1.5}
             className="
-              text-black/40 transition-all duration-300
+              text-black/70 transition-all duration-300
               group-hover:-translate-y-1 group-hover:translate-x-1
               group-hover:text-[#FF0000]
             "

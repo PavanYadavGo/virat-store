@@ -2,14 +2,14 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
-import cricketImage from "../../assets/categories/Category images/Surya.jpeg";
-import cricketcategorieImage from "../../assets/categories/Category images/Rohit.jpeg";
-import cricketcategoriesecondImage from "../../assets/categories/Category images/SuryaY.jpeg";
-import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.png";
-import cap from "../../assets/categories/Category images/cap.png";
-import cricketfImage from "../../assets/categories/Category images/women.png";
-import casualImage from "../../assets/categories/cricket.jpg";
-import TeamImage from "../../assets/categories/Category images/bagpack.png";
+import cricketImage from "../../assets/categories/Category images/Surya.webp";
+const cricketcategorieImage = "/images/categories/cricket-rohit.webp";
+import cricketcategoriesecondImage from "../../assets/categories/Category images/SuryaY.webp";
+import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.webp";
+import cap from "../../assets/categories/Category images/cap.webp";
+import cricketfImage from "../../assets/categories/Category images/women.webp";
+import casualImage from "../../assets/categories/cricket.webp";
+import TeamImage from "../../assets/categories/Category images/bagpack.webp";
 
 const MotionLink = motion.create(Link);
 
@@ -78,11 +78,7 @@ const CategorySection = () => {
       <div className="grid border-y border-black/30 md:grid-cols-4">
         {/* HEADING */}
 
-        <motion.div
-          initial={{ opacity: 0, x: -25 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
+        <div
           className="
             flex min-h-[200px] items-center justify-center
             border-b border-black/30 px-6 py-10 text-center
@@ -99,17 +95,13 @@ const CategorySection = () => {
             <br />
             Game
           </h2>
-        </motion.div>
+        </div>
 
         {/* CRICKET IMAGE */}
 
-        <MotionLink
+        <Link
           to="/cricket"
           aria-label="Explore cricket collection"
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
           className="
             group relative min-h-[220px] overflow-hidden
             border-b border-black/30 md:min-h-[260px]
@@ -119,8 +111,11 @@ const CategorySection = () => {
           <img
             src={cricketcategorieImage}
             alt="Cricket collection"
-            loading="lazy"
-            decoding="async"
+            width={600}
+            height={400}
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
             style={{ objectPosition: "center 35%" }}
             className="
               absolute inset-0 h-full w-full object-cover
@@ -144,17 +139,13 @@ const CategorySection = () => {
           >
             <ArrowUpRight size={17} />
           </div>
-        </MotionLink>
+        </Link>
 
         {/* CRICKET TITLE */}
 
-        <MotionLink
+        <Link
           to="/cricket"
           aria-label="Explore cricket collection"
-          initial={{ opacity: 0, x: 25 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
           className="
             flex min-h-[180px] items-center justify-center
             border-b border-black/30 px-6
@@ -170,17 +161,13 @@ const CategorySection = () => {
           >
             Cricket
           </h3>
-        </MotionLink>
+        </Link>
 
         {/* WOMEN'S CRICKET IMAGE */}
 
-        <MotionLink
+        <Link
           to="/women"
           aria-label="Explore women's collection"
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
           className="
             group relative min-h-[220px] overflow-hidden
             md:min-h-[260px]
@@ -189,6 +176,8 @@ const CategorySection = () => {
           <img
             src={cricketcategoriesecondImage}
             alt="Women's cricket collection"
+            width={600}
+            height={400}
             loading="lazy"
             decoding="async"
             style={{ objectPosition: "center 2%" }}
@@ -214,7 +203,7 @@ const CategorySection = () => {
           >
             <ArrowUpRight size={17} />
           </div>
-        </MotionLink>
+        </Link>
       </div>
 
       {/* SHOP BY CATEGORY HEADER */}
@@ -271,9 +260,11 @@ const CategorySection = () => {
             <img
               src={category.image}
               alt={category.title}
+              width={600}
+              height={450}
               loading="lazy"
               decoding="async"
-              style={{ objectPosition: 'center ${category.y}%' }}
+              style={{ objectPosition: `center ${category.y}%` }}
               className="
                 absolute inset-0 h-full w-full object-cover
                 transition-transform duration-700 group-hover:scale-105

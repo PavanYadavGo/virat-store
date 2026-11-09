@@ -287,7 +287,7 @@ const AdminProducts = () => {
                     })()}
                     <div>
                       <p className="font-bold text-[#080808]">{p.name}</p>
-                      <p className="text-[10px] text-black/40 font-mono">{p.id}</p>
+                      <p className="text-[10px] text-black/70 font-mono">{p.id}</p>
                     </div>
                   </div>
                 </td>

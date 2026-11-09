@@ -2,28 +2,20 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-// import banner0 from "../../assets/hero/banner-0.webp";
-// import banner1 from "../../assets/hero/banner-1.webp";
-// import banner2 from "../../assets/hero/banner-2.webp";
-// import banner3 from "../../assets/hero/banner-3.webp";
-// import banner4 from "../../assets/hero/banner-4.webp";
-import header01 from "../../assets/hero/header-1.png";
-import header02 from "../../assets/hero/header-2.png";
-import header03 from "../../assets/hero/header-3.png";
-import header04 from "../../assets/hero/header-4.png";
-import header05 from "../../assets/hero/header-5.png";
-
 const slides = [
-  // banner0,
-  // banner1,
-  // banner2,
-  // banner3,
-  // banner4,
-  header01,
-  header02,
-  header03,
-  header04,
-  header05,
+  "/images/hero/header-1.webp",
+  "/images/hero/header-2.webp",
+  "/images/hero/header-3.webp",
+  "/images/hero/header-4.webp",
+  "/images/hero/header-5.webp",
+];
+
+const mobileSlides = [
+  "/images/hero/header-1-mobile.webp",
+  "/images/hero/header-2-mobile.webp",
+  "/images/hero/header-3-mobile.webp",
+  "/images/hero/header-4-mobile.webp",
+  "/images/hero/header-5-mobile.webp",
 ];
 
 const Hero = () => {
@@ -73,7 +65,7 @@ const Hero = () => {
             key={current}
             custom={direction}
             initial={{
-              opacity: 0,
+              opacity: current === 0 ? 1 : 0,
             }}
             animate={{
               opacity: 1,
@@ -89,17 +81,29 @@ const Hero = () => {
             }}
             className="absolute inset-0 flex items-center justify-center bg-black"
           >
-            <img
-              src={slide}
-              alt={`Virat Sportswear Campaign Banner ${current + 1}`}
-              draggable={false}
-              className="
-                h-full
-                w-full
-                select-none
-                object-contain
-              "
-            />
+            <picture className="flex h-full w-full items-center justify-center">
+              <source
+                media="(max-width: 640px)"
+                srcSet={mobileSlides[current]}
+                type="image/webp"
+              />
+              <img
+                src={slide}
+                alt={`Virat Sportswear Campaign Banner ${current + 1}`}
+                draggable={false}
+                width={1600}
+                height={666}
+                fetchPriority={current === 0 ? "high" : "low"}
+                loading={current === 0 ? "eager" : "lazy"}
+                decoding={current === 0 ? "sync" : "async"}
+                className="
+                  h-full
+                  w-full
+                  select-none
+                  object-contain
+                "
+              />
+            </picture>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -193,9 +197,9 @@ const Hero = () => {
             {String(current + 1).padStart(2, "0")}
           </span>
 
-          <span className="text-white/30">/</span>
+          <span className="text-white/60">/</span>
 
-          <span className="text-white/40">
+          <span className="text-white/70">
             {String(slides.length).padStart(2, "0")}
           </span>
         </div>
@@ -325,7 +329,7 @@ const Hero = () => {
           text-[9px]
           uppercase
           tracking-[0.4em]
-          text-white/35
+          text-white/65
           sm:left-8
           lg:block
         "

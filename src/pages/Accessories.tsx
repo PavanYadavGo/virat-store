@@ -1,12 +1,14 @@
-import Navbar from "../components/layout/Navbar";
-// import Footer from "../components/layout/Footer";
+import SEO from "../components/common/SEO";
 import ShopPage from "../components/shop/ShopPage";
 
 const Accessories = () => {
   return (
     <>
-      <Navbar />
-
+      <SEO
+        title="Accessories"
+        description="The extras that complete your cricket kit. Sports caps, duffles, kit bags, socks, support gear and recovery essentials."
+        canonical="/accessories"
+      />
       <ShopPage
         eyebrow="Accessories — Virat"
         title="Accessories"

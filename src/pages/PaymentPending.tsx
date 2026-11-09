@@ -92,14 +92,14 @@ const PaymentPending = () => {
             {/* Grid of info */}
             <div className="grid gap-8 sm:grid-cols-2">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-black/40">Customer</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-black/70">Customer</p>
                 <p className="mt-1 font-bold">{order.customer.fullName}</p>
                 <p className="text-xs text-black/60">{order.customer.email}</p>
                 <p className="text-xs text-black/60">{order.customer.phone}</p>
               </div>
 
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-black/40">Shipping Address</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-black/70">Shipping Address</p>
                 <p className="mt-1 font-bold">{order.shippingAddress.street}</p>
                 <p className="text-xs text-black/60">
                   {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.postalCode}
@@ -110,7 +110,7 @@ const PaymentPending = () => {
 
             {/* Items */}
             <div className="mt-8 border-t border-black/10 pt-6">
-              <p className="mb-4 text-[10px] font-bold uppercase tracking-widest text-black/40">Items</p>
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-widest text-black/70">Items</p>
               <div className="flex flex-col gap-4">
                 {order.items.map((item, idx) => (
                   <div key={idx} className="flex items-center justify-between text-xs sm:text-sm">

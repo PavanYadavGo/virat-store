@@ -252,6 +252,8 @@ const Navbar = () => {
             <img
               src={logo}
               alt="VIRAT"
+              width={180}
+              height={60}
               className="h-11 w-auto object-contain sm:h-12 lg:h-15"
             />
           </Link>

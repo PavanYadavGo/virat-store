@@ -85,7 +85,7 @@ export default function ContactSection() {
           <span className="text-xs font-bold uppercase tracking-[0.25em]">
             Contact Virat
           </span>
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-black/40">
+          <span className="text-xs font-medium uppercase tracking-[0.2em] text-black/70">
             Get in touch
           </span>
         </motion.div>
@@ -250,7 +250,7 @@ export default function ContactSection() {
 
               {/* SUBMIT */}
               <div className="flex flex-col gap-5 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <p className="max-w-sm text-xs leading-relaxed text-black/40">
+                <p className="max-w-sm text-xs leading-relaxed text-black/70">
                   By submitting this form, you agree to be contacted regarding
                   your enquiry.
                 </p>

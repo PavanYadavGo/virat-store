@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Mail, MapPin, Phone, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
+import SEO from "../components/common/SEO";
 import { api } from "../services/api";
 
 const Contact = () => {
@@ -70,6 +71,11 @@ const Contact = () => {
 
   return (
     <main className="min-h-screen bg-[#F5F5F2] text-[#080808]">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with the Virat Sports team for order inquiries, sizing assistance, and custom teamwear collaborations."
+        canonical="/contact"
+      />
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-20 lg:pb-32">
         {/* WATERMARK */}
         <div

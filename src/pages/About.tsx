@@ -1,9 +1,15 @@
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
+import SEO from "../components/common/SEO";
 
 const About = () => {
   return (
     <main className="min-h-screen bg-[#F5F5F2] text-[#080808]">
+      <SEO
+        title="About Us"
+        description="Learn about Virat Sports: our heritage, commitment to elite cricket, and passion for engineering modern performance sportswear."
+        canonical="/about"
+      />
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-20 lg:pb-32">
         {/* =====================================================
             BACKGROUND WATERMARK
@@ -42,7 +48,7 @@ const About = () => {
               About Virat
             </span>
 
-            <span className="text-xs font-medium uppercase tracking-[0.2em] text-black/40">
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-black/70">
               The brand
             </span>
           </motion.div>
@@ -107,7 +113,7 @@ const About = () => {
           >
             <div className="grid gap-12 lg:grid-cols-[0.35fr_1fr] lg:gap-20">
               <div>
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-black/40">
+                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-black/70">
                   01 — Our story
                 </span>
               </div>

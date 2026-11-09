@@ -1,3 +1,4 @@
+import SEO from "../components/common/SEO";
 import Hero from "../components/home/Hero";
 import CategorySection from "../components/home/CategorySection";
 // import FeaturedProducts from "../components/home/FeaturedProducts";
@@ -13,6 +14,11 @@ import TeamWearSection from "../components/home/TeamwearSection";
 const Home = () => {
   return (
     <main>
+      <SEO
+        title="Cricket & Performance Sportswear"
+        description="Shop cricket-inspired sportswear at Virat. Explore cricket jerseys, sports T-shirts, shorts and tracksuits designed for everyday comfort and performance."
+        canonical="/"
+      />
       <Hero />
       <CategorySection />
       <CricketCollection />

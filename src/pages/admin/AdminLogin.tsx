@@ -45,7 +45,7 @@ const AdminLogin = () => {
             Admin Portal<span className="text-[#FF0000]">.</span>
           </h1>
 
-          <p className="mt-2 text-xs font-bold uppercase tracking-widest text-black/40">
+          <p className="mt-2 text-xs font-bold uppercase tracking-widest text-black/70">
             Virat Sportswear Store Management
           </p>
         </div>
@@ -109,7 +109,7 @@ const AdminLogin = () => {
         </form>
 
         <div className="mt-8 text-center">
-          <Link to="/" className="text-xs font-bold uppercase tracking-wider text-black/40 hover:text-black">
+          <Link to="/" className="text-xs font-bold uppercase tracking-wider text-black/70 hover:text-black">
             ← Return to Public Storefront
           </Link>
         </div>

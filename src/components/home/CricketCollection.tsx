@@ -1,8 +1,8 @@
 import { ArrowUpRight, MoveRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import posterImage from "../../assets/cricket-collection.jpg";
+import posterImage from "../../assets/cricket-collection.webp";
 
 // Configurable promotional video: defaults to local web-optimized asset, supports remote override via env
 const defaultPromoVideo = "/videos/promo-video.mp4";
@@ -11,6 +11,22 @@ const performanceVideo = import.meta.env.VITE_PROMO_VIDEO_URL || defaultPromoVid
 const CricketCollection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [videoError, setVideoError] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -274,7 +290,7 @@ const CricketCollection = () => {
 
           {/* VIDEO / HERO MEDIA */}
 
-          {performanceVideo && !videoError ? (
+          {performanceVideo && !videoError && isInView ? (
             <motion.video
               style={{ y: imageY }}
               src={performanceVideo}
@@ -299,6 +315,10 @@ const CricketCollection = () => {
               style={{ y: imageY }}
               src={posterImage}
               alt="Cricket Collection Performance"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              decoding="async"
               className="
                 absolute
                 inset-0
@@ -492,7 +512,7 @@ const CricketCollection = () => {
             font-bold
             uppercase
             tracking-[0.18em]
-            text-black/40
+            text-black/70
             sm:text-center
           "
         >
@@ -506,7 +526,7 @@ const CricketCollection = () => {
               font-bold
               uppercase
               tracking-[0.18em]
-              text-black/40
+              text-black/70
             "
           >
             Virat Sportswear

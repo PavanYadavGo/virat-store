@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, Check } from "lucide-react";
+import SEO from "../components/common/SEO";
 import { useCart } from "../context/CartContext";
 import { api } from "../services/api";
 import { getImagePresentation } from "../utils/imagePresentation";
@@ -469,11 +470,87 @@ const ProductPage = () => {
     setTimeout(() => setIsAdded(false), 2000);
   };
 
+  const productSchema = {
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.images?.map((img: string) =>
+      img.startsWith("http") ? img : `https://www.viratsports.in${img}`
+    ),
+    category: product.category,
+    brand: {
+      "@type": "Brand",
+      name: "Virat Sports",
+    },
+    offers:
+      product.price > 0 && !product.priceUnconfirmed
+        ? {
+            "@type": "Offer",
+            price: product.price,
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            url: `https://www.viratsports.in/product/${product.id}`,
+            seller: {
+              "@type": "Organization",
+              name: "Virat Sports",
+            },
+          }
+        : {
+            "@type": "Offer",
+            availability: "https://schema.org/PreOrder",
+            url: `https://www.viratsports.in/product/${product.id}`,
+            seller: {
+              "@type": "Organization",
+              name: "Virat Sports",
+            },
+          },
+  };
+
+  const breadcrumbSchema = {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.viratsports.in/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: product.category,
+        item: `https://www.viratsports.in/${
+          product.category.toLowerCase() === "accessories" ? "accessories" : "men"
+        }`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `https://www.viratsports.in/product/${product.id}`,
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[#F5F5F2] pt-24 text-[#080808]">
+      <SEO
+        title={product.name}
+        description={product.description}
+        canonical={`/product/${product.id}`}
+        ogType="product"
+        ogImage={
+          product.images && product.images.length > 0
+            ? product.images[0].startsWith("http")
+              ? product.images[0]
+              : `https://www.viratsports.in${product.images[0]}`
+            : undefined
+        }
+        schema={[productSchema, breadcrumbSchema]}
+      />
       {/* BREADCRUMB */}
       <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
-        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/70">
           <Link to="/" className="transition-colors hover:text-[#FF0000]">
             Home
           </Link>
@@ -522,6 +599,10 @@ const ProductPage = () => {
                   <img
                     src={img}
                     alt={`${product.name} view ${idx + 1}`}
+                    width={80}
+                    height={100}
+                    loading="lazy"
+                    decoding="async"
                     className={thumbPres.imageClass}
                   />
                 </button>
@@ -561,6 +642,9 @@ const ProductPage = () => {
                   transition={{ duration: 0.4 }}
                   src={currentSrc}
                   alt={product.name}
+                  width={800}
+                  height={1000}
+                  fetchPriority="high"
                   className={mainPres.imageClass}
                 />
               </div>
