@@ -38,13 +38,30 @@
     />
     <meta name="twitter:image" content="https://www.viratsports.in/images/hero/header-1.webp" />
 
-    <!-- Preload LCP Candidate Hero Banner -->
+    <!-- Preload LCP Candidate Hero Banner (Responsive) -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/hero/header-1-mobile.webp"
+      type="image/webp"
+      media="(max-width: 640px)"
+      fetchpriority="high"
+    />
     <link
       rel="preload"
       as="image"
       href="/images/hero/header-1.webp"
       type="image/webp"
+      media="(min-width: 641px)"
       fetchpriority="high"
+    />
+    <!-- Preload Above-the-fold Category Card Image for Mobile Viewports -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/categories/cricket-rohit.webp"
+      type="image/webp"
+      media="(max-width: 768px)"
     />
 
     <!-- Structured Data: Organization & WebSite -->

@@ -10,6 +10,14 @@ const slides = [
   "/images/hero/header-5.webp",
 ];
 
+const mobileSlides = [
+  "/images/hero/header-1-mobile.webp",
+  "/images/hero/header-2-mobile.webp",
+  "/images/hero/header-3-mobile.webp",
+  "/images/hero/header-4-mobile.webp",
+  "/images/hero/header-5-mobile.webp",
+];
+
 const Hero = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -73,22 +81,29 @@ const Hero = () => {
             }}
             className="absolute inset-0 flex items-center justify-center bg-black"
           >
-            <img
-              src={slide}
-              alt={`Virat Sportswear Campaign Banner ${current + 1}`}
-              draggable={false}
-              width={1600}
-              height={666}
-              fetchPriority={current === 0 ? "high" : "low"}
-              loading={current === 0 ? "eager" : "lazy"}
-              decoding={current === 0 ? "sync" : "async"}
-              className="
-                h-full
-                w-full
-                select-none
-                object-contain
-              "
-            />
+            <picture className="flex h-full w-full items-center justify-center">
+              <source
+                media="(max-width: 640px)"
+                srcSet={mobileSlides[current]}
+                type="image/webp"
+              />
+              <img
+                src={slide}
+                alt={`Virat Sportswear Campaign Banner ${current + 1}`}
+                draggable={false}
+                width={1600}
+                height={666}
+                fetchPriority={current === 0 ? "high" : "low"}
+                loading={current === 0 ? "eager" : "lazy"}
+                decoding={current === 0 ? "sync" : "async"}
+                className="
+                  h-full
+                  w-full
+                  select-none
+                  object-contain
+                "
+              />
+            </picture>
           </motion.div>
         </AnimatePresence>
       </div>
