@@ -2,18 +2,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-import header01 from "../../assets/hero/header-1.webp";
-import header02 from "../../assets/hero/header-2.webp";
-import header03 from "../../assets/hero/header-3.webp";
-import header04 from "../../assets/hero/header-4.webp";
-import header05 from "../../assets/hero/header-5.webp";
-
 const slides = [
-  header01,
-  header02,
-  header03,
-  header04,
-  header05,
+  "/images/hero/header-1.webp",
+  "/images/hero/header-2.webp",
+  "/images/hero/header-3.webp",
+  "/images/hero/header-4.webp",
+  "/images/hero/header-5.webp",
 ];
 
 const Hero = () => {
