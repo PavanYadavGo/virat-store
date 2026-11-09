@@ -115,7 +115,7 @@ const CategorySection = () => {
             height={400}
             loading="eager"
             fetchPriority="high"
-            decoding="async"
+            decoding="sync"
             style={{ objectPosition: "center 35%" }}
             className="
               absolute inset-0 h-full w-full object-cover
@@ -143,13 +143,9 @@ const CategorySection = () => {
 
         {/* CRICKET TITLE */}
 
-        <MotionLink
+        <Link
           to="/cricket"
           aria-label="Explore cricket collection"
-          initial={{ opacity: 0, x: 25 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
           className="
             flex min-h-[180px] items-center justify-center
             border-b border-black/30 px-6
@@ -165,7 +161,7 @@ const CategorySection = () => {
           >
             Cricket
           </h3>
-        </MotionLink>
+        </Link>
 
         {/* WOMEN'S CRICKET IMAGE */}
 

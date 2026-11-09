@@ -61,8 +61,14 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const togglePlay = () => {
+    if (!hasInteracted) {
+      setHasInteracted(true);
+      setIsPlaying(true);
+      return;
+    }
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
@@ -96,18 +102,31 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
         onClick={togglePlay}
         className="relative aspect-[9/14] w-full cursor-pointer overflow-hidden bg-black"
       >
-        <video
-          ref={videoRef}
-          src={video.videoUrl}
-          poster={video.posterUrl}
-          playsInline
-          loop
-          muted={isMuted}
-          preload="none"
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-        />
+        {hasInteracted ? (
+          <video
+            ref={videoRef}
+            src={video.videoUrl}
+            poster={video.posterUrl}
+            playsInline
+            loop
+            muted={isMuted}
+            autoPlay
+            preload="auto"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+          />
+        ) : (
+          <img
+            src={video.posterUrl}
+            alt={video.title}
+            width={450}
+            height={700}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+          />
+        )}
 
         {/* Ambient subtle vignette */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
