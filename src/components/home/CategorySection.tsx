@@ -279,7 +279,7 @@ const CategorySection = () => {
               height={450}
               loading="lazy"
               decoding="async"
-              style={{ objectPosition: 'center ${category.y}%' }}
+              style={{ objectPosition: `center ${category.y}%` }}
               className="
                 absolute inset-0 h-full w-full object-cover
                 transition-transform duration-700 group-hover:scale-105
