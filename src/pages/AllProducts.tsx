@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/common/SEO";
 import { productsDatabase, type ProductItem } from "./ProductPage";
 import { getImagePresentation } from "../utils/imagePresentation";
 import { api } from "../services/api";
@@ -66,6 +67,11 @@ export default function AllProducts() {
 
   return (
     <main className="min-h-screen bg-[#F5F5F2] text-[#080808]">
+      <SEO
+        title="All Products"
+        description="Browse the full Virat athletic collection: cricket match gear, graphic training tees, performance polos, athletic shorts, and track pants."
+        canonical="/products"
+      />
       {/* HERO SECTION */}
       <section className="relative overflow-hidden border-b border-black/10 px-6 pb-14 pt-36 lg:px-10">
         <div className="mx-auto max-w-7xl">
@@ -120,7 +126,7 @@ export default function AllProducts() {
 
           {/* ITEM COUNT & SORT */}
           <div className="flex items-center gap-4">
-            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/70">
               {filteredAndSortedProducts.length} Item{filteredAndSortedProducts.length !== 1 ? "s" : ""}
             </div>
 
@@ -191,6 +197,9 @@ export default function AllProducts() {
                         <img
                           src={imageSrc}
                           alt={product.name}
+                          width={400}
+                          height={500}
+                          decoding="async"
                           className={pres.imageClass}
                           loading="lazy"
                         />
@@ -203,7 +212,7 @@ export default function AllProducts() {
                   {/* DETAILS */}
                   <div className="mt-4 flex flex-1 flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.15em] text-black/45">
+                      <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.15em] text-black/70">
                         <span>{product.category || "Apparel"}</span>
                         {product.subcategory && <span>{product.subcategory}</span>}
                       </div>

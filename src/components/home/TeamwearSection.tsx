@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
-import TeamImage from "../../assets/categories/TEAM.png";
+import TeamImage from "../../assets/categories/TEAM.webp";
 import trendingImage from "../../assets/categories/trending.webp";
 
 const TeamwearSection = () => {
@@ -42,6 +42,8 @@ const TeamwearSection = () => {
           <img
             src={TeamImage}
             alt="Teamwear collection"
+            width={1600}
+            height={1000}
             loading="lazy"
             decoding="async"
             className="
@@ -77,6 +79,8 @@ const TeamwearSection = () => {
           <img
             src={trendingImage}
             alt="Trending products collection"
+            width={600}
+            height={800}
             loading="lazy"
             decoding="async"
             className="

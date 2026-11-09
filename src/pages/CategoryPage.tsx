@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/common/SEO";
 import { getImagePresentation } from "../utils/imagePresentation";
 
 type Product = {
@@ -239,6 +240,11 @@ const CategoryPage = () => {
 
   return (
     <main className="min-h-screen bg-[#F5F5F2] text-[#080808]">
+      <SEO
+        title={`${parentName ? `${parentName} — ` : ""}${categoryName}`}
+        description={`Explore Virat's ${categoryName} performance athletic collection. Engineered for comfort, mobility, and high-intensity sport.`}
+        canonical={location.pathname}
+      />
       {/* HEADER */}
       <section className="relative overflow-hidden border-b border-black/10 pt-28 sm:pt-32">
         {/* Background number */}
@@ -263,7 +269,7 @@ const CategoryPage = () => {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 pb-12 lg:px-10 lg:pb-16">
           {/* Breadcrumb */}
-          <div className="mb-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+          <div className="mb-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/70">
             <Link
               to="/"
               className="transition-colors hover:text-[#FF0000]"
@@ -325,7 +331,7 @@ const CategoryPage = () => {
       {/* TOOLBAR */}
       <section className="sticky top-0 z-30 border-b border-black/10 bg-[#F5F5F2]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-10">
-          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/70">
             {sortedProducts.length} Products
           </div>
 
@@ -462,6 +468,10 @@ const CategoryPage = () => {
                     <img
                       src={product.image}
                       alt={product.name}
+                      width={400}
+                      height={500}
+                      loading="lazy"
+                      decoding="async"
                       className={pres.imageClass}
                     />
 
@@ -505,7 +515,7 @@ const CategoryPage = () => {
 
               {/* INFO */}
               <div className="pt-4">
-                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-black/40">
+                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-black/70">
                   {product.category}
                 </p>
 

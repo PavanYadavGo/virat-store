@@ -113,10 +113,10 @@ const AdminDashboard = () => {
               className="group border border-black/10 bg-white p-6 transition-all duration-200 hover:border-black/30 hover:shadow-sm"
             >
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-black/40">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-black/70">
                   {card.label}
                 </span>
-                <Icon size={18} className="text-black/30 group-hover:text-[#FF0000]" />
+                <Icon size={18} className="text-black/60 group-hover:text-[#FF0000]" />
               </div>
 
               <div className="mt-4 flex items-baseline justify-between">
@@ -129,7 +129,7 @@ const AdminDashboard = () => {
                 />
               </div>
 
-              <p className="mt-2 text-xs font-medium text-black/50">
+              <p className="mt-2 text-xs font-medium text-black/70">
                 {card.sublabel}
               </p>
             </Link>

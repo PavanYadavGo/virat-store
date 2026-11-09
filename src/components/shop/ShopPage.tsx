@@ -149,8 +149,8 @@ const ShopPage = ({
                 font-bold
                 uppercase
                 tracking-[0.2em]
-                text-black/40
-                dark:text-white/40
+                text-black/70
+                dark:text-white/70
               "
             >
               <ArrowDown size={14} />
@@ -283,8 +283,8 @@ const ShopPage = ({
               font-bold
               uppercase
               tracking-[0.2em]
-              text-black/35
-              dark:text-white/35
+              text-black/70
+              dark:text-white/70
             "
           >
             00 Products
@@ -310,8 +310,8 @@ const ShopPage = ({
                 font-bold
                 uppercase
                 tracking-[0.25em]
-                text-black/30
-                dark:text-white/30
+                text-black/70
+                dark:text-white/70
               "
             >
               Product catalogue
@@ -321,8 +321,8 @@ const ShopPage = ({
               className="
                 mt-3
                 text-sm
-                text-black/40
-                dark:text-white/40
+                text-black/70
+                dark:text-white/70
               "
             >
               Products will appear here.

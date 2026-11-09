@@ -103,7 +103,7 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
           playsInline
           loop
           muted={isMuted}
-          preload="metadata"
+          preload="none"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
@@ -259,7 +259,7 @@ const SeeItInAction = () => {
               className="
                 mt-5 flex items-center gap-3
                 text-[10px] font-bold uppercase
-                tracking-[0.25em] text-black/40
+                tracking-[0.25em] text-black/70
               "
             >
               <span className="h-px w-8 bg-current" />
@@ -300,7 +300,7 @@ const SeeItInAction = () => {
             <span
               className="
                 text-[10px] font-bold uppercase
-                tracking-[0.25em] text-black/50
+                tracking-[0.25em] text-black/70
                 transition-colors duration-300
                 group-hover:text-[#FF0000]
               "
@@ -313,7 +313,7 @@ const SeeItInAction = () => {
             size={18}
             strokeWidth={1.5}
             className="
-              text-black/40 transition-all duration-300
+              text-black/70 transition-all duration-300
               group-hover:-translate-y-1 group-hover:translate-x-1
               group-hover:text-[#FF0000]
             "

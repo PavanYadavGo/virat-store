@@ -77,7 +77,7 @@ const Footer = () => {
               className="
                 mt-5 max-w-xs
                 text-xs leading-5
-                text-black/30
+                text-black/70
               "
             >
               Performance wear for the game. Sportswear for everything after
@@ -100,7 +100,7 @@ const Footer = () => {
                     font-bold
                     uppercase
                     tracking-wider
-                    text-black/50
+                    text-black/70
                     transition-all duration-300
                     hover:border-[#FF0000]
                     hover:bg-[#FF0000]

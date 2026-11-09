@@ -109,7 +109,7 @@ const AdminInquiries = () => {
                   >
                     {m.deliveryStatus === "sent" ? "Dispatched" : "Logged in System"}
                   </span>
-                  <span className="text-[10px] text-black/40">
+                  <span className="text-[10px] text-black/70">
                     {new Date(m.createdAt).toLocaleDateString()}
                   </span>
                 </div>

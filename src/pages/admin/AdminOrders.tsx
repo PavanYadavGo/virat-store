@@ -176,14 +176,14 @@ const AdminOrders = () => {
 
             <div className="mt-6 grid gap-6 sm:grid-cols-2 text-xs">
               <div>
-                <p className="font-bold uppercase tracking-wider text-black/40">Customer</p>
+                <p className="font-bold uppercase tracking-wider text-black/70">Customer</p>
                 <p className="mt-1 font-black text-sm">{selectedOrder.customer?.fullName}</p>
                 <p className="text-black/70">{selectedOrder.customer?.email}</p>
                 <p className="text-black/70">{selectedOrder.customer?.phone}</p>
               </div>
 
               <div>
-                <p className="font-bold uppercase tracking-wider text-black/40">Delivery Destination</p>
+                <p className="font-bold uppercase tracking-wider text-black/70">Delivery Destination</p>
                 <p className="mt-1 font-bold">{selectedOrder.shippingAddress?.street}</p>
                 <p className="text-black/70">
                   {selectedOrder.shippingAddress?.city}, {selectedOrder.shippingAddress?.state}{" "}
@@ -195,7 +195,7 @@ const AdminOrders = () => {
 
             {/* Items */}
             <div className="mt-6 border-t border-black/10 pt-4">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-wider text-black/40">Line Items</p>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-wider text-black/70">Line Items</p>
               <div className="flex flex-col gap-3">
                 {selectedOrder.items?.map((it, idx) => (
                   <div key={idx} className="flex items-center justify-between text-xs">

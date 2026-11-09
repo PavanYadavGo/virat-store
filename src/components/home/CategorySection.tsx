@@ -2,14 +2,14 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
-import cricketImage from "../../assets/categories/Category images/Surya.jpeg";
-import cricketcategorieImage from "../../assets/categories/Category images/Rohit.jpeg";
-import cricketcategoriesecondImage from "../../assets/categories/Category images/SuryaY.jpeg";
-import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.png";
-import cap from "../../assets/categories/Category images/cap.png";
-import cricketfImage from "../../assets/categories/Category images/women.png";
-import casualImage from "../../assets/categories/cricket.jpg";
-import TeamImage from "../../assets/categories/Category images/bagpack.png";
+import cricketImage from "../../assets/categories/Category images/Surya.webp";
+import cricketcategorieImage from "../../assets/categories/Category images/Rohit.webp";
+import cricketcategoriesecondImage from "../../assets/categories/Category images/SuryaY.webp";
+import accessoriesImage from "../../assets/categories/Category images/ACCESSORIES.webp";
+import cap from "../../assets/categories/Category images/cap.webp";
+import cricketfImage from "../../assets/categories/Category images/women.webp";
+import casualImage from "../../assets/categories/cricket.webp";
+import TeamImage from "../../assets/categories/Category images/bagpack.webp";
 
 const MotionLink = motion.create(Link);
 
@@ -119,6 +119,8 @@ const CategorySection = () => {
           <img
             src={cricketcategorieImage}
             alt="Cricket collection"
+            width={600}
+            height={400}
             loading="lazy"
             decoding="async"
             style={{ objectPosition: "center 35%" }}
@@ -189,6 +191,8 @@ const CategorySection = () => {
           <img
             src={cricketcategoriesecondImage}
             alt="Women's cricket collection"
+            width={600}
+            height={400}
             loading="lazy"
             decoding="async"
             style={{ objectPosition: "center 2%" }}
@@ -271,6 +275,8 @@ const CategorySection = () => {
             <img
               src={category.image}
               alt={category.title}
+              width={600}
+              height={450}
               loading="lazy"
               decoding="async"
               style={{ objectPosition: 'center ${category.y}%' }}

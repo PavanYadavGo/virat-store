@@ -48,7 +48,7 @@ const Cart = () => {
       {/* HEADER */}
       <section className="border-b border-black/10 pb-8 pt-6">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/70">
             <Link to="/" className="hover:text-[#FF0000]">Home</Link>
             <span>/</span>
             <span className="text-black">Shopping Bag</span>
@@ -129,7 +129,7 @@ const Cart = () => {
 
                   <div>
                     {item.category && (
-                      <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-black/40">
+                      <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-black/70">
                         {item.category}
                       </p>
                     )}
@@ -226,7 +226,7 @@ const Cart = () => {
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </button>
 
-              <div className="mt-6 flex flex-col gap-2 text-[10px] text-black/40">
+              <div className="mt-6 flex flex-col gap-2 text-[10px] text-black/70">
                 <p>• Free shipping on orders over ₹1,500 across India.</p>
                 <p>• 15-day return and exchange policy on unworn merchandise.</p>
                 <p>• Strict security: Prices verified directly by store backend.</p>

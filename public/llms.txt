@@ -1,0 +1,17 @@
+# Virat Sports
+
+> Virat Sports is an Indian cricket and athletic performance sportswear brand designing technical apparel for cricket players, athletes, and daily training.
+
+- Website: https://www.viratsports.in/
+- Brand: Virat Sports
+- Industry: Sportswear, Cricket Equipment, Athletic Apparel
+
+## Core Sections
+- [Home](https://www.viratsports.in/): Official Virat storefront and brand campaigns.
+- [All Products](https://www.viratsports.in/products): Complete sportswear catalog.
+- [Cricket Collection](https://www.viratsports.in/cricket): Performance cricket jerseys, pants, and match shorts.
+- [Men's Sportswear](https://www.viratsports.in/men): Training tees, polos, sleeveless vests, track jackets, and pants.
+- [Women's Collection](https://www.viratsports.in/women): Activewear, training tops, and athletic bottoms.
+- [Accessories](https://www.viratsports.in/accessories): Classic sports caps, kit bags, and equipment.
+- [About Us](https://www.viratsports.in/about): Brand story, heritage, and high-performance mission.
+- [Contact](https://www.viratsports.in/contact): Customer inquiries, orders, and custom teamwear collaborations.

@@ -106,7 +106,7 @@ const Checkout = () => {
       <div className="mx-auto max-w-7xl px-6 pb-24 lg:px-10">
         
         {/* BREADCRUMB */}
-        <div className="mb-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+        <div className="mb-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black/70">
           <Link to="/cart" className="flex items-center gap-1 hover:text-[#FF0000]">
             <ArrowLeft size={12} />
             Back to Bag
