@@ -20,12 +20,35 @@ import { requireBackendFeatures } from "./middleware/featureGate.js";
 
 const app = express();
 
-// Security & Middleware
+// Explicit CORS Origin Allowlist
+export const ALLOWED_ORIGINS: string[] = [
+  "https://www.viratsports.in",
+  "https://viratsports.in",
+  "https://virat-store.vercel.app",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+];
+
+// Append any additional comma-separated origins from CLIENT_URL (e.g. preview deployments)
+if (config.CLIENT_URL) {
+  config.CLIENT_URL.split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+    .forEach((origin) => {
+      if (!ALLOWED_ORIGINS.includes(origin)) {
+        ALLOWED_ORIGINS.push(origin);
+      }
+    });
+}
+
+// Security & Middleware (Runs before API routes and error handlers)
 app.use(
   cors({
-    origin: [config.CLIENT_URL, "http://localhost:5173", "http://127.0.0.1:5173"],
+    origin: ALLOWED_ORIGINS,
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
