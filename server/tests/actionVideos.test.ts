@@ -220,6 +220,86 @@ describe("Action Videos & Admin Management Suite", () => {
     );
   });
 
+  it("handles empty published video lists by returning empty array with count 0", async () => {
+    // Mark all videos as unpublished
+    memoryStore.actionVideos.forEach((v) => {
+      v.isPublished = false;
+    });
+
+    const res = await fetch(`${baseUrl}/api/action-videos`);
+    assert.equal(res.status, 200);
+    const json: any = await res.json();
+    assert.equal(json.success, true);
+    assert.equal(Array.isArray(json.data), true);
+    assert.equal(json.data.length, 0);
+    assert.equal(json.count, 0);
+  });
+
+  it("verifies end-to-end admin lifecycle: publish, unpublish, delete, and empty state", async () => {
+    // Clear all existing videos
+    memoryStore.actionVideos = [];
+
+    // 1. Add two videos via admin
+    const { req: r1, res: s1, getData: d1 } = createMockReqRes({
+      title: "Video Alpha",
+      description: "First test video",
+      platform: "Instagram",
+      videoUrl: "/videos/alpha.mp4",
+      posterUrl: "/images/action/alpha.webp",
+      isPublished: true,
+      displayOrder: 1,
+    });
+    await createActionVideo(r1, s1);
+    const video1 = d1().data;
+
+    const { req: r2, res: s2, getData: d2 } = createMockReqRes({
+      title: "Video Beta",
+      description: "Second test video",
+      platform: "YouTube",
+      videoUrl: "/videos/beta.mp4",
+      posterUrl: "/images/action/beta.webp",
+      isPublished: true,
+      displayOrder: 2,
+    });
+    await createActionVideo(r2, s2);
+    const video2 = d2().data;
+
+    // Confirm both appear in public endpoint
+    const pubRes1 = await fetch(`${baseUrl}/api/action-videos`);
+    const pubJson1: any = await pubRes1.json();
+    assert.equal(pubJson1.data.length, 2);
+    assert.equal(pubJson1.data[0].title, "Video Alpha");
+    assert.equal(pubJson1.data[1].title, "Video Beta");
+
+    // 2. Unpublish one video (Video Alpha)
+    const { req: r3, res: s3 } = createMockReqRes(
+      { isPublished: false },
+      { id: video1.id }
+    );
+    await updateActionVideo(r3, s3);
+
+    // Confirm only Video Beta appears on public endpoint
+    const pubRes2 = await fetch(`${baseUrl}/api/action-videos`);
+    const pubJson2: any = await pubRes2.json();
+    assert.equal(pubJson2.data.length, 1);
+    assert.equal(pubJson2.data[0].title, "Video Beta");
+
+    // 3. Delete Video Beta
+    const { req: r4, res: s4 } = createMockReqRes({}, { id: video2.id });
+    await deleteActionVideo(r4, s4);
+
+    // Confirm zero published videos
+    const pubRes3 = await fetch(`${baseUrl}/api/action-videos`);
+    const pubJson3: any = await pubRes3.json();
+    assert.equal(pubJson3.data.length, 0);
+
+    // 4. Remove all videos entirely
+    memoryStore.actionVideos = [];
+    const pubRes4 = await fetch(`${baseUrl}/api/action-videos`);
+    const pubJson4: any = await pubRes4.json();
+    assert.equal(pubJson4.data.length, 0);
+  });
+
   it("allows admin to reorder action videos sequentially", async () => {
     // Current IDs: "01", "02", "03", "04"
     // Reorder to reverse: "04", "03", "02", "01"

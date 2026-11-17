@@ -28,49 +28,6 @@ const getPlatformIcon = (platform: string): React.ComponentType<{ size?: number;
   }
 };
 
-const fallbackVideos: VideoItem[] = [
-  {
-    id: "01",
-    title: "Match Day",
-    description: "Built for the pressure.",
-    platform: "Instagram",
-    url: "https://www.instagram.com/reels/DeY9WWXM0l_/",
-    videoUrl: "/videos/seeitinaction1.mp4",
-    posterUrl: "/images/action/poster-1.webp",
-    Icon: FaInstagram,
-  },
-  {
-    id: "02",
-    title: "Train Hard",
-    description: "Made to move.",
-    platform: "Instagram",
-    url: "https://www.instagram.com/reel/DeV8mbcqJ-L/?exln=eTY1czhidXBzamp5",
-    videoUrl: "/videos/seeitinaction2.mp4",
-    posterUrl: "/images/action/poster-2.webp",
-    Icon: FaInstagram,
-  },
-  {
-    id: "03",
-    title: "Game Ready",
-    description: "Performance without compromise.",
-    platform: "Facebook",
-    url: "https://www.facebook.com/share/v/1MKc2ormHS/",
-    videoUrl: "/videos/seeitinaction3.mp4",
-    posterUrl: "/images/action/poster-3.webp",
-    Icon: FaFacebookF,
-  },
-  {
-    id: "04",
-    title: "Relentless",
-    description: "Built for every session.",
-    platform: "Instagram",
-    url: "https://www.instagram.com/",
-    videoUrl: "/videos/seeitinaction4.mp4",
-    posterUrl: "/images/action/poster-4.webp",
-    Icon: FaInstagram,
-  },
-];
-
 const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -210,7 +167,7 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
 };
 
 const SeeItInAction = () => {
-  const [actionVideos, setActionVideos] = useState<VideoItem[]>(fallbackVideos);
+  const [actionVideos, setActionVideos] = useState<VideoItem[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -218,7 +175,8 @@ const SeeItInAction = () => {
       .getActionVideos()
       .then((data) => {
         if (isMounted && Array.isArray(data) && data.length > 0) {
-          const mapped: VideoItem[] = data.map((item, idx) => ({
+          const published = data.filter((item) => item.isPublished !== false);
+          const mapped: VideoItem[] = published.map((item, idx) => ({
             id: item.id || String(idx + 1).padStart(2, "0"),
             title: item.title,
             description: item.description,
@@ -229,16 +187,25 @@ const SeeItInAction = () => {
             Icon: getPlatformIcon(item.platform),
           }));
           setActionVideos(mapped);
+        } else if (isMounted) {
+          setActionVideos([]);
         }
       })
       .catch((err) => {
-        console.warn("[SeeItInAction] Using static fallback videos:", err);
+        console.warn("[SeeItInAction] Failed to load action videos:", err);
+        if (isMounted) {
+          setActionVideos([]);
+        }
       });
 
     return () => {
       isMounted = false;
     };
   }, []);
+
+  if (actionVideos.length === 0) {
+    return null;
+  }
 
   return (
     <section
