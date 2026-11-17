@@ -11,6 +11,7 @@ import {
   isOperatingInMemory,
 } from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
+import actionVideoRoutes from "./routes/actionVideoRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
@@ -108,6 +109,7 @@ app.get("/api/ready", (_req, res) => {
 
 // API Routes
 app.use("/api/products", productRoutes);
+app.use("/api/action-videos", actionVideoRoutes);
 app.use("/api/orders", requireBackendFeatures, orderRoutes);
 app.use("/api/contact", requireBackendFeatures, contactRoutes);
 app.use("/api/admin", requireBackendFeatures, adminRoutes);

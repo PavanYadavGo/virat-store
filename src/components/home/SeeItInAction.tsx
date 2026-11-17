@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ArrowUpRight, Play, Pause, Volume2, VolumeX } from "lucide-react";
-import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { motion } from "motion/react";
+import { api } from "../../services/api";
 
 interface VideoItem {
   id: string;
@@ -11,10 +12,23 @@ interface VideoItem {
   url: string;
   videoUrl: string;
   posterUrl: string;
-  Icon: typeof FaInstagram;
+  Icon: React.ComponentType<{ size?: number; className?: string }>;
 }
 
-const videos: VideoItem[] = [
+const getPlatformIcon = (platform: string): React.ComponentType<{ size?: number; className?: string }> => {
+  switch (platform?.toLowerCase()) {
+    case "instagram":
+      return FaInstagram;
+    case "facebook":
+      return FaFacebookF;
+    case "youtube":
+      return FaYoutube;
+    default:
+      return Play;
+  }
+};
+
+const fallbackVideos: VideoItem[] = [
   {
     id: "01",
     title: "Match Day",
@@ -157,7 +171,7 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
 
         {/* Badge */}
         <div className="absolute left-3 top-3 z-10 bg-black/80 px-2 py-1 text-[8px] font-black uppercase tracking-[0.2em] text-white backdrop-blur-sm">
-          VIRAT REEL {video.id}
+          VIRAT REEL {video.id.length <= 4 ? video.id : String(index + 1).padStart(2, "0")}
         </div>
       </div>
 
@@ -196,6 +210,36 @@ const ActionVideoCard = ({ video, index }: { video: VideoItem; index: number }) 
 };
 
 const SeeItInAction = () => {
+  const [actionVideos, setActionVideos] = useState<VideoItem[]>(fallbackVideos);
+
+  useEffect(() => {
+    let isMounted = true;
+    api
+      .getActionVideos()
+      .then((data) => {
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          const mapped: VideoItem[] = data.map((item, idx) => ({
+            id: item.id || String(idx + 1).padStart(2, "0"),
+            title: item.title,
+            description: item.description,
+            platform: item.platform,
+            url: item.externalUrl || "https://www.instagram.com/",
+            videoUrl: item.videoUrl,
+            posterUrl: item.posterUrl,
+            Icon: getPlatformIcon(item.platform),
+          }));
+          setActionVideos(mapped);
+        }
+      })
+      .catch((err) => {
+        console.warn("[SeeItInAction] Using static fallback videos:", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <section
       id="see-it-in-action"
@@ -282,7 +326,7 @@ const SeeItInAction = () => {
               "
             >
               <span className="h-px w-8 bg-current" />
-              04 Featured videos
+              {String(actionVideos.length).padStart(2, "0")} Featured videos
             </div>
           </motion.div>
         </div>
@@ -294,7 +338,7 @@ const SeeItInAction = () => {
             sm:mt-14 sm:grid-cols-2 lg:grid-cols-4
           "
         >
-          {videos.map((video, index) => (
+          {actionVideos.map((video, index) => (
             <ActionVideoCard key={video.id} video={video} index={index} />
           ))}
         </div>

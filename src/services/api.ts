@@ -46,6 +46,21 @@ export interface ApiOrder {
   createdAt: string;
 }
 
+export interface ApiActionVideo {
+  id: string;
+  _id?: string;
+  title: string;
+  description: string;
+  platform: "Instagram" | "Facebook" | "YouTube" | "Other" | string;
+  videoUrl: string;
+  posterUrl: string;
+  externalUrl?: string;
+  isPublished: boolean;
+  displayOrder: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export const api = {
   // Products
   async getProducts(category?: string): Promise<ApiProduct[]> {
@@ -231,6 +246,84 @@ export const api = {
     });
     const json = await res.json();
     if (!res.ok) throw new Error(json.error || "Failed to update order status");
+    return json.data;
+  },
+
+  // Action Videos (Public)
+  async getActionVideos(): Promise<ApiActionVideo[]> {
+    try {
+      const res = await fetch(`${API_BASE}/action-videos`);
+      if (!res.ok) throw new Error("Failed fetching action videos");
+      const json = await res.json();
+      return json.data || [];
+    } catch (e) {
+      console.warn("[API] Falling back for action videos:", e);
+      return [];
+    }
+  },
+
+  // Action Videos (Admin)
+  async getAdminActionVideos(token: string): Promise<ApiActionVideo[]> {
+    const res = await fetch(`${API_BASE}/admin/action-videos`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) {
+      const json = await res.json().catch(() => ({}));
+      throw new Error(json.error || "Failed to fetch action videos");
+    }
+    const json = await res.json();
+    return json.data || [];
+  },
+
+  async createAdminActionVideo(token: string, videoData: Partial<ApiActionVideo>): Promise<ApiActionVideo> {
+    const res = await fetch(`${API_BASE}/admin/action-videos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(videoData),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || "Failed to create action video");
+    return json.data;
+  },
+
+  async updateAdminActionVideo(token: string, id: string, videoData: Partial<ApiActionVideo>): Promise<ApiActionVideo> {
+    const res = await fetch(`${API_BASE}/admin/action-videos/${encodeURIComponent(id)}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(videoData),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || "Failed to update action video");
+    return json.data;
+  },
+
+  async deleteAdminActionVideo(token: string, id: string): Promise<boolean> {
+    const res = await fetch(`${API_BASE}/admin/action-videos/${encodeURIComponent(id)}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || "Failed to delete action video");
+    return true;
+  },
+
+  async reorderAdminActionVideos(token: string, videoIds: string[]): Promise<ApiActionVideo[]> {
+    const res = await fetch(`${API_BASE}/admin/action-videos/reorder`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ videoIds }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || "Failed to reorder action videos");
     return json.data;
   },
 };

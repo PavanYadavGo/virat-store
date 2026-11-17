@@ -8,6 +8,13 @@ import {
 } from "../controllers/productController.js";
 import { getAdminOrders, updateOrderStatus } from "../controllers/orderController.js";
 import { getAdminContacts } from "../controllers/contactController.js";
+import {
+  getAdminActionVideos,
+  createActionVideo,
+  updateActionVideo,
+  deleteActionVideo,
+  reorderActionVideos,
+} from "../controllers/actionVideoController.js";
 import { requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
@@ -37,6 +44,13 @@ router.put("/orders/:orderId/status", updateOrderStatus);
 
 // Inquiries Management
 router.get("/contacts", getAdminContacts);
+
+// Action Video Management (See It in Action)
+router.get("/action-videos", getAdminActionVideos);
+router.post("/action-videos", createActionVideo);
+router.put("/action-videos/reorder", reorderActionVideos);
+router.put("/action-videos/:id", updateActionVideo);
+router.delete("/action-videos/:id", deleteActionVideo);
 
 export default router;
 

@@ -77,6 +77,21 @@ export interface StoreContact {
   createdAt: Date;
 }
 
+export interface StoreActionVideo {
+  id: string;
+  _id?: string;
+  title: string;
+  description: string;
+  platform: "Instagram" | "Facebook" | "YouTube" | "Other" | string;
+  videoUrl: string;
+  posterUrl: string;
+  externalUrl?: string;
+  isPublished: boolean;
+  displayOrder: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 // Verified client product catalog (15 products across 8 families)
 export const initialProducts: StoreProduct[] = [
   {
@@ -576,12 +591,75 @@ initialProducts.forEach((product) => {
   }
 });
 
+// Default initial "See It in Action" videos
+export const initialActionVideos: StoreActionVideo[] = [
+  {
+    id: "01",
+    title: "Match Day",
+    description: "Built for the pressure.",
+    platform: "Instagram",
+    externalUrl: "https://www.instagram.com/reels/DeY9WWXM0l_/",
+    videoUrl: "/videos/seeitinaction1.mp4",
+    posterUrl: "/images/action/poster-1.webp",
+    isPublished: true,
+    displayOrder: 1,
+    createdAt: new Date("2026-10-20T00:00:00Z"),
+    updatedAt: new Date("2026-10-20T00:00:00Z"),
+  },
+  {
+    id: "02",
+    title: "Train Hard",
+    description: "Made to move.",
+    platform: "Instagram",
+    externalUrl: "https://www.instagram.com/reel/DeV8mbcqJ-L/?exln=eTY1czhidXBzamp5",
+    videoUrl: "/videos/seeitinaction2.mp4",
+    posterUrl: "/images/action/poster-2.webp",
+    isPublished: true,
+    displayOrder: 2,
+    createdAt: new Date("2026-10-20T00:00:00Z"),
+    updatedAt: new Date("2026-10-20T00:00:00Z"),
+  },
+  {
+    id: "03",
+    title: "Game Ready",
+    description: "Performance without compromise.",
+    platform: "Facebook",
+    externalUrl: "https://www.facebook.com/share/v/1MKc2ormHS/",
+    videoUrl: "/videos/seeitinaction3.mp4",
+    posterUrl: "/images/action/poster-3.webp",
+    isPublished: true,
+    displayOrder: 3,
+    createdAt: new Date("2026-10-20T00:00:00Z"),
+    updatedAt: new Date("2026-10-20T00:00:00Z"),
+  },
+  {
+    id: "04",
+    title: "Relentless",
+    description: "Built for every session.",
+    platform: "Instagram",
+    externalUrl: "https://www.instagram.com/",
+    videoUrl: "/videos/seeitinaction4.mp4",
+    posterUrl: "/images/action/poster-4.webp",
+    isPublished: true,
+    displayOrder: 4,
+    createdAt: new Date("2026-10-20T00:00:00Z"),
+    updatedAt: new Date("2026-10-20T00:00:00Z"),
+  },
+];
+
+initialActionVideos.forEach((video) => {
+  if (!video._id) {
+    video._id = generateDeterministicObjectId(`action-video-${video.id}`);
+  }
+});
+
 // In-Memory state for graceful fallback
 export const memoryStore = {
   products: initialProducts.map((p) => ({ ...p })),
   orders: [] as StoreOrder[],
   admins: [] as StoreAdmin[],
   contacts: [] as StoreContact[],
+  actionVideos: initialActionVideos.map((v) => ({ ...v })),
 };
 
 // Reset helper for test suites
@@ -589,6 +667,7 @@ export const resetMemoryStoreForTesting = () => {
   memoryStore.products = initialProducts.map((p) => ({ ...p }));
   memoryStore.orders = [];
   memoryStore.contacts = [];
+  memoryStore.actionVideos = initialActionVideos.map((v) => ({ ...v }));
 };
 
 // Initialize default admin in memory store

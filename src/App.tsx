@@ -25,6 +25,7 @@ const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminProducts = lazy(() => import("./pages/admin/AdminProducts"));
 const AdminOrders = lazy(() => import("./pages/admin/AdminOrders"));
+const AdminActionVideos = lazy(() => import("./pages/admin/AdminActionVideos"));
 const AdminInquiries = lazy(() => import("./pages/admin/AdminInquiries"));
 
 import { CartProvider } from "./context/CartContext";
@@ -77,6 +78,8 @@ function AppContent() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/admin/action-videos" element={<AdminActionVideos />} />
+          <Route path="/admin/see-it-in-action" element={<AdminActionVideos />} />
           <Route path="/admin/inquiries" element={<AdminInquiries />} />
 
           <Route path="*" element={<Home />} />

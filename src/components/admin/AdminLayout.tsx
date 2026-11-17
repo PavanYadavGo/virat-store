@@ -7,6 +7,7 @@ import {
   Mail,
   LogOut,
   ExternalLink,
+  Film,
 } from "lucide-react";
 import { useAdminAuth } from "../../context/AdminAuthContext";
 
@@ -27,6 +28,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode; title: string }>
     { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
     { label: "Products", path: "/admin/products", icon: Package },
     { label: "Orders", path: "/admin/orders", icon: ShoppingBag },
+    { label: "See It in Action", path: "/admin/action-videos", icon: Film },
     { label: "Inquiries", path: "/admin/inquiries", icon: Mail },
   ];
 
